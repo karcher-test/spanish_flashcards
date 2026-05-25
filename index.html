@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charla — Spanish flashcards</title>
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Yeseva+One&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-base: #fff1d6;
+  --bg-deep: #ffd8a3;
+  --paper: #fffaf0;
+  --ink: #1f1208;
+  --ink-soft: #6b4a2e;
+  --muted: #a78a66;
+  --terracotta: #d2542e;
+  --terracotta-deep: #a8401f;
+  --marigold: #f4a300;
+  --marigold-deep: #d18800;
+  --hibiscus: #d63558;
+  --jade: #2f8f5a;
+  --jade-deep: #1f6440;
+  --jade-soft: #c5e2cf;
+  --indigo: #364fa6;
+  --gold: #c89236;
+  --cream: #fff8e8;
+  --rojo-soft: #f9d6cc;
+  --repaso: #b04a8c;
+  --repaso-deep: #813767;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { min-height: 100vh; }
+body {
+  font-family: 'Inter', sans-serif;
+  background:
+    radial-gradient(ellipse at 50% 0%, #ffd5a0 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 100%, #ffb89a 0%, transparent 55%),
+    radial-gradient(ellipse at 0% 60%, #ffe0c0 0%, transparent 50%),
+    var(--bg-base);
+  background-attachment: fixed;
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+button { font-family: inherit; }
+
+/* DECORATIVE BACKGROUND ELEMENTS */
+.bg-decor { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.sombrero {
+  position: absolute;
+  width: 240px;
+  height: 140px;
+  opacity: 0.12;
+}
+.sombrero-1 { top: 10%; left: -60px; transform: rotate(-12deg); }
+.sombrero-2 { bottom: 14%; right: -70px; transform: rotate(8deg); width: 200px; height: 115px; }
+.cactus {
+  position: absolute;
+  width: 70px;
+  height: 110px;
+  opacity: 0.13;
+}
+.cactus-1 { top: 28%; right: 3%; }
+.cactus-2 { bottom: 6%; left: 5%; transform: scaleX(-1); }
+.motif {
+  position: absolute;
+  opacity: 0.11;
+  pointer-events: none;
+}
+.motif-chili { width: 60px; height: 100px; top: 45%; left: 2%; transform: rotate(-18deg); }
+.motif-maracas { width: 110px; height: 110px; top: 55%; right: 4%; transform: rotate(8deg); }
+.motif-agave { width: 90px; height: 90px; bottom: 35%; right: 8%; opacity: 0.10; }
+.sun-rays {
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg, rgba(244, 163, 0, 0.15) 5deg, transparent 12deg,
+    transparent 25deg, rgba(244, 163, 0, 0.15) 30deg, transparent 37deg,
+    transparent 50deg, rgba(244, 163, 0, 0.15) 55deg, transparent 62deg,
+    transparent 75deg, rgba(244, 163, 0, 0.15) 80deg, transparent 87deg,
+    transparent 100deg, rgba(244, 163, 0, 0.15) 105deg, transparent 112deg,
+    transparent 125deg, rgba(244, 163, 0, 0.15) 130deg, transparent 137deg,
+    transparent 150deg, rgba(244, 163, 0, 0.15) 155deg, transparent 162deg,
+    transparent 175deg, rgba(244, 163, 0, 0.15) 180deg, transparent 187deg,
+    transparent 200deg, rgba(244, 163, 0, 0.15) 205deg, transparent 212deg,
+    transparent 225deg, rgba(244, 163, 0, 0.15) 230deg, transparent 237deg,
+    transparent 250deg, rgba(244, 163, 0, 0.15) 255deg, transparent 262deg,
+    transparent 275deg, rgba(244, 163, 0, 0.15) 280deg, transparent 287deg,
+    transparent 300deg, rgba(244, 163, 0, 0.15) 305deg, transparent 312deg,
+    transparent 325deg, rgba(244, 163, 0, 0.15) 330deg, transparent 337deg,
+    transparent 350deg, rgba(244, 163, 0, 0.15) 355deg, transparent 360deg);
+  border-radius: 50%;
+  animation: rotateSlow 180s linear infinite;
+}
+@keyframes rotateSlow {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to { transform: translateX(-50%) rotate(360deg); }
+}
+
+.app-root {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 24px 20px 80px;
+  position: relative;
+  min-height: 100vh;
+  z-index: 1;
+}
+
+/* PAPEL PICADO bunting */
+.papel-picado {
+  position: absolute;
+  top: 8px; left: 0; right: 0;
+  height: 28px;
+  background-image:
+    linear-gradient(135deg, var(--terracotta) 25%, transparent 25%),
+    linear-gradient(225deg, var(--terracotta) 25%, transparent 25%),
+    linear-gradient(135deg, var(--marigold) 25%, transparent 25%),
+    linear-gradient(225deg, var(--marigold) 25%, transparent 25%),
+    linear-gradient(135deg, var(--jade) 25%, transparent 25%),
+    linear-gradient(225deg, var(--jade) 25%, transparent 25%),
+    linear-gradient(135deg, var(--hibiscus) 25%, transparent 25%),
+    linear-gradient(225deg, var(--hibiscus) 25%, transparent 25%),
+    linear-gradient(135deg, var(--indigo) 25%, transparent 25%),
+    linear-gradient(225deg, var(--indigo) 25%, transparent 25%);
+  background-size: 24px 28px, 24px 28px, 24px 28px, 24px 28px, 24px 28px, 24px 28px, 24px 28px, 24px 28px, 24px 28px, 24px 28px;
+  background-position: 0 0, 12px 0, 48px 0, 60px 0, 96px 0, 108px 0, 144px 0, 156px 0, 192px 0, 204px 0;
+  background-repeat: repeat-x;
+  opacity: 0.9;
+  z-index: 0;
+  -webkit-mask: linear-gradient(180deg, transparent 0%, black 60%, black 100%);
+          mask: linear-gradient(180deg, transparent 0%, black 60%, black 100%);
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding-top: 36px;
+  position: relative;
+  z-index: 1;
+}
+.header-mark { display: flex; align-items: center; gap: 12px; }
+.logo-icon { position: relative; width: 48px; height: 38px; flex-shrink: 0; }
+.logo-icon svg { width: 100%; height: 100%; }
+.mark-text {
+  font-family: 'Yeseva One', serif;
+  font-size: 32px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.header-right { display: flex; align-items: center; gap: 10px; }
+.sync-indicator {
+  font-size: 11px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 50px;
+  border: 1.5px solid var(--ink);
+  white-space: nowrap;
+}
+.sync-synced { background: var(--jade-soft); color: var(--jade-deep); }
+.sync-syncing { background: var(--bg-deep); color: var(--marigold-deep); }
+.sync-offline { background: var(--cream); color: var(--muted); }
+
+.header-session {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 14px;
+  background: var(--cream);
+  padding: 8px 14px;
+  border: 2.5px solid var(--ink);
+  border-radius: 100px;
+  box-shadow: 3px 3px 0 0 var(--ink);
+  white-space: nowrap;
+}
+.session-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+main { position: relative; z-index: 1; }
+
+/* HERO */
+.hero-card {
+  position: relative;
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  padding: 50px 36px 44px;
+  box-shadow: 8px 8px 0 0 var(--ink);
+  margin-bottom: 28px;
+  overflow: hidden;
+}
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 16px;
+  background: repeating-linear-gradient(90deg,
+    var(--terracotta) 0 14px, var(--marigold) 14px 28px,
+    var(--hibiscus) 28px 42px, var(--jade) 42px 56px,
+    var(--indigo) 56px 70px);
+  border-bottom: 2px solid var(--ink);
+}
+.hero-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 8px;
+  background: repeating-linear-gradient(90deg,
+    var(--gold) 0 12px, transparent 12px 24px);
+  border-top: 2px solid var(--ink);
+}
+.hero-sticker {
+  position: absolute;
+  font-family: 'Bungee', sans-serif;
+  font-size: 13px;
+  padding: 8px 16px;
+  border: 2.5px solid var(--ink);
+  border-radius: 50px;
+  z-index: 3;
+  box-shadow: 3px 3px 0 0 var(--ink);
+}
+.hero-sticker-tl {
+  top: 36px; right: 24px;
+  background: var(--terracotta); color: var(--cream);
+  transform: rotate(-6deg);
+}
+.hero-sticker-br {
+  bottom: 32px; right: 32px;
+  background: var(--jade); color: var(--cream);
+  transform: rotate(5deg);
+}
+.hero-eyebrow {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 16px;
+  color: var(--terracotta);
+  margin-bottom: 12px;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; width: 24px; height: 1.5px; background: var(--terracotta);
+}
+.hero-title {
+  font-family: 'Yeseva One', serif;
+  font-size: clamp(48px, 9vw, 64px);
+  line-height: 0.95;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+.hero-title em { font-family: 'DM Serif Display', serif; font-style: italic; color: var(--terracotta); }
+.hero-dot { color: var(--marigold); }
+.hero-sub {
+  font-size: 17px; color: var(--ink-soft);
+  margin-bottom: 28px; line-height: 1.5;
+  font-style: italic; max-width: 480px;
+}
+.btn-primary {
+  font-family: 'Yeseva One', serif;
+  font-size: 17px;
+  background: var(--terracotta); color: var(--cream);
+  border: 2.5px solid var(--ink);
+  padding: 14px 28px;
+  border-radius: 50px;
+  box-shadow: 4px 4px 0 0 var(--ink);
+  display: inline-flex; align-items: center; gap: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  letter-spacing: 0.01em;
+}
+.btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--ink);
+  background: var(--hibiscus);
+}
+.btn-primary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 0 var(--ink);
+}
+.btn-arrow { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 22px; transition: transform 0.2s; }
+.btn-primary:hover .btn-arrow { transform: translateX(4px); }
+.btn-small { padding: 10px 22px; font-size: 15px; }
+
+.btn-link {
+  background: none; border: none; cursor: pointer;
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 15px; color: var(--ink-soft);
+  text-decoration: underline;
+  text-decoration-color: var(--terracotta);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  padding: 4px 0;
+}
+.btn-link:hover { color: var(--terracotta); }
+
+/* FLAG button on wrong-answer */
+.card-action-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.btn-flag {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 14px;
+  background: var(--cream);
+  color: var(--ink-soft);
+  border: 2px dashed var(--muted);
+  padding: 10px 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-flag:hover:not(:disabled) {
+  background: var(--marigold);
+  color: var(--ink);
+  border-color: var(--ink);
+  border-style: solid;
+}
+.btn-flag.flagged, .btn-flag:disabled {
+  background: var(--jade-soft);
+  color: var(--jade-deep);
+  border-color: var(--jade);
+  border-style: solid;
+  cursor: default;
+}
+
+/* PRE-SESSION POPUP */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 18, 8, 0.55);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal {
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 28px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 8px 8px 0 0 var(--ink);
+  position: relative;
+  overflow: hidden;
+  animation: popIn 0.25s ease;
+}
+@keyframes popIn { from { transform: scale(0.95); } to { transform: scale(1); } }
+.modal::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 10px;
+  background: repeating-linear-gradient(90deg,
+    var(--terracotta) 0 14px, var(--marigold) 14px 28px,
+    var(--hibiscus) 28px 42px, var(--jade) 42px 56px,
+    var(--indigo) 56px 70px);
+  border-bottom: 2px solid var(--ink);
+}
+.modal-title {
+  font-family: 'Yeseva One', serif;
+  font-size: 28px;
+  margin-top: 18px;
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.modal-subtitle {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin-bottom: 22px;
+}
+.modal-section {
+  margin-bottom: 22px;
+}
+.modal-section-label {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 15px;
+  color: var(--terracotta);
+  margin-bottom: 10px;
+  display: block;
+}
+.gender-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.gender-btn {
+  font-family: inherit;
+  font-size: 15px;
+  padding: 12px 14px;
+  background: var(--cream);
+  border: 2.5px solid var(--ink);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: var(--ink);
+  font-weight: 600;
+}
+.gender-btn:hover { background: var(--bg-deep); }
+.gender-btn.active {
+  background: var(--marigold);
+  box-shadow: 3px 3px 0 0 var(--ink);
+  transform: translate(-1px, -1px);
+}
+.range-row {
+  display: flex; align-items: center; gap: 14px;
+}
+.range-row input[type="range"] {
+  flex: 1;
+  accent-color: var(--terracotta);
+}
+.range-value {
+  font-family: 'Yeseva One', serif;
+  font-size: 28px;
+  color: var(--terracotta);
+  min-width: 70px;
+  text-align: right;
+}
+.range-value-suffix {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+.modal-actions {
+  display: flex; gap: 10px; justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.modal-actions .btn-link { padding: 14px 18px; }
+
+/* STATS — now 3 buckets: Aprendidas / Aprendiendo / Repaso */
+.stats-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 14px; margin-bottom: 28px;
+}
+.stat-card {
+  background: var(--cream);
+  border: 2.5px solid var(--ink);
+  border-radius: 8px;
+  padding: 22px 20px 18px;
+  box-shadow: 4px 4px 0 0 var(--ink);
+  position: relative; overflow: hidden;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s ease;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.stat-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 6px;
+}
+.stat-aprendidas::before { background: var(--jade); }
+.stat-aprendiendo::before { background: var(--marigold); }
+.stat-repaso::before { background: var(--repaso); }
+.stat-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--ink);
+}
+.stat-emoji {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Yeseva One', serif;
+  font-size: 18px; font-weight: 800;
+  margin-bottom: 8px; margin-top: 6px;
+  color: var(--cream);
+}
+.stat-aprendidas .stat-emoji { background: var(--jade); }
+.stat-aprendiendo .stat-emoji { background: var(--marigold); color: var(--ink); }
+.stat-repaso .stat-emoji { background: var(--repaso); }
+.stat-num {
+  font-family: 'Yeseva One', serif;
+  font-size: 48px; line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+}
+.stat-aprendidas .stat-num { color: var(--jade-deep); }
+.stat-aprendiendo .stat-num { color: var(--marigold-deep); }
+.stat-repaso .stat-num { color: var(--repaso-deep); }
+.stat-label {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 18px; margin-top: 2px;
+  color: var(--ink);
+}
+.stat-label-en {
+  font-size: 12px; color: var(--ink-soft);
+  font-weight: 500;
+}
+.stat-tap { font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
+
+/* PHRASES */
+.phrases-panel {
+  background: var(--cream);
+  border: 2.5px solid var(--ink);
+  border-radius: 8px;
+  padding: 28px 22px 22px;
+  box-shadow: 4px 4px 0 0 var(--ink);
+  margin-bottom: 24px;
+  position: relative;
+}
+.phrases-panel::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 8px;
+  background: repeating-linear-gradient(90deg,
+    var(--marigold) 0 10px, var(--gold) 10px 20px);
+  border-bottom: 2px solid var(--ink);
+}
+.phrases-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px; flex-wrap: wrap;
+}
+.phrases-badge {
+  font-family: 'Bungee', sans-serif;
+  font-size: 11px;
+  background: var(--marigold);
+  border: 2px solid var(--ink);
+  padding: 4px 12px;
+  border-radius: 50px;
+  color: var(--ink);
+}
+.phrases-count { font-family: 'DM Serif Display', serif; font-style: italic; color: var(--ink-soft); font-size: 15px; }
+.phrases-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.phrase-chip {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 14px;
+  background: var(--bg-deep);
+  border: 1.5px solid var(--ink);
+  border-radius: 50px;
+  font-size: 15px;
+}
+.phrase-es { font-family: 'DM Serif Display', serif; font-style: italic; color: var(--terracotta); }
+.phrase-arrow { color: var(--marigold-deep); font-weight: 700; }
+.phrase-en { color: var(--ink-soft); }
+.home-footer { text-align: center; margin-top: 36px; }
+
+/* STUDY VIEW */
+.study { animation: fadeUp 0.3s ease; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.study-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.study-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.study-pill {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 15px;
+  background: var(--cream);
+  border: 2px solid var(--ink);
+  padding: 6px 14px;
+  border-radius: 50px;
+  box-shadow: 2px 2px 0 0 var(--ink);
+  color: var(--ink);
+}
+.study-progress { display: flex; gap: 5px; }
+.pip {
+  width: 24px; height: 8px;
+  background: var(--bg-deep);
+  border: 1.5px solid var(--ink);
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+.pip.pip-done { background: var(--jade); }
+.pip.pip-active {
+  background: var(--terracotta);
+  animation: pulsePip 1.5s ease-in-out infinite;
+}
+@keyframes pulsePip { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
+.card {
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 48px 32px 36px;
+  box-shadow: 8px 8px 0 0 var(--ink);
+  position: relative;
+  min-height: 380px;
+  display: flex; flex-direction: column;
+  transition: all 0.25s ease;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 10px;
+  background: repeating-linear-gradient(90deg,
+    var(--terracotta) 0 14px, var(--marigold) 14px 28px,
+    var(--jade) 28px 42px, var(--indigo) 42px 56px,
+    var(--hibiscus) 56px 70px);
+  border-bottom: 2px solid var(--ink);
+  border-radius: 9px 9px 0 0;
+}
+.card-correct { background: #dff5e3; box-shadow: 8px 8px 0 0 var(--jade); }
+.card-wrong { background: #fde7e0; box-shadow: 8px 8px 0 0 var(--terracotta); animation: shake 0.4s ease; }
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0); }
+  20%, 60% { transform: translate(-6px, 0); }
+  40%, 80% { transform: translate(6px, 0); }
+}
+.card-stage-tag {
+  position: absolute;
+  top: -16px; left: 24px;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--marigold);
+  border: 2.5px solid var(--ink);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-family: 'Yeseva One', serif;
+  font-size: 13px;
+  box-shadow: 2px 2px 0 0 var(--ink);
+  z-index: 5;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.stage-num {
+  background: var(--ink);
+  color: var(--marigold);
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.card-prompt-label {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 16px;
+  color: var(--terracotta);
+  margin-bottom: 20px;
+  margin-top: 4px;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.card-prompt-label::before, .card-prompt-label::after {
+  content: ''; width: 16px; height: 1.5px; background: var(--terracotta);
+}
+.card-prompt-text {
+  font-family: 'Yeseva One', serif;
+  font-size: clamp(40px, 8vw, 72px);
+  line-height: 1.0;
+  color: var(--ink);
+  margin-bottom: 32px;
+  word-break: break-word;
+  letter-spacing: -0.02em;
+}
+.card-prompt-text.is-sentence {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: clamp(24px, 4.5vw, 36px);
+  line-height: 1.2;
+}
+.card-form { display: flex; gap: 10px; margin-top: auto; }
+.card-input {
+  flex: 1;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 14px 20px;
+  background: var(--bg-base);
+  border: 2.5px solid var(--ink);
+  color: var(--ink);
+  outline: none;
+  border-radius: 50px;
+  transition: all 0.15s ease;
+}
+.card-input:focus { background: white; box-shadow: 3px 3px 0 0 var(--marigold); }
+.card-input::placeholder { color: var(--muted); font-style: italic; }
+.card-submit {
+  font-family: 'Yeseva One', serif;
+  font-size: 16px;
+  padding: 14px 28px;
+  background: var(--ink);
+  color: var(--cream);
+  border: 2.5px solid var(--ink);
+  cursor: pointer;
+  border-radius: 50px;
+  box-shadow: 3px 3px 0 0 var(--terracotta);
+  transition: all 0.15s ease;
+}
+.card-submit:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 0 var(--terracotta);
+  background: var(--terracotta);
+}
+.card-feedback {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 2px dashed var(--muted);
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.feedback-mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  font-size: 26px;
+  font-family: 'Yeseva One', serif;
+  border: 2.5px solid var(--ink);
+  margin-bottom: 10px;
+  box-shadow: 3px 3px 0 0 var(--ink);
+}
+.feedback-correct .feedback-mark { background: var(--jade); color: var(--cream); }
+.feedback-wrong .feedback-mark { background: var(--terracotta); color: var(--cream); }
+.feedback-text { font-family: 'Yeseva One', serif; font-size: 26px; margin-bottom: 16px; }
+.wrong-block {
+  background: var(--cream);
+  border: 2.5px solid var(--ink);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 18px;
+  box-shadow: 3px 3px 0 0 var(--terracotta);
+}
+.wrong-row {
+  display: grid; grid-template-columns: 110px 1fr;
+  gap: 14px; padding: 10px 0;
+  font-size: 15px;
+}
+.wrong-row + .wrong-row { border-top: 1.5px dashed var(--muted); }
+.wrong-label {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 13px;
+  color: var(--terracotta);
+  padding-top: 3px;
+}
+.wrong-value { color: var(--ink); line-height: 1.5; font-weight: 500; }
+.wrong-value.strong { font-family: 'Yeseva One', serif; font-size: 18px; font-weight: normal; }
+.wrong-value em { font-family: 'DM Serif Display', serif; font-style: italic; color: var(--terracotta); display: block; margin-bottom: 4px; }
+.wrong-en { display: block; color: var(--ink-soft); font-size: 14px; }
+
+/* DONE */
+.done {
+  text-align: center;
+  padding: 60px 20px;
+  animation: pop 0.5s ease;
+  position: relative;
+}
+@keyframes pop { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+.done-confetti { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.confetti {
+  position: absolute;
+  width: 14px; height: 14px;
+  animation: fall 3s ease-out infinite;
+  border: 1.5px solid var(--ink);
+}
+.confetti:nth-child(12n+1) { left: 10%; background: var(--terracotta); animation-delay: 0s; transform: rotate(15deg); }
+.confetti:nth-child(12n+2) { left: 20%; background: var(--marigold); animation-delay: 0.3s; transform: rotate(-25deg); border-radius: 50%; }
+.confetti:nth-child(12n+3) { left: 30%; background: var(--jade); animation-delay: 0.5s; transform: rotate(45deg); }
+.confetti:nth-child(12n+4) { left: 40%; background: var(--indigo); animation-delay: 0.7s; border-radius: 50%; }
+.confetti:nth-child(12n+5) { left: 50%; background: var(--hibiscus); animation-delay: 0.2s; transform: rotate(-15deg); }
+.confetti:nth-child(12n+6) { left: 60%; background: var(--gold); animation-delay: 0.6s; border-radius: 50%; }
+.confetti:nth-child(12n+7) { left: 70%; background: var(--terracotta); animation-delay: 0.8s; transform: rotate(25deg); }
+.confetti:nth-child(12n+8) { left: 80%; background: var(--marigold); animation-delay: 0.4s; }
+.confetti:nth-child(12n+9) { left: 90%; background: var(--jade); animation-delay: 0.9s; border-radius: 50%; }
+.confetti:nth-child(12n+10) { left: 15%; background: var(--indigo); animation-delay: 1.1s; transform: rotate(35deg); }
+.confetti:nth-child(12n+11) { left: 55%; background: var(--hibiscus); animation-delay: 1.3s; border-radius: 50%; }
+.confetti:nth-child(12n) { left: 85%; background: var(--gold); animation-delay: 1.5s; transform: rotate(-45deg); }
+@keyframes fall { 0% { top: -20px; opacity: 1; } 100% { top: 100%; opacity: 0; } }
+.done-emoji {
+  font-size: 80px;
+  margin-bottom: 20px;
+  display: inline-block;
+  animation: wiggle 0.8s ease-in-out infinite;
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(8deg); }
+}
+.done-eyebrow {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 16px;
+  color: var(--jade-deep);
+  margin-bottom: 12px;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.done-eyebrow::before, .done-eyebrow::after {
+  content: ''; width: 24px; height: 1.5px; background: var(--jade-deep);
+}
+.done-title {
+  font-family: 'Yeseva One', serif;
+  font-size: clamp(56px, 11vw, 100px);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 18px;
+  background: linear-gradient(135deg, var(--terracotta) 0%, var(--marigold) 50%, var(--hibiscus) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.done-sub {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 19px;
+  color: var(--ink-soft);
+  max-width: 460px;
+  margin: 0 auto 28px;
+  line-height: 1.5;
+}
+.done-stats {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin: 0 auto 32px;
+  max-width: 460px;
+  flex-wrap: wrap;
+}
+.done-stat {
+  background: var(--cream);
+  border: 2.5px solid var(--ink);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 3px 3px 0 0 var(--ink);
+  text-align: center;
+  min-width: 110px;
+}
+.done-stat-num {
+  font-family: 'Yeseva One', serif;
+  font-size: 32px;
+  line-height: 1;
+}
+.done-stat-num-aprendidas { color: var(--jade-deep); }
+.done-stat-num-aprendiendo { color: var(--marigold-deep); }
+.done-stat-num-repaso { color: var(--repaso-deep); }
+.done-stat-label {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+
+/* BUCKET */
+.bucket { animation: fadeUp 0.3s ease; }
+.bucket-header {
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 6px 6px 0 0 var(--ink);
+  margin: 18px 0 28px;
+  position: relative;
+  overflow: hidden;
+}
+.bucket-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 10px;
+  background: repeating-linear-gradient(90deg,
+    var(--terracotta) 0 14px, var(--marigold) 14px 28px,
+    var(--jade) 28px 42px, var(--indigo) 42px 56px);
+  border-bottom: 2px solid var(--ink);
+}
+.bucket-eyebrow {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+  margin-top: 6px;
+}
+.bucket-title {
+  font-family: 'Yeseva One', serif;
+  font-size: clamp(44px, 7vw, 64px);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+.bucket-title-en {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 18px;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+}
+.bucket-sub { font-size: 16px; color: var(--ink-soft); line-height: 1.5; font-style: italic; }
+.bucket-empty {
+  text-align: center;
+  padding: 60px 20px;
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  color: var(--ink-soft);
+  font-size: 19px;
+  background: var(--cream);
+  border: 2.5px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 4px 4px 0 0 var(--ink);
+}
+.bucket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+.bucket-card {
+  padding: 18px;
+  background: var(--cream);
+  border: 2.5px solid var(--ink);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 4px 4px 0 0 var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.bucket-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  background: var(--marigold);
+}
+.bucket-card-aprendidas::before { background: var(--jade); }
+.bucket-card-aprendiendo::before { background: var(--marigold); }
+.bucket-card-repaso::before { background: var(--repaso); }
+.bucket-card:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 0 var(--ink); }
+.bucket-card.revealed.bucket-card-aprendidas { background: #e8f5ed; }
+.bucket-card.revealed.bucket-card-aprendiendo { background: #fdeee0; }
+.bucket-card.revealed.bucket-card-repaso { background: #f4e0ec; }
+.bucket-card-cat {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+  margin-top: 4px;
+}
+.bucket-card-es {
+  font-family: 'Yeseva One', serif;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1.05;
+  margin-bottom: 10px;
+}
+.bucket-card-en {
+  font-size: 15px;
+  color: var(--muted);
+  font-style: italic;
+  font-weight: 500;
+  min-height: 22px;
+}
+.bucket-card.revealed .bucket-card-en { color: var(--ink); font-weight: 600; font-style: normal; }
+.bucket-card-sentence {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1.5px dashed var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.bucket-card-sentence em { color: var(--terracotta); font-family: 'DM Serif Display', serif; font-style: italic; }
+.bucket-card-sentence span { color: var(--ink-soft); }
+
+@media (max-width: 640px) {
+  .app-root { padding: 18px 16px 60px; }
+  .hero-card { padding: 36px 22px 28px; }
+  .hero-sticker-tl { top: 22px; right: 14px; font-size: 12px; padding: 8px 14px; }
+  .hero-sticker-br { bottom: 18px; right: 18px; font-size: 12px; }
+  .stats-row { grid-template-columns: 1fr; }
+  .card { padding: 40px 22px 28px; min-height: 320px; }
+  .card-form { flex-direction: column; }
+  .card-submit { width: 100%; }
+  .wrong-row { grid-template-columns: 1fr; gap: 4px; }
+  .sombrero { width: 140px; height: 70px; }
+  .sombrero-1 { left: -40px; }
+  .sombrero-2 { right: -40px; width: 120px; }
+}
+.hidden { display: none !important; }
+
+</style>
+</head>
+<body>
+<div class="bg-decor">
+  <div class="sun-rays"></div>
+  <svg class="sombrero sombrero-1" viewBox="0 0 240 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Brim: wide ellipse with upturned edges -->
+  <path d="M 12 95 Q 12 80 35 78 Q 70 70 120 70 Q 170 70 205 78 Q 228 80 228 95 Q 228 115 195 122 Q 160 130 120 130 Q 80 130 45 122 Q 12 115 12 95 Z"
+        fill="#c64525" stroke="#1f1208" stroke-width="3"/>
+  <!-- Brim band (decorative stripe) -->
+  <path d="M 28 95 Q 60 88 120 86 Q 180 88 212 95"
+        stroke="#f4a300" stroke-width="4" fill="none"/>
+  <path d="M 28 100 Q 60 93 120 91 Q 180 93 212 100"
+        stroke="#1f1208" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>
+  <!-- Crown: tall pointed shape rising from brim -->
+  <path d="M 70 78 Q 75 55 90 35 Q 100 18 120 14 Q 140 18 150 35 Q 165 55 170 78 Z"
+        fill="#e85a26" stroke="#1f1208" stroke-width="3"/>
+  <!-- Crown band -->
+  <path d="M 73 76 Q 100 70 120 70 Q 140 70 167 76"
+        stroke="#f4a300" stroke-width="5" fill="none"/>
+  <path d="M 76 74 L 80 78 M 86 72 L 90 78 M 96 71 L 100 77 M 106 70 L 110 76 M 116 70 L 120 76 M 126 70 L 130 76 M 136 71 L 140 77 M 146 72 L 150 78 M 156 73 L 160 79"
+        stroke="#1f1208" stroke-width="1.5" fill="none"/>
+  <!-- Decorative pom-pom on top -->
+  <circle cx="120" cy="14" r="6" fill="#d63558" stroke="#1f1208" stroke-width="2"/>
+  <!-- Pom-poms hanging from brim edges -->
+  <circle cx="20" cy="100" r="5" fill="#d63558" stroke="#1f1208" stroke-width="2"/>
+  <circle cx="220" cy="100" r="5" fill="#2f8f5a" stroke="#1f1208" stroke-width="2"/>
+  <!-- Tassel string under -->
+  <line x1="120" y1="125" x2="118" y2="138" stroke="#1f1208" stroke-width="2"/>
+  <circle cx="117" cy="138" r="3" fill="#f4a300" stroke="#1f1208" stroke-width="1.5"/>
+</svg>
+  <svg class="sombrero sombrero-2" viewBox="0 0 240 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Brim: wide ellipse with upturned edges -->
+  <path d="M 12 95 Q 12 80 35 78 Q 70 70 120 70 Q 170 70 205 78 Q 228 80 228 95 Q 228 115 195 122 Q 160 130 120 130 Q 80 130 45 122 Q 12 115 12 95 Z"
+        fill="#c64525" stroke="#1f1208" stroke-width="3"/>
+  <!-- Brim band (decorative stripe) -->
+  <path d="M 28 95 Q 60 88 120 86 Q 180 88 212 95"
+        stroke="#f4a300" stroke-width="4" fill="none"/>
+  <path d="M 28 100 Q 60 93 120 91 Q 180 93 212 100"
+        stroke="#1f1208" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>
+  <!-- Crown: tall pointed shape rising from brim -->
+  <path d="M 70 78 Q 75 55 90 35 Q 100 18 120 14 Q 140 18 150 35 Q 165 55 170 78 Z"
+        fill="#e85a26" stroke="#1f1208" stroke-width="3"/>
+  <!-- Crown band -->
+  <path d="M 73 76 Q 100 70 120 70 Q 140 70 167 76"
+        stroke="#f4a300" stroke-width="5" fill="none"/>
+  <path d="M 76 74 L 80 78 M 86 72 L 90 78 M 96 71 L 100 77 M 106 70 L 110 76 M 116 70 L 120 76 M 126 70 L 130 76 M 136 71 L 140 77 M 146 72 L 150 78 M 156 73 L 160 79"
+        stroke="#1f1208" stroke-width="1.5" fill="none"/>
+  <!-- Decorative pom-pom on top -->
+  <circle cx="120" cy="14" r="6" fill="#d63558" stroke="#1f1208" stroke-width="2"/>
+  <!-- Pom-poms hanging from brim edges -->
+  <circle cx="20" cy="100" r="5" fill="#d63558" stroke="#1f1208" stroke-width="2"/>
+  <circle cx="220" cy="100" r="5" fill="#2f8f5a" stroke="#1f1208" stroke-width="2"/>
+  <!-- Tassel string under -->
+  <line x1="120" y1="125" x2="118" y2="138" stroke="#1f1208" stroke-width="2"/>
+  <circle cx="117" cy="138" r="3" fill="#f4a300" stroke="#1f1208" stroke-width="1.5"/>
+</svg>
+  <svg class="cactus cactus-1" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main trunk -->
+  <rect x="28" y="20" width="14" height="80" rx="7" fill="#2f8f5a" stroke="#1f1208" stroke-width="2.5"/>
+  <!-- Left arm -->
+  <path d="M 28 50 L 18 50 Q 8 50 8 60 L 8 78" fill="none" stroke="#1f1208" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M 28 50 L 18 50 Q 8 50 8 60 L 8 78 L 18 78 Q 22 78 22 70 L 22 56 L 28 56 Z" fill="#2f8f5a" stroke="#1f1208" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Right arm -->
+  <path d="M 42 38 L 52 38 Q 62 38 62 48 L 62 65 L 52 65 Q 48 65 48 57 L 48 44 L 42 44 Z" fill="#2f8f5a" stroke="#1f1208" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Vertical ridges (spines lines) -->
+  <line x1="34" y1="30" x2="34" y2="95" stroke="#1f6440" stroke-width="1.5"/>
+  <line x1="38" y1="30" x2="38" y2="95" stroke="#1f6440" stroke-width="1.5"/>
+  <line x1="14" y1="58" x2="14" y2="75" stroke="#1f6440" stroke-width="1.5"/>
+  <line x1="54" y1="46" x2="54" y2="62" stroke="#1f6440" stroke-width="1.5"/>
+  <!-- Top flower -->
+  <ellipse cx="35" cy="18" rx="5" ry="4" fill="#d63558" stroke="#1f1208" stroke-width="1.5"/>
+  <ellipse cx="35" cy="16" rx="3" ry="2" fill="#f4a300"/>
+</svg>
+  <svg class="cactus cactus-2" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main trunk -->
+  <rect x="28" y="20" width="14" height="80" rx="7" fill="#2f8f5a" stroke="#1f1208" stroke-width="2.5"/>
+  <!-- Left arm -->
+  <path d="M 28 50 L 18 50 Q 8 50 8 60 L 8 78" fill="none" stroke="#1f1208" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M 28 50 L 18 50 Q 8 50 8 60 L 8 78 L 18 78 Q 22 78 22 70 L 22 56 L 28 56 Z" fill="#2f8f5a" stroke="#1f1208" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Right arm -->
+  <path d="M 42 38 L 52 38 Q 62 38 62 48 L 62 65 L 52 65 Q 48 65 48 57 L 48 44 L 42 44 Z" fill="#2f8f5a" stroke="#1f1208" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Vertical ridges (spines lines) -->
+  <line x1="34" y1="30" x2="34" y2="95" stroke="#1f6440" stroke-width="1.5"/>
+  <line x1="38" y1="30" x2="38" y2="95" stroke="#1f6440" stroke-width="1.5"/>
+  <line x1="14" y1="58" x2="14" y2="75" stroke="#1f6440" stroke-width="1.5"/>
+  <line x1="54" y1="46" x2="54" y2="62" stroke="#1f6440" stroke-width="1.5"/>
+  <!-- Top flower -->
+  <ellipse cx="35" cy="18" rx="5" ry="4" fill="#d63558" stroke="#1f1208" stroke-width="1.5"/>
+  <ellipse cx="35" cy="16" rx="3" ry="2" fill="#f4a300"/>
+</svg>
+  <svg class="motif motif-chili" viewBox="0 0 70 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Stem -->
+  <path d="M 30 18 Q 28 8 38 4 Q 48 8 44 20" fill="#2f8f5a" stroke="#1f1208" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Pepper body — long curved teardrop -->
+  <path d="M 30 18 Q 18 30 16 55 Q 14 85 26 105 Q 38 115 48 102 Q 56 85 52 60 Q 48 35 44 20 Q 38 16 30 18 Z"
+        fill="#c8201d" stroke="#1f1208" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Highlight -->
+  <path d="M 28 30 Q 22 50 24 75" stroke="#f4a300" stroke-width="3" fill="none" opacity="0.6"/>
+</svg>
+  <svg class="motif motif-maracas" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- First maraca (lower-left) -->
+  <g transform="rotate(-25 40 75)">
+    <line x1="40" y1="100" x2="40" y2="125" stroke="#a8401f" stroke-width="6" stroke-linecap="round"/>
+    <line x1="40" y1="100" x2="40" y2="125" stroke="#1f1208" stroke-width="2"/>
+    <ellipse cx="40" cy="78" rx="26" ry="30" fill="#f4a300" stroke="#1f1208" stroke-width="2.5"/>
+    <!-- Pattern dots -->
+    <circle cx="32" cy="70" r="3" fill="#d63558"/>
+    <circle cx="46" cy="65" r="3" fill="#2f8f5a"/>
+    <circle cx="40" cy="85" r="3" fill="#364fa6"/>
+    <circle cx="30" cy="88" r="2.5" fill="#d63558"/>
+    <circle cx="50" cy="82" r="2.5" fill="#364fa6"/>
+    <!-- Decorative band -->
+    <path d="M 16 78 Q 40 70 64 78" stroke="#1f1208" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
+  </g>
+  <!-- Second maraca (upper-right) -->
+  <g transform="rotate(25 100 75)">
+    <line x1="100" y1="100" x2="100" y2="125" stroke="#a8401f" stroke-width="6" stroke-linecap="round"/>
+    <line x1="100" y1="100" x2="100" y2="125" stroke="#1f1208" stroke-width="2"/>
+    <ellipse cx="100" cy="78" rx="26" ry="30" fill="#d63558" stroke="#1f1208" stroke-width="2.5"/>
+    <circle cx="92" cy="70" r="3" fill="#f4a300"/>
+    <circle cx="106" cy="65" r="3" fill="#2f8f5a"/>
+    <circle cx="100" cy="85" r="3" fill="#f4a300"/>
+    <circle cx="90" cy="88" r="2.5" fill="#f4a300"/>
+    <circle cx="110" cy="82" r="2.5" fill="#2f8f5a"/>
+    <path d="M 76 78 Q 100 70 124 78" stroke="#1f1208" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
+  </g>
+</svg>
+  <svg class="motif motif-agave" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 8 leaves radiating from center -->
+  <g>
+    <path d="M 50 50 L 50 5 L 56 15 Z" fill="#5c8d6f" stroke="#1f1208" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M 50 50 L 85 18 L 80 28 Z" fill="#6b9d80" stroke="#1f1208" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M 50 50 L 95 50 L 85 56 Z" fill="#5c8d6f" stroke="#1f1208" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M 50 50 L 85 82 L 80 72 Z" fill="#6b9d80" stroke="#1f1208" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M 50 50 L 50 95 L 44 85 Z" fill="#5c8d6f" stroke="#1f1208" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M 50 50 L 15 82 L 20 72 Z" fill="#6b9d80" stroke="#1f1208" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M 50 50 L 5 50 L 15 56 Z" fill="#5c8d6f" stroke="#1f1208" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M 50 50 L 15 18 L 20 28 Z" fill="#6b9d80" stroke="#1f1208" stroke-width="2" stroke-linejoin="round"/>
+  </g>
+  <circle cx="50" cy="50" r="5" fill="#1f6440" stroke="#1f1208" stroke-width="2"/>
+</svg>
+</div>
+<div class="app-root">
+  <div class="papel-picado"></div>
+  <header class="app-header">
+    <div class="header-mark">
+      <div class="logo-icon">
+        <svg viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 12 95 Q 12 80 35 78 Q 70 70 120 70 Q 170 70 205 78 Q 228 80 228 95 Q 228 115 195 122 Q 160 130 120 130 Q 80 130 45 122 Q 12 115 12 95 Z" fill="#c64525" stroke="#1f1208" stroke-width="5"/>
+          <path d="M 28 95 Q 60 88 120 86 Q 180 88 212 95" stroke="#f4a300" stroke-width="6" fill="none"/>
+          <path d="M 70 78 Q 75 55 90 35 Q 100 18 120 14 Q 140 18 150 35 Q 165 55 170 78 Z" fill="#e85a26" stroke="#1f1208" stroke-width="5"/>
+          <path d="M 73 76 Q 100 70 120 70 Q 140 70 167 76" stroke="#f4a300" stroke-width="6" fill="none"/>
+          <circle cx="120" cy="14" r="7" fill="#d63558" stroke="#1f1208" stroke-width="3"/>
+        </svg>
+      </div>
+      <span class="mark-text">Charla</span>
+    </div>
+    <div class="header-right">
+      <div id="syncIndicator" class="sync-indicator sync-offline" title="Cloud sync status"></div>
+      <div class="header-session"></div>
+    </div>
+  </header>
+  <div id="content"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = 'https://fpusffsmgsewolxmgtxq.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZwdXNmZnNtZ3Nld29seG1ndHhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MjkyNzUsImV4cCI6MjA5NTMwNTI3NX0.8X0c0VSC3hwWuIoDYtTGAtWZx-3MDNT_gIEvaO_-A2Y';
+const SYNC_ROW_ID = 'me';
+
+let sb = null;
+let syncStatus = 'offline'; // 'synced' | 'syncing' | 'offline'
+let syncTimer = null;
+
+try {
+  if (window.supabase && SUPABASE_URL) {
+    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  }
+} catch (e) {
+  console.warn('Supabase init failed:', e);
+}
+
+function updateSyncIndicator() {
+  const el = document.getElementById('syncIndicator');
+  if (!el) return;
+  const labels = {
+    synced: '● synced',
+    syncing: '● syncing…',
+    offline: '○ offline',
+  };
+  el.textContent = labels[syncStatus] || '';
+  el.className = 'sync-indicator sync-' + syncStatus;
+}
+
+async function syncDown() {
+  if (!sb) return;
+  syncStatus = 'syncing';
+  updateSyncIndicator();
+  try {
+    const { data, error } = await sb
+      .from('charla_progress')
+      .select('data, updated_at')
+      .eq('id', SYNC_ROW_ID)
+      .maybeSingle();
+    if (error) throw error;
+    if (data && data.data) {
+      const cloud = data.data;
+      const cloudTs = cloud.updatedAt || new Date(data.updated_at).getTime();
+      const localTs = state.updatedAt || 0;
+      if (cloudTs > localTs) {
+        // Cloud is newer — adopt it
+        state = cloud;
+        // Re-apply defaults in case cloud copy is missing newer fields
+        if (!state.thisSessionWrongs) state.thisSessionWrongs = {};
+        if (!state.userSynonyms) state.userSynonyms = {};
+        if (!state.flaggedLog) state.flaggedLog = [];
+        if (state.gender === undefined) state.gender = null;
+        if (state.aprendiendoCount === undefined) state.aprendiendoCount = 5;
+        saveState(state);
+        renderHome();
+      }
+    }
+    syncStatus = 'synced';
+  } catch (e) {
+    console.warn('Sync down failed:', e?.message || e, e);
+    syncStatus = 'offline';
+  }
+  updateSyncIndicator();
+}
+
+async function syncUp() {
+  if (!sb) return;
+  syncStatus = 'syncing';
+  updateSyncIndicator();
+  try {
+    const { error } = await sb
+      .from('charla_progress')
+      .upsert({ id: SYNC_ROW_ID, data: state, updated_at: new Date().toISOString() }, { onConflict: 'id' });
+    if (error) throw error;
+    syncStatus = 'synced';
+  } catch (e) {
+    console.warn('Sync up failed:', e?.message || e, e);
+    syncStatus = 'offline';
+  }
+  updateSyncIndicator();
+}
+
+function scheduleSyncUp() {
+  if (syncTimer) clearTimeout(syncTimer);
+  syncTimer = setTimeout(() => { syncUp(); }, 2000);
+}
+
+const WORD_POOL = [
+  {es:"no",en:"no",syn:["nope"],cat:"social",type:"adverb",sentenceEs:"No, no tengo tiempo.",sentenceEn:"No, I don't have time."},
+  {es:"s\u00ed",en:"yes",syn:["yeah", "yep"],cat:"social",type:"adverb",sentenceEs:"S\u00ed, me gusta el caf\u00e9.",sentenceEn:"Yes, I like coffee."},
+  {es:"yo",en:"I",syn:[],cat:"pronoun",type:"pronoun",sentenceEs:"Yo soy estudiante.",sentenceEn:"I am a student."},
+  {es:"t\u00fa",en:"you",syn:[],cat:"pronoun",type:"pronoun",sentenceEs:"\u00bfT\u00fa hablas espa\u00f1ol?",sentenceEn:"Do you speak Spanish?"},
+  {es:"\u00e9l",en:"he",syn:["him"],cat:"pronoun",type:"pronoun",sentenceEs:"\u00c9l es mi hermano.",sentenceEn:"He is my brother."},
+  {es:"ella",en:"she",syn:["her"],cat:"pronoun",type:"pronoun",sentenceEs:"Ella canta muy bien.",sentenceEn:"She sings very well."},
+  {es:"con",en:"with",syn:[],cat:"connector",type:"preposition",sentenceEs:"Voy con mis amigos.",sentenceEn:"I am going with my friends."},
+  {es:"sin",en:"without",syn:[],cat:"connector",type:"preposition",sentenceEs:"No puedo vivir sin ti.",sentenceEn:"I cannot live without you."},
+  {es:"pero",en:"but",syn:["however"],cat:"connector",type:"conjunction",sentenceEs:"Quiero ir pero no puedo.",sentenceEn:"I want to go but I cannot."},
+  {es:"porque",en:"because",syn:["since", "as"],cat:"connector",type:"conjunction",sentenceEs:"Estudio porque me gusta.",sentenceEn:"I study because I like it."},
+  {es:"para",en:"for/to",syn:["for", "to"],cat:"connector",type:"preposition",sentenceEs:"Este regalo es para ti.",sentenceEn:"This gift is for you."},
+  {es:"hasta",en:"until/up to",syn:["until", "up to", "till"],cat:"connector",type:"preposition",sentenceEs:"Trabajo hasta las seis.",sentenceEn:"I work until six."},
+  {es:"desde",en:"from/since",syn:["from", "since"],cat:"connector",type:"preposition",sentenceEs:"Te espero desde temprano.",sentenceEn:"I have been waiting for you since early."},
+  {es:"aqu\u00ed",en:"here",syn:[],cat:"place",type:"adverb",sentenceEs:"Vivo aqu\u00ed desde hace a\u00f1os.",sentenceEn:"I have lived here for years."},
+  {es:"all\u00ed",en:"there",syn:[],cat:"place",type:"adverb",sentenceEs:"Mi familia vive all\u00ed.",sentenceEn:"My family lives there."},
+  {es:"ahora",en:"now",syn:["right now", "currently"],cat:"time",type:"adverb",sentenceEs:"Tengo que ir ahora.",sentenceEn:"I have to go now."},
+  {es:"siempre",en:"always",syn:["forever"],cat:"time",type:"adverb",sentenceEs:"Siempre llego temprano.",sentenceEn:"I always arrive early."},
+  {es:"nunca",en:"never",syn:[],cat:"time",type:"adverb",sentenceEs:"Nunca como carne.",sentenceEn:"I never eat meat."},
+  {es:"muy",en:"very",syn:["really", "quite"],cat:"modifier",type:"adverb",sentenceEs:"Estoy muy contento.",sentenceEsF:"Estoy muy contenta.",sentenceEn:"I am very happy."},
+  {es:"mucho",en:"a lot/much",syn:["lots", "a lot", "much", "many"],cat:"modifier",type:"adverb",sentenceEs:"Te quiero mucho.",sentenceEn:"I love you a lot."},
+  {es:"poco",en:"little/few",syn:["little", "few", "a bit"],cat:"modifier",type:"adverb",sentenceEs:"Hablo un poco de espa\u00f1ol.",sentenceEn:"I speak a little Spanish."},
+  {es:"antes",en:"before",syn:["prior"],cat:"time",type:"adverb",sentenceEs:"Llam\u00e9 antes de salir.",sentenceEn:"I called before leaving."},
+  {es:"despu\u00e9s",en:"after/later",syn:["after", "later", "afterwards"],cat:"time",type:"adverb",sentenceEs:"Hablamos despu\u00e9s de la cena.",sentenceEn:"We talk after dinner."},
+  {es:"hoy",en:"today",syn:[],cat:"time",type:"adverb",sentenceEs:"Hoy hace mucho calor.",sentenceEn:"Today it is very hot."},
+  {es:"ayer",en:"yesterday",syn:[],cat:"time",type:"adverb",sentenceEs:"Ayer fui al cine.",sentenceEn:"Yesterday I went to the movies."},
+  {es:"ma\u00f1ana",en:"morning/tomorrow",syn:["morning", "tomorrow"],cat:"time",type:"noun",sentenceEs:"Te veo ma\u00f1ana por la ma\u00f1ana.",sentenceEn:"I will see you tomorrow morning."},
+  {es:"ser",en:"to be (permanent)",syn:["be"],cat:"verb",type:"verb",sentenceEs:"Quiero ser doctor.",sentenceEsF:"Quiero ser doctora.",sentenceEn:"I want to be a doctor."},
+  {es:"estar",en:"to be (state)",syn:["be"],cat:"verb",type:"verb",sentenceEs:"Voy a estar en casa.",sentenceEn:"I am going to be at home."},
+  {es:"tener",en:"to have",syn:["have", "own"],cat:"verb",type:"verb",sentenceEs:"Tengo dos hermanos.",sentenceEn:"I have two brothers."},
+  {es:"hacer",en:"to do/to make",syn:["do", "make"],cat:"verb",type:"verb",sentenceEs:"\u00bfQu\u00e9 vas a hacer hoy?",sentenceEn:"What are you going to do today?"},
+  {es:"ir",en:"to go",syn:["go", "leave"],cat:"verb",type:"verb",sentenceEs:"Voy a ir al mercado.",sentenceEn:"I am going to go to the market."},
+  {es:"ver",en:"to see",syn:["see", "watch", "view"],cat:"verb",type:"verb",sentenceEs:"Quiero ver una pel\u00edcula.",sentenceEn:"I want to see a film."},
+  {es:"decir",en:"to say/to tell",syn:["say", "tell"],cat:"verb",type:"verb",sentenceEs:"\u00bfQu\u00e9 quieres decir?",sentenceEn:"What do you want to say?"},
+  {es:"dar",en:"to give",syn:["give", "hand"],cat:"verb",type:"verb",sentenceEs:"Te voy a dar un regalo.",sentenceEn:"I am going to give you a gift."},
+  {es:"saber",en:"to know (facts)",syn:["know"],cat:"verb",type:"verb",sentenceEs:"No s\u00e9 la respuesta.",sentenceEn:"I don't know the answer."},
+  {es:"querer",en:"to want",syn:["want", "wish", "desire"],cat:"verb",type:"verb",sentenceEs:"Quiero un caf\u00e9, por favor.",sentenceEn:"I want a coffee, please."},
+  {es:"poder",en:"to be able to/can",syn:["can", "be able"],cat:"verb",type:"verb",sentenceEs:"Puedo ayudarte ma\u00f1ana.",sentenceEn:"I can help you tomorrow."},
+  {es:"venir",en:"to come",syn:["come", "arrive"],cat:"verb",type:"verb",sentenceEs:"\u00bfQuieres venir conmigo?",sentenceEn:"Do you want to come with me?"},
+  {es:"hablar",en:"to speak/to talk",syn:["speak", "talk", "chat"],cat:"verb",type:"verb",sentenceEs:"Me gusta hablar contigo.",sentenceEn:"I like to talk with you."},
+  {es:"pensar",en:"to think",syn:["think"],cat:"verb",type:"verb",sentenceEs:"Voy a pensar en eso.",sentenceEn:"I am going to think about that."},
+  {es:"creer",en:"to believe",syn:["believe", "think"],cat:"verb",type:"verb",sentenceEs:"Creo que es verdad.",sentenceEn:"I believe it is true."},
+  {es:"gustar",en:"to like",syn:["like", "enjoy"],cat:"verb",type:"verb",sentenceEs:"Me gusta la m\u00fasica.",sentenceEn:"I like music."},
+  {es:"esperar",en:"to wait/to hope",syn:["wait", "hope"],cat:"verb",type:"verb",sentenceEs:"Vamos a esperar el autob\u00fas.",sentenceEn:"We are going to wait for the bus."},
+  {es:"comer",en:"to eat",syn:["eat"],cat:"verb",type:"verb",sentenceEs:"Vamos a comer pizza.",sentenceEn:"We are going to eat pizza."},
+  {es:"beber",en:"to drink",syn:["drink"],cat:"verb",type:"verb",sentenceEs:"Quiero beber agua.",sentenceEn:"I want to drink water."},
+  {es:"vivir",en:"to live",syn:["live", "reside"],cat:"verb",type:"verb",sentenceEs:"Vivo en una ciudad peque\u00f1a.",sentenceEn:"I live in a small city."},
+  {es:"trabajar",en:"to work",syn:["work"],cat:"verb",type:"verb",sentenceEs:"Tengo que trabajar ma\u00f1ana.",sentenceEn:"I have to work tomorrow."},
+  {es:"comprar",en:"to buy",syn:["buy", "purchase", "get"],cat:"verb",type:"verb",sentenceEs:"Quiero comprar pan.",sentenceEn:"I want to buy bread."},
+  {es:"preguntar",en:"to ask",syn:["ask", "question"],cat:"verb",type:"verb",sentenceEs:"Voy a preguntar al profesor.",sentenceEn:"I am going to ask the teacher."},
+  {es:"leer",en:"to read",syn:["read"],cat:"verb",type:"verb",sentenceEs:"Me gusta leer libros.",sentenceEn:"I like to read books."},
+  {es:"escribir",en:"to write",syn:["write"],cat:"verb",type:"verb",sentenceEs:"Voy a escribir una carta.",sentenceEn:"I am going to write a letter."},
+  {es:"caminar",en:"to walk",syn:["walk", "stroll"],cat:"verb",type:"verb",sentenceEs:"Vamos a caminar al parque.",sentenceEn:"Let us walk to the park."},
+  {es:"dormir",en:"to sleep",syn:["sleep"],cat:"verb",type:"verb",sentenceEs:"Necesito dormir ocho horas.",sentenceEn:"I need to sleep eight hours."},
+  {es:"jugar",en:"to play",syn:["play"],cat:"verb",type:"verb",sentenceEs:"Los ni\u00f1os quieren jugar.",sentenceEn:"The children want to play."},
+  {es:"amar",en:"to love",syn:["love"],cat:"verb",type:"verb",sentenceEs:"Te voy a amar siempre.",sentenceEn:"I will love you always."},
+  {es:"estudiar",en:"to study",syn:["study", "learn"],cat:"verb",type:"verb",sentenceEs:"Voy a estudiar espa\u00f1ol.",sentenceEn:"I am going to study Spanish."},
+  {es:"pagar",en:"to pay",syn:["pay"],cat:"verb",type:"verb",sentenceEs:"Tengo que pagar la cuenta.",sentenceEn:"I have to pay the bill."},
+  {es:"correr",en:"to run",syn:["run", "jog"],cat:"verb",type:"verb",sentenceEs:"Me gusta correr por la ma\u00f1ana.",sentenceEn:"I like to run in the morning."},
+  {es:"cantar",en:"to sing",syn:["sing"],cat:"verb",type:"verb",sentenceEs:"Me gusta cantar canciones.",sentenceEn:"I like to sing songs."},
+  {es:"bailar",en:"to dance",syn:["dance"],cat:"verb",type:"verb",sentenceEs:"Vamos a bailar esta noche.",sentenceEn:"We are going to dance tonight."},
+  {es:"vender",en:"to sell",syn:["sell"],cat:"verb",type:"verb",sentenceEs:"Ellos van a vender la casa.",sentenceEn:"They are going to sell the house."},
+  {es:"despertar",en:"to wake up",syn:["wake up", "wake", "awake"],cat:"verb",type:"verb",sentenceEs:"Voy a despertar temprano.",sentenceEn:"I am going to wake up early."},
+  {es:"hola",en:"hello",syn:["hi", "hey"],cat:"social",type:"interjection",sentenceEs:"Hola, \u00bfc\u00f3mo est\u00e1s?",sentenceEn:"Hello, how are you?"},
+  {es:"adi\u00f3s",en:"goodbye/bye",syn:["farewell", "see you"],cat:"social",type:"interjection",sentenceEs:"Adi\u00f3s, hasta ma\u00f1ana.",sentenceEn:"Goodbye, see you tomorrow."},
+  {es:"gracias",en:"thank you/thanks",syn:["thx", "cheers"],cat:"social",type:"interjection",sentenceEs:"Muchas gracias por todo.",sentenceEn:"Thank you very much for everything."},
+  {es:"perd\u00f3n",en:"sorry",syn:["pardon", "excuse me", "apologies"],cat:"social",type:"interjection",sentenceEs:"Perd\u00f3n, no te escuch\u00e9.",sentenceEn:"Sorry, I didn't hear you."},
+  {es:"d\u00eda",en:"day",syn:[],cat:"time",type:"noun",sentenceEs:"Hoy es un d\u00eda perfecto.",sentenceEn:"Today is a perfect day."},
+  {es:"noche",en:"night",syn:["evening", "nighttime"],cat:"time",type:"noun",sentenceEs:"La noche es tranquila.",sentenceEn:"The night is quiet."},
+  {es:"tarde",en:"afternoon/evening",syn:["afternoon", "evening"],cat:"time",type:"noun",sentenceEs:"Llegamos por la tarde.",sentenceEn:"We arrived in the afternoon."},
+  {es:"hora",en:"hour",syn:["time"],cat:"time",type:"noun",sentenceEs:"Espero por una hora.",sentenceEn:"I am waiting for an hour."},
+  {es:"tiempo",en:"time/weather",syn:["time", "weather"],cat:"time",type:"noun",sentenceEs:"No tengo tiempo hoy.",sentenceEn:"I do not have time today."},
+  {es:"a\u00f1o",en:"year",syn:[],cat:"time",type:"noun",sentenceEs:"El a\u00f1o pasado viaj\u00e9 mucho.",sentenceEn:"Last year I travelled a lot."},
+  {es:"mes",en:"month",syn:[],cat:"time",type:"noun",sentenceEs:"Este mes voy a M\u00e9xico.",sentenceEn:"This month I am going to Mexico."},
+  {es:"semana",en:"week",syn:[],cat:"time",type:"noun",sentenceEs:"La semana pasada fue larga.",sentenceEn:"Last week was long."},
+  {es:"persona",en:"person",syn:["individual", "human"],cat:"people",type:"noun",sentenceEs:"Es una persona muy amable.",sentenceEn:"She is a very kind person."},
+  {es:"hombre",en:"man",syn:["guy", "male"],cat:"people",type:"noun",sentenceEs:"Ese hombre es mi padre.",sentenceEn:"That man is my father."},
+  {es:"mujer",en:"woman",syn:["lady", "female"],cat:"people",type:"noun",sentenceEs:"La mujer es doctora.",sentenceEn:"The woman is a doctor."},
+  {es:"ni\u00f1o",en:"boy/child",syn:["kid", "child", "boy"],cat:"people",type:"noun",sentenceEs:"El ni\u00f1o juega en el parque.",sentenceEn:"The boy plays in the park."},
+  {es:"ni\u00f1a",en:"girl",syn:["kid", "child"],cat:"people",type:"noun",sentenceEs:"La ni\u00f1a tiene un perro.",sentenceEn:"The girl has a dog."},
+  {es:"amigo",en:"friend",syn:["mate", "pal", "buddy"],cat:"people",type:"noun",sentenceEs:"Mi amigo vive cerca.",sentenceEn:"My friend lives nearby."},
+  {es:"familia",en:"family",syn:["relatives"],cat:"people",type:"noun",sentenceEs:"Tengo una familia grande.",sentenceEn:"I have a big family."},
+  {es:"madre",en:"mother/mom",syn:["mum", "mom", "mama", "mommy", "mummy"],cat:"people",type:"noun",sentenceEs:"Mi madre cocina muy bien.",sentenceEn:"My mother cooks very well."},
+  {es:"padre",en:"father/dad",syn:["daddy", "papa"],cat:"people",type:"noun",sentenceEs:"Mi padre trabaja mucho.",sentenceEn:"My father works a lot."},
+  {es:"hijo",en:"son",syn:[],cat:"people",type:"noun",sentenceEs:"Su hijo tiene cinco a\u00f1os.",sentenceEn:"Her son is five years old."},
+  {es:"hija",en:"daughter",syn:[],cat:"people",type:"noun",sentenceEs:"Mi hija estudia m\u00fasica.",sentenceEn:"My daughter studies music."},
+  {es:"hermano",en:"brother",syn:["bro", "sibling"],cat:"people",type:"noun",sentenceEs:"Mi hermano es alto.",sentenceEn:"My brother is tall."},
+  {es:"hermana",en:"sister",syn:["sis", "sibling"],cat:"people",type:"noun",sentenceEs:"Mi hermana vive en M\u00e9xico.",sentenceEn:"My sister lives in Mexico."},
+  {es:"abuelo",en:"grandfather/grandpa",syn:["granddad"],cat:"people",type:"noun",sentenceEs:"Mi abuelo es muy sabio.",sentenceEn:"My grandfather is very wise."},
+  {es:"abuela",en:"grandmother/grandma",syn:["nana", "gran"],cat:"people",type:"noun",sentenceEs:"Mi abuela hace pasteles.",sentenceEn:"My grandmother makes cakes."},
+  {es:"agua",en:"water",syn:[],cat:"food",type:"noun",sentenceEs:"Necesito un vaso de agua.",sentenceEn:"I need a glass of water."},
+  {es:"caf\u00e9",en:"coffee",syn:[],cat:"food",type:"noun",sentenceEs:"Tomo caf\u00e9 por la ma\u00f1ana.",sentenceEn:"I drink coffee in the morning."},
+  {es:"pan",en:"bread",syn:["loaf"],cat:"food",type:"noun",sentenceEs:"El pan est\u00e1 fresco.",sentenceEn:"The bread is fresh."},
+  {es:"comida",en:"food/meal",syn:["dish"],cat:"food",type:"noun",sentenceEs:"La comida est\u00e1 lista.",sentenceEn:"The food is ready."},
+  {es:"leche",en:"milk",syn:[],cat:"food",type:"noun",sentenceEs:"Los ni\u00f1os beben leche.",sentenceEn:"The children drink milk."},
+  {es:"carne",en:"meat",syn:["beef"],cat:"food",type:"noun",sentenceEs:"La carne est\u00e1 deliciosa.",sentenceEn:"The meat is delicious."},
+  {es:"queso",en:"cheese",syn:[],cat:"food",type:"noun",sentenceEs:"Me gusta el queso amarillo.",sentenceEn:"I like yellow cheese."},
+  {es:"arroz",en:"rice",syn:[],cat:"food",type:"noun",sentenceEs:"Comemos arroz con pollo.",sentenceEn:"We eat rice with chicken."},
+  {es:"huevo",en:"egg",syn:[],cat:"food",type:"noun",sentenceEs:"Quiero un huevo frito.",sentenceEn:"I want a fried egg."},
+  {es:"az\u00facar",en:"sugar",syn:[],cat:"food",type:"noun",sentenceEs:"\u00bfQuieres az\u00facar en tu caf\u00e9?",sentenceEn:"Do you want sugar in your coffee?"},
+  {es:"sal",en:"salt",syn:[],cat:"food",type:"noun",sentenceEs:"Pasa la sal, por favor.",sentenceEn:"Pass the salt, please."},
+  {es:"manzana",en:"apple",syn:[],cat:"food",type:"noun",sentenceEs:"Como una manzana cada d\u00eda.",sentenceEn:"I eat an apple every day."},
+  {es:"naranja",en:"orange",syn:[],cat:"food",type:"noun",sentenceEs:"La naranja es dulce.",sentenceEn:"The orange is sweet."},
+  {es:"pl\u00e1tano",en:"banana",syn:[],cat:"food",type:"noun",sentenceEs:"El pl\u00e1tano est\u00e1 maduro.",sentenceEn:"The banana is ripe."},
+  {es:"pescado",en:"fish (food)",syn:[],cat:"food",type:"noun",sentenceEs:"El pescado es muy fresco.",sentenceEn:"The fish is very fresh."},
+  {es:"desayuno",en:"breakfast",syn:[],cat:"food",type:"noun",sentenceEs:"El desayuno es importante.",sentenceEn:"Breakfast is important."},
+  {es:"almuerzo",en:"lunch",syn:["midday meal"],cat:"food",type:"noun",sentenceEs:"Vamos al almuerzo juntos.",sentenceEn:"Let us go to lunch together."},
+  {es:"cena",en:"dinner",syn:["supper"],cat:"food",type:"noun",sentenceEs:"La cena fue deliciosa.",sentenceEn:"The dinner was delicious."},
+  {es:"delicioso",en:"delicious/tasty",syn:["delicious", "tasty", "yummy"],cat:"food",type:"adjective",sentenceEs:"La comida est\u00e1 deliciosa.",sentenceEn:"The food is delicious."},
+  {es:"bueno",en:"good",syn:["nice", "fine", "great"],cat:"quality",type:"adjective",sentenceEs:"Es un libro muy bueno.",sentenceEn:"It is a very good book."},
+  {es:"malo",en:"bad",syn:["poor", "awful", "terrible"],cat:"quality",type:"adjective",sentenceEs:"El tiempo est\u00e1 malo hoy.",sentenceEn:"The weather is bad today."},
+  {es:"grande",en:"big/large",syn:["big", "large", "huge"],cat:"quality",type:"adjective",sentenceEs:"Tienen una casa grande.",sentenceEn:"They have a big house."},
+  {es:"peque\u00f1o",en:"small/little",syn:["small", "little", "tiny"],cat:"quality",type:"adjective",sentenceEs:"Tengo un perro peque\u00f1o.",sentenceEn:"I have a small dog."},
+  {es:"nuevo",en:"new",syn:["fresh", "brand new"],cat:"quality",type:"adjective",sentenceEs:"Tengo un coche nuevo.",sentenceEn:"I have a new car."},
+  {es:"viejo",en:"old",syn:["aged", "elderly"],cat:"quality",type:"adjective",sentenceEs:"Mi abuelo es viejo.",sentenceEn:"My grandfather is old."},
+  {es:"joven",en:"young",syn:["youthful"],cat:"quality",type:"adjective",sentenceEs:"Ella es muy joven.",sentenceEn:"She is very young."},
+  {es:"bonito",en:"pretty/cute",syn:["pretty", "cute", "lovely", "nice"],cat:"quality",type:"adjective",sentenceEs:"Tu vestido es bonito.",sentenceEn:"Your dress is pretty."},
+  {es:"feo",en:"ugly",syn:["unattractive"],cat:"quality",type:"adjective",sentenceEs:"Ese sombrero es feo.",sentenceEn:"That hat is ugly."},
+  {es:"caliente",en:"hot",syn:["warm"],cat:"quality",type:"adjective",sentenceEs:"El caf\u00e9 est\u00e1 muy caliente.",sentenceEn:"The coffee is very hot."},
+  {es:"fr\u00edo",en:"cold",syn:["chilly", "cool"],cat:"quality",type:"adjective",sentenceEs:"El agua est\u00e1 fr\u00eda.",sentenceEn:"The water is cold."},
+  {es:"feliz",en:"happy",syn:["glad", "joyful", "cheerful"],cat:"feeling",type:"adjective",sentenceEs:"Estoy muy feliz hoy.",sentenceEn:"I am very happy today."},
+  {es:"triste",en:"sad",syn:["unhappy", "down"],cat:"feeling",type:"adjective",sentenceEs:"Me siento triste a veces.",sentenceEn:"I feel sad sometimes."},
+  {es:"cansado",en:"tired",syn:["cansada", "exhausted", "sleepy", "weary"],cat:"feeling",type:"adjective",sentenceEs:"Estoy cansado del trabajo.",sentenceEsF:"Estoy cansada del trabajo.",sentenceEn:"I am tired from work."},
+  {es:"r\u00e1pido",en:"fast/quick",syn:["fast", "quick", "speedy"],cat:"quality",type:"adjective",sentenceEs:"El tren es muy r\u00e1pido.",sentenceEn:"The train is very fast."},
+  {es:"lento",en:"slow",syn:["sluggish"],cat:"quality",type:"adjective",sentenceEs:"Este autob\u00fas es lento.",sentenceEn:"This bus is slow."},
+  {es:"f\u00e1cil",en:"easy",syn:["simple"],cat:"quality",type:"adjective",sentenceEs:"El examen fue f\u00e1cil.",sentenceEn:"The exam was easy."},
+  {es:"dif\u00edcil",en:"difficult/hard",syn:["difficult", "hard", "tough"],cat:"quality",type:"adjective",sentenceEs:"Esta tarea es dif\u00edcil.",sentenceEn:"This task is difficult."},
+  {es:"casa",en:"house/home",syn:["home", "house"],cat:"home",type:"noun",sentenceEs:"Mi casa es peque\u00f1a.",sentenceEn:"My house is small."},
+  {es:"puerta",en:"door",syn:["doorway", "entrance"],cat:"home",type:"noun",sentenceEs:"Cierra la puerta, por favor.",sentenceEn:"Close the door, please."},
+  {es:"ventana",en:"window",syn:[],cat:"home",type:"noun",sentenceEs:"Abre la ventana, hace calor.",sentenceEn:"Open the window, it is hot."},
+  {es:"mesa",en:"table",syn:["desk"],cat:"home",type:"noun",sentenceEs:"La mesa est\u00e1 en la cocina.",sentenceEn:"The table is in the kitchen."},
+  {es:"silla",en:"chair",syn:["seat"],cat:"home",type:"noun",sentenceEs:"Si\u00e9ntate en esta silla.",sentenceEn:"Sit in this chair."},
+  {es:"cama",en:"bed",syn:[],cat:"home",type:"noun",sentenceEs:"Mi cama es muy c\u00f3moda.",sentenceEn:"My bed is very comfortable."},
+  {es:"libro",en:"book",syn:[],cat:"object",type:"noun",sentenceEs:"Este libro es interesante.",sentenceEn:"This book is interesting."},
+  {es:"tel\u00e9fono",en:"phone/telephone",syn:["mobile", "cell"],cat:"object",type:"noun",sentenceEs:"Mi tel\u00e9fono no funciona.",sentenceEn:"My phone is not working."},
+  {es:"dinero",en:"money",syn:["cash", "funds"],cat:"object",type:"noun",sentenceEs:"No tengo mucho dinero.",sentenceEn:"I do not have much money."},
+  {es:"coche",en:"car",syn:["auto", "automobile", "vehicle"],cat:"object",type:"noun",sentenceEs:"Voy en coche al trabajo.",sentenceEn:"I go to work by car."},
+  {es:"llave",en:"key",syn:[],cat:"object",type:"noun",sentenceEs:"No encuentro mi llave.",sentenceEn:"I cannot find my key."},
+  {es:"cuaderno",en:"notebook",syn:["exercise book", "jotter"],cat:"object",type:"noun",sentenceEs:"Necesito un cuaderno nuevo.",sentenceEn:"I need a new notebook."},
+  {es:"l\u00e1piz",en:"pencil",syn:[],cat:"object",type:"noun",sentenceEs:"\u00bfTienes un l\u00e1piz?",sentenceEn:"Do you have a pencil?"},
+  {es:"ciudad",en:"city",syn:["town"],cat:"place",type:"noun",sentenceEs:"Madrid es una ciudad grande.",sentenceEn:"Madrid is a big city."},
+  {es:"calle",en:"street",syn:["road"],cat:"place",type:"noun",sentenceEs:"La calle est\u00e1 llena de gente.",sentenceEn:"The street is full of people."},
+  {es:"escuela",en:"school",syn:[],cat:"place",type:"noun",sentenceEs:"Los ni\u00f1os van a la escuela.",sentenceEn:"The children go to school."},
+  {es:"tienda",en:"shop/store",syn:["shop", "store"],cat:"place",type:"noun",sentenceEs:"Voy a la tienda a comprar pan.",sentenceEn:"I am going to the shop to buy bread."},
+  {es:"restaurante",en:"restaurant",syn:["eatery"],cat:"place",type:"noun",sentenceEs:"Cenamos en un restaurante.",sentenceEn:"We had dinner at a restaurant."},
+  {es:"parque",en:"park",syn:[],cat:"place",type:"noun",sentenceEs:"Caminamos en el parque.",sentenceEn:"We walk in the park."},
+  {es:"mercado",en:"market",syn:[],cat:"place",type:"noun",sentenceEs:"Compro frutas en el mercado.",sentenceEn:"I buy fruit at the market."},
+  {es:"playa",en:"beach",syn:["shore", "seaside"],cat:"place",type:"noun",sentenceEs:"La playa es muy bonita.",sentenceEn:"The beach is very beautiful."},
+  {es:"tren",en:"train",syn:[],cat:"object",type:"noun",sentenceEs:"El tren va a Madrid.",sentenceEn:"The train goes to Madrid."},
+  {es:"autob\u00fas",en:"bus",syn:["bus", "coach"],cat:"object",type:"noun",sentenceEs:"El autob\u00fas llega tarde.",sentenceEn:"The bus arrives late."},
+  {es:"avi\u00f3n",en:"airplane/plane",syn:["plane", "airplane", "aeroplane"],cat:"object",type:"noun",sentenceEs:"El avi\u00f3n es muy r\u00e1pido.",sentenceEn:"The plane is very fast."},
+  {es:"cabeza",en:"head",syn:[],cat:"body",type:"noun",sentenceEs:"Me duele la cabeza.",sentenceEn:"My head hurts."},
+  {es:"mano",en:"hand",syn:[],cat:"body",type:"noun",sentenceEs:"Dame la mano.",sentenceEn:"Give me your hand."},
+  {es:"pie",en:"foot",syn:[],cat:"body",type:"noun",sentenceEs:"Mi pie est\u00e1 cansado.",sentenceEn:"My foot is tired."},
+  {es:"ojo",en:"eye",syn:[],cat:"body",type:"noun",sentenceEs:"Tiene un ojo verde.",sentenceEn:"She has a green eye."},
+  {es:"coraz\u00f3n",en:"heart",syn:[],cat:"body",type:"noun",sentenceEs:"Mi coraz\u00f3n late r\u00e1pido.",sentenceEn:"My heart beats fast."},
+  {es:"rojo",en:"red",syn:[],cat:"color",type:"adjective",sentenceEs:"Tengo un coche rojo.",sentenceEn:"I have a red car."},
+  {es:"azul",en:"blue",syn:[],cat:"color",type:"adjective",sentenceEs:"El cielo es azul.",sentenceEn:"The sky is blue."},
+  {es:"verde",en:"green",syn:[],cat:"color",type:"adjective",sentenceEs:"La hierba es verde.",sentenceEn:"The grass is green."},
+  {es:"amarillo",en:"yellow",syn:[],cat:"color",type:"adjective",sentenceEs:"El sol parece amarillo.",sentenceEn:"The sun looks yellow."},
+  {es:"negro",en:"black",syn:[],cat:"color",type:"adjective",sentenceEs:"Mi gato es negro.",sentenceEn:"My cat is black."},
+  {es:"blanco",en:"white",syn:[],cat:"color",type:"adjective",sentenceEs:"La nieve es blanca.",sentenceEn:"The snow is white."},
+  {es:"uno",en:"one",syn:["1"],cat:"number",type:"number",sentenceEs:"Quiero uno, por favor.",sentenceEn:"I want one, please."},
+  {es:"dos",en:"two",syn:["2"],cat:"number",type:"number",sentenceEs:"Tengo dos perros.",sentenceEn:"I have two dogs."},
+  {es:"tres",en:"three",syn:["3"],cat:"number",type:"number",sentenceEs:"Hay tres libros aqu\u00ed.",sentenceEn:"There are three books here."},
+  {es:"cuatro",en:"four",syn:["4"],cat:"number",type:"number",sentenceEs:"Mi familia tiene cuatro personas.",sentenceEn:"My family has four people."},
+  {es:"cinco",en:"five",syn:["5"],cat:"number",type:"number",sentenceEs:"Llego en cinco minutos.",sentenceEn:"I arrive in five minutes."},
+  {es:"diez",en:"ten",syn:["10"],cat:"number",type:"number",sentenceEs:"Tengo diez a\u00f1os de experiencia.",sentenceEn:"I have ten years of experience."},
+  {es:"cien",en:"hundred",syn:["100", "one hundred"],cat:"number",type:"number",sentenceEs:"Pagu\u00e9 cien pesos.",sentenceEn:"I paid one hundred pesos."},
+  {es:"mil",en:"thousand",syn:["1000", "one thousand"],cat:"number",type:"number",sentenceEs:"Hay mil estrellas en el cielo.",sentenceEn:"There are a thousand stars in the sky."},
+  {es:"sol",en:"sun",syn:[],cat:"nature",type:"noun",sentenceEs:"El sol brilla mucho hoy.",sentenceEn:"The sun is shining a lot today."},
+  {es:"luna",en:"moon",syn:[],cat:"nature",type:"noun",sentenceEs:"La luna es muy brillante.",sentenceEn:"The moon is very bright."},
+  {es:"cielo",en:"sky",syn:["heaven"],cat:"nature",type:"noun",sentenceEs:"El cielo est\u00e1 azul.",sentenceEn:"The sky is blue."},
+  {es:"mar",en:"sea/ocean",syn:["sea", "ocean"],cat:"nature",type:"noun",sentenceEs:"El mar est\u00e1 tranquilo.",sentenceEn:"The sea is calm."},
+  {es:"r\u00edo",en:"river",syn:["stream"],cat:"nature",type:"noun",sentenceEs:"El r\u00edo pasa por el pueblo.",sentenceEn:"The river goes through the town."},
+  {es:"\u00e1rbol",en:"tree",syn:[],cat:"nature",type:"noun",sentenceEs:"El \u00e1rbol tiene muchas hojas.",sentenceEn:"The tree has many leaves."},
+  {es:"flor",en:"flower",syn:["blossom", "bloom"],cat:"nature",type:"noun",sentenceEs:"La flor es muy hermosa.",sentenceEn:"The flower is very beautiful."},
+  {es:"estrella",en:"star",syn:[],cat:"nature",type:"noun",sentenceEs:"Veo una estrella en el cielo.",sentenceEn:"I see a star in the sky."},
+  {es:"fuego",en:"fire",syn:["flame"],cat:"nature",type:"noun",sentenceEs:"Hay fuego en la chimenea.",sentenceEn:"There is fire in the fireplace."},
+  {es:"vista",en:"view/sight",syn:["view", "sight", "scenery"],cat:"nature",type:"noun",sentenceEs:"La vista es magn\u00edfica.",sentenceEn:"The view is magnificent."},
+  {es:"perro",en:"dog",syn:["puppy", "doggy"],cat:"animal",type:"noun",sentenceEs:"Mi perro es muy juguet\u00f3n.",sentenceEn:"My dog is very playful."},
+  {es:"gato",en:"cat",syn:["kitty", "kitten"],cat:"animal",type:"noun",sentenceEs:"El gato duerme en la cama.",sentenceEn:"The cat sleeps on the bed."},
+  {es:"caballo",en:"horse",syn:[],cat:"animal",type:"noun",sentenceEs:"El caballo corre r\u00e1pido.",sentenceEn:"The horse runs fast."},
+  {es:"p\u00e1jaro",en:"bird",syn:[],cat:"animal",type:"noun",sentenceEs:"Un p\u00e1jaro canta en el \u00e1rbol.",sentenceEn:"A bird is singing in the tree."},
+  {es:"vaca",en:"cow",syn:["cattle"],cat:"animal",type:"noun",sentenceEs:"La vaca da leche.",sentenceEn:"The cow gives milk."},
+  {es:"pez",en:"fish (alive)",syn:[],cat:"animal",type:"noun",sentenceEs:"Hay un pez en el agua.",sentenceEn:"There is a fish in the water."},
+  {es:"nosotros",en:"we",syn:["us"],cat:"pronoun",type:"pronoun",sentenceEs:"Nosotros vamos al parque.",sentenceEn:"We are going to the park."},
+  {es:"ropa",en:"clothes/clothing",syn:["clothes", "clothing", "garments"],cat:"clothing",type:"noun",sentenceEs:"Necesito ropa nueva.",sentenceEn:"I need new clothes."},
+  {es:"camisa",en:"shirt",syn:["top"],cat:"clothing",type:"noun",sentenceEs:"Mi camisa es azul.",sentenceEn:"My shirt is blue."},
+  {es:"zapato",en:"shoe",syn:[],cat:"clothing",type:"noun",sentenceEs:"Compr\u00e9 un zapato nuevo.",sentenceEn:"I bought a new shoe."},
+  {es:"regalo",en:"gift/present",syn:["gift", "present"],cat:"object",type:"noun",sentenceEs:"Te tengo un regalo.",sentenceEn:"I have a gift for you."},
+  {es:"pel\u00edcula",en:"movie/film",syn:["movie", "film"],cat:"object",type:"noun",sentenceEs:"Vamos a ver una pel\u00edcula.",sentenceEn:"We are going to watch a film."}
+];
+
+const PHRASES = [
+  {es:"hasta la vista",en:"see you later",components:["hasta", "vista"]},
+  {es:"buenos d\u00edas",en:"good morning",components:["bueno", "d\u00eda"]},
+  {es:"buenas noches",en:"good night",components:["bueno", "noche"]},
+  {es:"mucho gusto",en:"nice to meet you",components:["mucho", "gustar"]},
+  {es:"hasta ma\u00f1ana",en:"see you tomorrow",components:["hasta", "ma\u00f1ana"]},
+  {es:"no s\u00e9",en:"I don't know",components:["no", "saber"]},
+  {es:"me gusta",en:"I like it",components:["gustar"]},
+  {es:"por favor",en:"please",components:["para"]},
+  {es:"de nada",en:"you're welcome",components:["no"]}
+];
+
+
+
+// ============================================================================
+// MATCHING
+// ============================================================================
+
+// Common contractions to expand both ways for forgiving matching
+const CONTRACTIONS = {
+  "im": "i am", "i'm": "i am",
+  "ive": "i have", "i've": "i have",
+  "ill": "i will", "i'll": "i will",
+  "id": "i would", "i'd": "i would",
+  "youre": "you are", "you're": "you are",
+  "youve": "you have", "you've": "you have",
+  "youll": "you will", "you'll": "you will",
+  "youd": "you would", "you'd": "you would",
+  "hes": "he is", "he's": "he is",
+  "shes": "she is", "she's": "she is",
+  "its": "it is", "it's": "it is",
+  "were": "we are", "we're": "we are",
+  "weve": "we have", "we've": "we have",
+  "theyre": "they are", "they're": "they are",
+  "theyve": "they have", "they've": "they have",
+  "isnt": "is not", "isn't": "is not",
+  "arent": "are not", "aren't": "are not",
+  "wasnt": "was not", "wasn't": "was not",
+  "werent": "were not", "weren't": "were not",
+  "dont": "do not", "don't": "do not",
+  "doesnt": "does not", "doesn't": "does not",
+  "didnt": "did not", "didn't": "did not",
+  "havent": "have not", "haven't": "have not",
+  "hasnt": "has not", "hasn't": "has not",
+  "cant": "can not", "can't": "can not", "cannot": "can not",
+  "couldnt": "could not", "couldn't": "could not",
+  "wont": "will not", "won't": "will not",
+  "wouldnt": "would not", "wouldn't": "would not",
+  "shouldnt": "should not", "shouldn't": "should not",
+};
+
+function expandContractions(text) {
+  // Replace any contraction tokens
+  return text.split(' ').map(w => CONTRACTIONS[w] || w).join(' ');
+}
+
+// UK/US spelling and word pairs — normalize both to a canonical form.
+// Applied AFTER contractions so we work on whole words.
+// Also includes common English synonyms that should be accepted interchangeably
+// (so "I want to ask the professor" matches "I want to ask the teacher").
+const UK_US_NORM = {
+  // UK → US canonical
+  mum: 'mom', mummy: 'mommy', mam: 'mom',
+  colour: 'color', flavour: 'flavor', favour: 'favor', neighbour: 'neighbor',
+  honour: 'honor', behaviour: 'behavior', humour: 'humor',
+  realise: 'realize', organise: 'organize', recognise: 'recognize',
+  centre: 'center', theatre: 'theater', metre: 'meter', litre: 'liter',
+  travelling: 'traveling', travelled: 'traveled', cancelled: 'canceled',
+  grey: 'gray',
+  // UK words → US equivalents (canonical = US since en strings are US-flavored)
+  lift: 'elevator', flat: 'apartment', biscuit: 'cookie',
+  lorry: 'truck', motorway: 'highway', petrol: 'gas',
+  queue: 'line', rubbish: 'trash', bin: 'trash',
+  trousers: 'pants', jumper: 'sweater', trainers: 'sneakers',
+  pavement: 'sidewalk', autumn: 'fall', holiday: 'vacation',
+  chemist: 'pharmacy', shop: 'store',
+  // English synonyms — normalise to one canonical form on both sides
+  present: 'gift',
+  professor: 'teacher',
+  film: 'movie', films: 'movies', cinema: 'movies',
+  hi: 'hello', hey: 'hello',
+  yeah: 'yes', yep: 'yes', yup: 'yes',
+  nope: 'no',
+  cheers: 'thanks', thx: 'thanks',
+  bye: 'goodbye', farewell: 'goodbye',
+  sorry: 'apologies',
+  buddy: 'friend', pal: 'friend', mate: 'friend',
+  kid: 'child', kids: 'children',
+  guy: 'man', dude: 'man',
+  lady: 'woman',
+  puppy: 'dog', doggy: 'dog', doggie: 'dog',
+  kitty: 'cat', kitten: 'cat',
+  store: 'shop',  // careful: 'shop' is the UK form we mapped above to 'store' — this would loop. Remove this one.
+  // (removed shop/store circular)
+  auto: 'car', automobile: 'car', vehicle: 'car',
+  road: 'street',
+  ocean: 'sea',
+  pretty: 'cute', lovely: 'cute',
+  tasty: 'delicious', yummy: 'delicious',
+  exhausted: 'tired', sleepy: 'tired', weary: 'tired',
+  glad: 'happy', joyful: 'happy', cheerful: 'happy',
+  unhappy: 'sad', down: 'sad',
+  simple: 'easy',
+  difficult: 'hard', tough: 'hard',
+  fast: 'quick', speedy: 'quick',
+  sluggish: 'slow',
+  huge: 'big', large: 'big',
+  little: 'small', tiny: 'small',
+  awful: 'bad', terrible: 'bad', poor: 'bad',
+  fine: 'good', great: 'good', nice: 'good',
+  fresh: 'new', 'brand-new': 'new',
+  aged: 'old', elderly: 'old',
+  // verbs
+  speak: 'talk', chat: 'talk',
+  buy: 'purchase', get: 'purchase',
+  enjoy: 'like',
+  jog: 'run',
+  walk: 'stroll',  // wait, "walk" should be canonical not stroll. flip.
+  stroll: 'walk',
+  view: 'see', watch: 'see',
+  arrive: 'come',
+  desire: 'want', wish: 'want',
+  reside: 'live',
+  learn: 'study',
+  // numbers
+  '1': 'one', '2': 'two', '3': 'three', '4': 'four', '5': 'five',
+  '10': 'ten', '100': 'hundred', '1000': 'thousand',
+};
+// Fix the circular shop/store: remove the override (shop UK→store already maps shop→store)
+delete UK_US_NORM.store;
+
+function applyUkUsNorm(text) {
+  return text.split(' ').map(w => UK_US_NORM[w] || w).join(' ');
+}
+
+const normalize = (s) => {
+  let result = s.toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')      // strip accents
+    .replace(/\s*\([^)]*\)\s*/g, ' ')      // strip parentheticals
+    .replace(/[¿?¡!.,;:()"]/g, '')          // strip most punctuation (keep apostrophes for now)
+    .replace(/^to\s+/, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  // Expand contractions for matching
+  result = expandContractions(result);
+  // Now strip remaining apostrophes (in case any leaked through)
+  result = result.replace(/'/g, '').replace(/\s+/g, ' ').trim();
+  // Map UK spellings/words → US canonical
+  result = applyUkUsNorm(result);
+  return result;
+};
+
+const levenshtein = (a, b) => {
+  if (a.length === 0) return b.length;
+  if (b.length === 0) return a.length;
+  const dp = Array.from({ length: a.length + 1 }, () => new Array(b.length + 1).fill(0));
+  for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+  for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost);
+    }
+  }
+  return dp[a.length][b.length];
+};
+
+// Lookup user-added synonyms for a normalized target
+function getUserSynonyms(target) {
+  // We index by the normalized canonical target string.
+  // Target may have multiple alternates "x/y" — we check each.
+  const keys = target.split(/[\/,]/).map(t => normalize(t.trim())).filter(Boolean);
+  const out = [];
+  for (const k of keys) {
+    if (state.userSynonyms && state.userSynonyms[k]) {
+      out.push(...state.userSynonyms[k]);
+    }
+  }
+  return out;
+}
+
+const sentenceMatch = (input, target) => {
+  const a = normalize(input);
+  const t = normalize(target);
+  if (a === t) return true;
+  const tolerance = Math.min(3, Math.max(1, Math.floor(t.length / 12)));
+  if (levenshtein(a, t) <= tolerance) return true;
+  // Also try user synonyms (e.g. they may have flagged a whole sentence variant)
+  const userSyns = getUserSynonyms(target);
+  for (const s of userSyns) {
+    const sn = normalize(s);
+    if (a === sn) return true;
+    if (levenshtein(a, sn) <= tolerance) return true;
+  }
+  return false;
+};
+
+// Word matching: takes the target string AND optional list of synonyms
+// Returns true if input matches target OR any synonym (including user-added)
+const isWordCorrect = (input, target, synonyms = []) => {
+  const a = normalize(input);
+  if (!a) return false;
+  const userSyns = getUserSynonyms(target);
+  const candidates = [
+    ...target.split(/[\/,]/).map(t => t.trim()),
+    ...synonyms,
+    ...userSyns,
+  ].map(t => normalize(t)).filter(Boolean);
+  for (const t of candidates) {
+    if (a === t) return true;
+    if (levenshtein(a, t) <= 1) return true;
+    if (a.length >= 3 && t.length >= 3) {
+      const aWords = a.split(' ');
+      const tWords = t.split(' ');
+      if (aWords.some(w => w.length >= 3 && tWords.includes(w))) return true;
+      if (tWords.some(w => w.length >= 3 && aWords.includes(w))) return true;
+    }
+  }
+  return false;
+};
+
+const isCorrect = (input, target, kind, synonyms) => {
+  if (kind === 'sentence') return sentenceMatch(input, target);
+  return isWordCorrect(input, target, synonyms);
+};
+
+const shuffle = (arr) => {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
+// Frequency-weighted sample without replacement.
+// `pool` is assumed to be already ordered by frequency (index 0 = most common).
+// Common words are much more likely to be picked, but any word can surface.
+const weightedSampleByRank = (items, getOriginalRank, n) => {
+  // Build weights using 1 / (rank+1)^0.7 — a moderate power law.
+  // rank+1 so the most-common word doesn't have infinite weight.
+  const remaining = [...items];
+  const result = [];
+  while (result.length < n && remaining.length > 0) {
+    const weights = remaining.map(w => 1 / Math.pow(getOriginalRank(w) + 1, 0.7));
+    const totalWeight = weights.reduce((a, b) => a + b, 0);
+    let r = Math.random() * totalWeight;
+    let pickedIdx = 0;
+    for (let i = 0; i < weights.length; i++) {
+      r -= weights[i];
+      if (r <= 0) { pickedIdx = i; break; }
+    }
+    result.push(remaining[pickedIdx]);
+    remaining.splice(pickedIdx, 1);
+  }
+  return result;
+};
+
+const pickSessionWords = (pool, n, alreadyUsed) => {
+  // pool is ordered by frequency. Capture each word's original rank by its index.
+  const rankByEs = {};
+  pool.forEach((w, i) => { rankByEs[w.es] = i; });
+
+  const available = pool.filter(w => !alreadyUsed.has(w.es));
+  // Weighted-sample more than we need so the category filter has room
+  const sampleSize = Math.min(available.length, n * 3);
+  const candidates = weightedSampleByRank(available, w => rankByEs[w.es], sampleSize);
+
+  const picked = [];
+  const catCount = {};
+  const typeCount = {};
+  for (const w of candidates) {
+    if (picked.length >= n) break;
+    if ((catCount[w.cat] || 0) >= 2) continue;
+    if ((typeCount[w.type] || 0) >= 3) continue;
+    picked.push(w);
+    catCount[w.cat] = (catCount[w.cat] || 0) + 1;
+    typeCount[w.type] = (typeCount[w.type] || 0) + 1;
+  }
+  // If category filter blocked us from reaching n, fill from remaining candidates
+  if (picked.length < n) {
+    for (const w of candidates) {
+      if (picked.length >= n) break;
+      if (picked.find(p => p.es === w.es)) continue;
+      picked.push(w);
+    }
+  }
+  // If still short (very small pool), top up from anywhere in available
+  if (picked.length < n) {
+    for (const w of available) {
+      if (picked.length >= n) break;
+      if (picked.find(p => p.es === w.es)) continue;
+      picked.push(w);
+    }
+  }
+  return picked;
+};
+
+const STAGES = [
+  { id: 0, label: 'Spanish word', prompt: 'Translate to English', from: 'es', to: 'en', kind: 'word' },
+  { id: 1, label: 'English word', prompt: 'Translate to Spanish', from: 'en', to: 'es', kind: 'word' },
+  { id: 2, label: 'Spanish sentence', prompt: 'Translate to English', from: 'es', to: 'en', kind: 'sentence' },
+  { id: 3, label: 'English sentence', prompt: 'Translate to Spanish', from: 'en', to: 'es', kind: 'sentence' },
+];
+
+// ============================================================================
+// PERSISTENCE
+// ============================================================================
+const STORAGE_KEY = 'charla-flashcards-v1';
+const loadState = () => {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+};
+const saveState = (s) => {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch {}
+};
+
+// ============================================================================
+// STATE
+// ============================================================================
+//
+// CARD SHAPE:
+//   {
+//     es, en, cat, type,
+//     bucket: 'aprendiendo' | 'aprendidas' | 'repaso',
+//     introducedSession: number,
+//     cleanStreakSessions: number,         // for promotion to aprendidas (need 2 in a row)
+//     lastSessionReviewed: number,
+//   }
+//
+// Promotion rules (run at end of session):
+//   - For each card in the pack:
+//       - If wrong >= 2 times this session → repaso
+//       - Else if had no wrongs this session AND not in aprendidas:
+//           - cleanStreakSessions += 1
+//           - if cleanStreakSessions >= 2 → aprendidas
+//       - Else: cleanStreakSessions = 0
+//   - Cards in repaso that pass cleanly this session → back to aprendiendo (cleanStreak=1)
+
+let state = loadState() || {
+  session: 1,
+  cards: {},
+  todayPack: [],
+  todayCompleted: [],
+  unlockedPhrases: [],
+  // session-scoped wrong count map: { es: number }
+  thisSessionWrongs: {},
+  // user-added synonyms: { "targetWord": ["alt1", "alt2"] }
+  // key is the lowercase, accent-stripped target
+  userSynonyms: {},
+  // list of flags for export: { input, target, kind, es, en, ts, session }
+  flaggedLog: [],
+  // user preferences
+  gender: null,            // 'masc' | 'fem' — set on first popup
+  aprendiendoCount: 5,     // how many cards from Aprendiendo to add each session
+  // timestamp for sync conflict resolution (newest wins)
+  updatedAt: 0,
+};
+
+// Make sure newer fields exist on older saves
+if (!state.thisSessionWrongs) state.thisSessionWrongs = {};
+if (!state.userSynonyms) state.userSynonyms = {};
+if (!state.flaggedLog) state.flaggedLog = [];
+if (state.gender === undefined) state.gender = null;
+if (state.aprendiendoCount === undefined) state.aprendiendoCount = 5;
+if (!state.updatedAt) state.updatedAt = 0;
+
+let study = null; // runtime study state, not persisted
+
+const persist = () => {
+  state.updatedAt = Date.now();
+  saveState(state);
+  scheduleSyncUp();
+};
+
+// ============================================================================
+// VIEWS
+// ============================================================================
+const root = document.getElementById('content');
+const headerSession = document.querySelector('.header-session');
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function updateHeader() {
+  headerSession.innerHTML = `<span class="session-dot"></span>Sesión ${state.session}`;
+}
+
+function getWord(es) {
+  return WORD_POOL.find(w => w.es === es);
+}
+
+function getCleanEnglish(en) {
+  return en.replace(/\s*\([^)]*\)\s*/g, '').split('/')[0].trim();
+}
+
+function getBucketCounts() {
+  const counts = { aprendidas: 0, aprendiendo: 0, repaso: 0 };
+  for (const c of Object.values(state.cards)) {
+    if (c.bucket && counts[c.bucket] !== undefined) counts[c.bucket]++;
+  }
+  return counts;
+}
+
+// ----- HOME -----
+function renderHome() {
+  updateHeader();
+  const counts = getBucketCounts();
+  const todayRemaining = state.todayPack.filter(es => !state.todayCompleted.includes(es)).length;
+  const startLabel = todayRemaining > 0 ? `Continuar — ${todayRemaining} restantes` : 'Empezar sesión';
+
+  let phrasesHtml = '';
+  if (state.unlockedPhrases.length > 0) {
+    const chips = state.unlockedPhrases.map(p => {
+      const phrase = PHRASES.find(ph => ph.es === p);
+      if (!phrase) return '';
+      return `<div class="phrase-chip">
+        <span class="phrase-es">${escapeHtml(phrase.es)}</span>
+        <span class="phrase-arrow">→</span>
+        <span class="phrase-en">${escapeHtml(phrase.en)}</span>
+      </div>`;
+    }).join('');
+    phrasesHtml = `
+      <div class="phrases-panel">
+        <div class="phrases-header">
+          <span class="phrases-badge">★ DESBLOQUEADAS</span>
+          <span class="phrases-count">${state.unlockedPhrases.length} frase${state.unlockedPhrases.length !== 1 ? 's' : ''}</span>
+        </div>
+        <div class="phrases-list">${chips}</div>
+      </div>`;
+  }
+
+  root.innerHTML = `
+    <main class="home">
+      <div class="hero-card">
+        <div class="hero-sticker hero-sticker-tl">¡Vamos!</div>
+        <div class="hero-sticker hero-sticker-br">10 palabras</div>
+        <div class="hero-eyebrow">Misión de hoy</div>
+        <h1 class="hero-title"><em>Diez</em> palabras<span class="hero-dot">.</span></h1>
+        <p class="hero-sub">Más el repaso de la última sesión y cinco amigas de tu pila Aprendiendo — todas mezcladas en una baraja fresca.</p>
+        <button class="btn-primary" id="startBtn">${startLabel}<span class="btn-arrow">→</span></button>
+      </div>
+
+      <div class="stats-row">
+        <button class="stat-card stat-aprendidas" id="viewAprendidas">
+          <div class="stat-emoji">✓</div>
+          <div class="stat-num">${counts.aprendidas}</div>
+          <div class="stat-label">Aprendidas</div>
+          <div class="stat-label-en">Learnt</div>
+        </button>
+        <button class="stat-card stat-aprendiendo" id="viewAprendiendo">
+          <div class="stat-emoji">★</div>
+          <div class="stat-num">${counts.aprendiendo}</div>
+          <div class="stat-label">Aprendiendo</div>
+          <div class="stat-label-en">Learning</div>
+        </button>
+        <button class="stat-card stat-repaso" id="viewRepaso">
+          <div class="stat-emoji">↻</div>
+          <div class="stat-num">${counts.repaso}</div>
+          <div class="stat-label">Repaso</div>
+          <div class="stat-label-en">Review</div>
+        </button>
+      </div>
+
+      ${phrasesHtml}
+
+      <footer class="home-footer">
+        ${state.flaggedLog.length > 0 ? `<button class="btn-link" id="exportBtn">📤 Exportar ${state.flaggedLog.length} marcadas · Export flags</button><br><br>` : ''}
+        <button class="btn-link" id="resetBtn">Borrar todo el progreso</button>
+      </footer>
+    </main>
+  `;
+
+  document.getElementById('startBtn').onclick = startSession;
+  document.getElementById('viewAprendidas').onclick = () => renderBucket('aprendidas');
+  document.getElementById('viewAprendiendo').onclick = () => renderBucket('aprendiendo');
+  document.getElementById('viewRepaso').onclick = () => renderBucket('repaso');
+  const exportBtn = document.getElementById('exportBtn');
+  if (exportBtn) exportBtn.onclick = exportFlaggedAnswers;
+  document.getElementById('resetBtn').onclick = () => {
+    if (!confirm('¿Borrar todo el progreso? Esto no se puede deshacer.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    state = { session: 1, cards: {}, todayPack: [], todayCompleted: [], unlockedPhrases: [], thisSessionWrongs: {}, userSynonyms: {}, flaggedLog: [] };
+    renderHome();
+  };
+}
+
+function exportFlaggedAnswers() {
+  if (!state.flaggedLog || state.flaggedLog.length === 0) return;
+  const lines = ['# Charla — flagged answers', '', `Exported: ${new Date().toLocaleString()}`, `Total: ${state.flaggedLog.length}`, ''];
+  for (const f of state.flaggedLog) {
+    lines.push(`---`);
+    lines.push(`Session ${f.session} · ${f.kind}`);
+    lines.push(`Spanish: ${f.es}  (${f.en})`);
+    lines.push(`Target:  ${f.target}`);
+    lines.push(`I typed: ${f.userAnswer}`);
+    lines.push('');
+  }
+  const text = lines.join('\n');
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `charla-flags-${new Date().toISOString().slice(0,10)}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ----- SESSION START -----
+function startSession() {
+  const remaining = state.todayPack.filter(es => !state.todayCompleted.includes(es));
+  if (remaining.length > 0) {
+    // In-progress pack — just resume, no popup
+    initStudy();
+    renderStudy();
+    return;
+  }
+  // Need a new pack — show the popup
+  showPreSessionPopup();
+}
+
+function showPreSessionPopup() {
+  // Compute available pool for the slider — Aprendiendo cards not in last session
+  const prevSessionCards = new Set(Object.values(state.cards)
+    .filter(c => c.introducedSession === state.session - 1)
+    .map(c => c.es));
+  const aprendiendoAvailable = Object.values(state.cards)
+    .filter(c => c.bucket === 'aprendiendo' && !prevSessionCards.has(c.es))
+    .length;
+
+  // Default = user's saved aprendiendoCount, clamped to available
+  const defaultCount = Math.min(state.aprendiendoCount || 5, aprendiendoAvailable);
+  const repasoCount = Object.values(state.cards).filter(c => c.bucket === 'repaso').length;
+  const lastSessionCount = prevSessionCards.size;
+
+  // Current gender (or default to 'masc' for first time)
+  const gender = state.gender || 'masc';
+
+  // The popup
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.id = 'preSessionOverlay';
+  overlay.innerHTML = `
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-title">¿Listo para empezar?</div>
+      <div class="modal-subtitle">Ready to begin?</div>
+
+      <div class="modal-section">
+        <label class="modal-section-label">Repaso de Aprendiendo · Review from Learning</label>
+        <div class="range-row">
+          <input type="range" id="aprendiendoSlider" min="0" max="${aprendiendoAvailable}" value="${defaultCount}" />
+          <div>
+            <span class="range-value" id="aprendiendoVal">${defaultCount}</span>
+            <span class="range-value-suffix">/ ${aprendiendoAvailable}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <label class="modal-section-label">¿Cómo te describes? · How do you describe yourself?</label>
+        <div class="gender-toggle">
+          <button class="gender-btn ${gender === 'masc' ? 'active' : ''}" data-gender="masc">♂ Masculino</button>
+          <button class="gender-btn ${gender === 'fem' ? 'active' : ''}" data-gender="fem">♀ Femenino</button>
+        </div>
+      </div>
+
+      <div class="modal-subtitle" style="margin-top:-8px; font-size: 13px;">
+        Total: 10 nuevas + ${lastSessionCount} de la última sesión${repasoCount > 0 ? ` + ${repasoCount} de Repaso` : ''} + <span id="aprendiendoTotal">${defaultCount}</span> de Aprendiendo
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-link" id="cancelStart">Cancelar</button>
+        <button class="btn-primary" id="confirmStart">¡Vamos!<span class="btn-arrow">→</span></button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  // Wire up slider
+  const slider = document.getElementById('aprendiendoSlider');
+  const valLabel = document.getElementById('aprendiendoVal');
+  const totalLabel = document.getElementById('aprendiendoTotal');
+  slider.oninput = (e) => {
+    valLabel.textContent = e.target.value;
+    totalLabel.textContent = e.target.value;
+  };
+
+  // Gender toggle
+  let chosenGender = gender;
+  overlay.querySelectorAll('.gender-btn').forEach(btn => {
+    btn.onclick = () => {
+      overlay.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      chosenGender = btn.getAttribute('data-gender');
+    };
+  });
+
+  document.getElementById('cancelStart').onclick = () => {
+    document.body.removeChild(overlay);
+  };
+  document.getElementById('confirmStart').onclick = () => {
+    const count = parseInt(slider.value, 10);
+    state.gender = chosenGender;
+    state.aprendiendoCount = count;
+    persist();
+    document.body.removeChild(overlay);
+    actuallyStartSession(count);
+  };
+
+  // Click outside to cancel
+  overlay.onclick = () => {
+    if (document.body.contains(overlay)) document.body.removeChild(overlay);
+  };
+}
+
+function actuallyStartSession(aprendiendoCount) {
+  // Build a new pack
+  const usedEs = new Set(Object.keys(state.cards));
+  const newWords = pickSessionWords(WORD_POOL, 10, usedEs);
+  for (const w of newWords) {
+    state.cards[w.es] = {
+      es: w.es, en: w.en, cat: w.cat, type: w.type,
+      bucket: 'aprendiendo',
+      introducedSession: state.session,
+      cleanStreakSessions: 0,
+      lastSessionReviewed: 0,
+    };
+  }
+
+  // Last session's cards (if any)
+  const prevSessionCards = Object.values(state.cards)
+    .filter(c => c.introducedSession === state.session - 1)
+    .map(c => c.es);
+
+  // Pick N from aprendiendo (excluding prev session) + ALL repaso cards
+  const learningPool = Object.values(state.cards)
+    .filter(c => c.bucket === 'aprendiendo' && !prevSessionCards.includes(c.es) && !newWords.find(n => n.es === c.es))
+    .map(c => c.es);
+  const learningPick = shuffle(learningPool).slice(0, aprendiendoCount);
+
+  const repasoCards = Object.values(state.cards)
+    .filter(c => c.bucket === 'repaso')
+    .map(c => c.es);
+
+  const allPack = new Set([
+    ...newWords.map(w => w.es),
+    ...prevSessionCards,
+    ...learningPick,
+    ...repasoCards,
+  ]);
+  state.todayPack = shuffle([...allPack]);
+  state.todayCompleted = [];
+  state.thisSessionWrongs = {};
+  persist();
+  initStudy();
+  renderStudy();
+}
+
+// ----- STUDY -----
+function initStudy() {
+  const remaining = state.todayPack.filter(es => !state.todayCompleted.includes(es));
+  const stagesRemaining = {};
+  for (const es of remaining) {
+    stagesRemaining[es] = [0, 1, 2, 3];
+  }
+  study = {
+    queue: shuffle(remaining),
+    stagesRemaining,
+    currentEs: null,
+    stage: 0,
+    feedback: null,
+    showWrongDetails: false,
+    inputValue: '',
+  };
+  pickNext();
+}
+
+function pickNext() {
+  if (!study) return;
+  let i = 0;
+  while (i < study.queue.length) {
+    const candidate = study.queue[i];
+    const stages = study.stagesRemaining[candidate];
+    if (stages && stages.length > 0) {
+      study.queue.splice(i, 1);
+      study.currentEs = candidate;
+      // Pick the LOWEST remaining stage so we go in order per card
+      study.stage = stages[0];
+      study.feedback = null;
+      study.showWrongDetails = false;
+      study.inputValue = '';
+      return;
+    }
+    i++;
+  }
+  study.currentEs = null;
+}
+
+function renderStudy() {
+  if (!study) return;
+  if (!study.currentEs) {
+    renderDone();
+    return;
+  }
+  const word = getWord(study.currentEs);
+  if (!word) {
+    pickNext();
+    if (study.currentEs) renderStudy(); else renderDone();
+    return;
+  }
+  const stage = study.stage;
+  const stageInfo = STAGES[stage];
+
+  // Pick the Spanish sentence variant based on user's gender preference
+  const sentenceEs = (state.gender === 'fem' && word.sentenceEsF) ? word.sentenceEsF : word.sentenceEs;
+
+  let promptText, targetText;
+  if (stageInfo.kind === 'word') {
+    promptText = stageInfo.from === 'es' ? word.es : getCleanEnglish(word.en);
+    targetText = stageInfo.to === 'es' ? word.es : word.en;
+  } else {
+    promptText = stageInfo.from === 'es' ? sentenceEs : word.sentenceEn;
+    targetText = stageInfo.to === 'es' ? sentenceEs : word.sentenceEn;
+  }
+
+  // Words remaining (not stages)
+  const wordsRemaining = Object.keys(study.stagesRemaining).filter(es => study.stagesRemaining[es].length > 0).length;
+
+  let cardClass = 'card';
+  if (study.feedback === 'correct') cardClass += ' card-correct';
+  if (study.feedback === 'wrong') cardClass += ' card-wrong';
+
+  let feedbackHtml = '';
+  if (study.feedback === 'correct') {
+    feedbackHtml = `
+      <div class="card-feedback feedback-correct">
+        <div class="feedback-mark">✓</div>
+        <div class="feedback-text">${getCorrectMessage()}</div>
+        <button class="btn-primary btn-small" id="continueBtn">Siguiente →</button>
+      </div>`;
+  } else if (study.feedback === 'wrong' && study.showWrongDetails) {
+    let exampleRow = '';
+    if (stageInfo.kind === 'word' && sentenceEs) {
+      exampleRow = `
+        <div class="wrong-row">
+          <span class="wrong-label">Ejemplo</span>
+          <span class="wrong-value">
+            <em>${escapeHtml(sentenceEs)}</em>
+            <span class="wrong-en">${escapeHtml(word.sentenceEn)}</span>
+          </span>
+        </div>`;
+    }
+    // Build flag-status — has the user already flagged this exact attempt?
+    const flagKey = `${normalize(study.lastWrongInput || '')}|${normalize(targetText)}`;
+    const alreadyFlagged = study.flaggedThisAttempt;
+    const flagBtn = alreadyFlagged
+      ? `<button class="btn-flag flagged" disabled>✓ Marcado — gracias</button>`
+      : `<button class="btn-flag" id="flagBtn">⚑ Marcar respuesta · Flag answer</button>`;
+    feedbackHtml = `
+      <div class="card-feedback feedback-wrong">
+        <div class="feedback-mark">✕</div>
+        <div class="feedback-text">${getWrongMessage()}</div>
+        <div class="wrong-block">
+          <div class="wrong-row">
+            <span class="wrong-label">Respuesta</span>
+            <span class="wrong-value strong">${escapeHtml(targetText)}</span>
+          </div>
+          <div class="wrong-row">
+            <span class="wrong-label">Tu respuesta</span>
+            <span class="wrong-value" style="color: var(--ink-soft);">${escapeHtml(study.lastWrongInput || '')}</span>
+          </div>
+          <div class="wrong-row">
+            <span class="wrong-label">${escapeHtml(word.es)}</span>
+            <span class="wrong-value">${escapeHtml(word.en)}</span>
+          </div>
+          ${exampleRow}
+        </div>
+        <div class="card-action-row">
+          ${flagBtn}
+          <button class="btn-primary btn-small" id="continueBtn">Otra vez →</button>
+        </div>
+      </div>`;
+  }
+
+  const placeholder = stageInfo.to === 'es' ? 'escribe en español…' : 'type in English…';
+  const inputDisabled = study.feedback ? 'disabled' : '';
+  const submitBtn = !study.feedback ? '<button type="submit" class="card-submit">Comprobar</button>' : '';
+
+  root.innerHTML = `
+    <main class="study">
+      <div class="study-header">
+        <button class="btn-link" id="exitBtn">← Salir</button>
+        <div class="study-meta">
+          <div class="study-pill">${wordsRemaining} palabra${wordsRemaining !== 1 ? 's' : ''} restante${wordsRemaining !== 1 ? 's' : ''}</div>
+          <div class="study-progress">
+            ${[0,1,2,3].map(i => {
+              let cls = 'pip';
+              if (i < stage) cls += ' pip-done';
+              if (i === stage) cls += ' pip-active';
+              return `<div class="${cls}"></div>`;
+            }).join('')}
+          </div>
+        </div>
+      </div>
+
+      <div class="${cardClass}">
+        <div class="card-stage-tag">
+          <span class="stage-num">${stage + 1}/4</span>
+          <span class="stage-label">${stageInfo.label}</span>
+        </div>
+        <div class="card-prompt-label">${stageInfo.prompt}</div>
+        <div class="card-prompt-text ${stageInfo.kind === 'sentence' ? 'is-sentence' : ''}">${escapeHtml(promptText)}</div>
+        <form class="card-form" id="answerForm">
+          <input id="answerInput" class="card-input" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="${placeholder}" ${inputDisabled} value="${escapeHtml(study.inputValue)}" />
+          ${submitBtn}
+        </form>
+        ${feedbackHtml}
+      </div>
+    </main>
+  `;
+
+  if (!study.feedback) {
+    const inp = document.getElementById('answerInput');
+    if (inp) {
+      inp.focus();
+      inp.oninput = e => { study.inputValue = e.target.value; };
+    }
+    const form = document.getElementById('answerForm');
+    if (form) form.onsubmit = (e) => { e.preventDefault(); handleSubmit(targetText, stageInfo.kind, word.syn); };
+  }
+  const cont = document.getElementById('continueBtn');
+  if (cont) {
+    cont.onclick = () => {
+      if (study.feedback === 'correct') handleContinueCorrect();
+      else if (study.feedback === 'wrong') handleContinueWrong();
+    };
+  }
+  const flag = document.getElementById('flagBtn');
+  if (flag) {
+    flag.onclick = handleFlag;
+  }
+  document.getElementById('exitBtn').onclick = () => {
+    persist();
+    renderHome();
+  };
+}
+
+const CORRECT_MSGS = ['¡Correcto!', '¡Bien hecho!', '¡Perfecto!', '¡Estupendo!', '¡Genial!', '¡Eso es!', '¡Increíble!', '¡Ándale!'];
+const WRONG_MSGS = ['¡Casi!', 'No exactamente.', 'Otra vez.', 'No, no.', '¡Inténtalo de nuevo!'];
+function getCorrectMessage() { return CORRECT_MSGS[Math.floor(Math.random() * CORRECT_MSGS.length)]; }
+function getWrongMessage() { return WRONG_MSGS[Math.floor(Math.random() * WRONG_MSGS.length)]; }
+
+function handleSubmit(targetText, kind, synonyms) {
+  if (study.feedback || !study.inputValue.trim()) return;
+  const correct = isCorrect(study.inputValue, targetText, kind, synonyms || []);
+  study.feedback = correct ? 'correct' : 'wrong';
+  if (!correct) {
+    study.showWrongDetails = true;
+    study.lastWrongInput = study.inputValue;
+    study.lastTarget = targetText;
+    study.lastKind = kind;
+    study.flaggedThisAttempt = false;
+    // Track wrong count for this session
+    state.thisSessionWrongs[study.currentEs] = (state.thisSessionWrongs[study.currentEs] || 0) + 1;
+    persist();
+  }
+  renderStudy();
+}
+
+function handleFlag() {
+  if (!study || study.feedback !== 'wrong' || study.flaggedThisAttempt) return;
+  const input = (study.lastWrongInput || '').trim();
+  const target = study.lastTarget;
+  const kind = study.lastKind || 'word';
+  if (!input || !target) return;
+
+  // 1. Add to local userSynonyms so this answer is accepted from now on
+  // We index synonyms under the normalized target.
+  // For "x/y" targets we index under each alternate.
+  const targetKeys = target.split(/[\/,]/).map(t => normalize(t.trim())).filter(Boolean);
+  for (const k of targetKeys) {
+    if (!state.userSynonyms[k]) state.userSynonyms[k] = [];
+    if (!state.userSynonyms[k].includes(input)) state.userSynonyms[k].push(input);
+  }
+
+  // 2. Log for export
+  const word = getWord(study.currentEs);
+  state.flaggedLog.push({
+    ts: new Date().toISOString(),
+    session: state.session,
+    es: study.currentEs,
+    en: word ? word.en : '',
+    kind,
+    target,
+    userAnswer: input,
+  });
+
+  study.flaggedThisAttempt = true;
+  persist();
+  renderStudy();
+}
+
+function handleContinueCorrect() {
+  const es = study.currentEs;
+  // Remove this stage from card's remaining
+  study.stagesRemaining[es] = (study.stagesRemaining[es] || []).filter(s => s !== study.stage);
+  if (study.stagesRemaining[es].length === 0) {
+    delete study.stagesRemaining[es];
+    completeCard(es);
+  } else {
+    // Re-insert into queue 1-3 ahead so stages interleave aggressively
+    const insertAt = Math.min(study.queue.length, 1 + Math.floor(Math.random() * 3));
+    study.queue.splice(insertAt, 0, es);
+  }
+  pickNext();
+  renderStudy();
+}
+
+function handleContinueWrong() {
+  const es = study.currentEs;
+  // Wrong: reset all 4 stages for this card so they redo it
+  study.stagesRemaining[es] = [0, 1, 2, 3];
+  // Re-insert with delay 2-4 ahead
+  const insertAt = Math.min(study.queue.length, 2 + Math.floor(Math.random() * 3));
+  study.queue.splice(insertAt, 0, es);
+  pickNext();
+  renderStudy();
+}
+
+function completeCard(es) {
+  // The card finished all 4 stages. Mark completed for the session.
+  if (!state.todayCompleted.includes(es)) state.todayCompleted.push(es);
+
+  // Update lastSessionReviewed
+  if (state.cards[es]) {
+    state.cards[es].lastSessionReviewed = state.session;
+  }
+
+  // Phrase unlock check
+  const knownOrLearning = new Set(
+    Object.values(state.cards)
+      .filter(c => c.bucket === 'aprendidas' || c.bucket === 'aprendiendo')
+      .map(c => c.es)
+  );
+  for (const phrase of PHRASES) {
+    if (state.unlockedPhrases.includes(phrase.es)) continue;
+    if (phrase.components.every(c => knownOrLearning.has(c))) {
+      state.unlockedPhrases.push(phrase.es);
+    }
+  }
+  persist();
+}
+
+// Apply bucket promotions/demotions at end of session
+function applyEndOfSessionBucketChanges() {
+  const promotions = { aprendidas: [], repaso: [], recovered: [] };
+  for (const es of state.todayCompleted) {
+    const card = state.cards[es];
+    if (!card) continue;
+    const wrongs = state.thisSessionWrongs[es] || 0;
+    if (wrongs >= 2) {
+      // Demote to repaso
+      if (card.bucket !== 'repaso') promotions.repaso.push(es);
+      card.bucket = 'repaso';
+      card.cleanStreakSessions = 0;
+    } else if (wrongs === 0) {
+      // Clean session — increment streak, maybe promote
+      card.cleanStreakSessions = (card.cleanStreakSessions || 0) + 1;
+      if (card.bucket === 'repaso') {
+        // Recovered from repaso → back to aprendiendo, streak counts from 1
+        card.bucket = 'aprendiendo';
+        card.cleanStreakSessions = 1;
+        promotions.recovered.push(es);
+      } else if (card.bucket !== 'aprendidas' && card.cleanStreakSessions >= 2) {
+        card.bucket = 'aprendidas';
+        promotions.aprendidas.push(es);
+      }
+    } else {
+      // 1 wrong — reset streak but stay where they are
+      card.cleanStreakSessions = 0;
+    }
+  }
+  return promotions;
+}
+
+// ----- DONE -----
+function renderDone() {
+  const learnedToday = state.todayCompleted.length;
+  const promotions = applyEndOfSessionBucketChanges();
+
+  // Bump session
+  state.session += 1;
+  state.todayPack = [];
+  state.todayCompleted = [];
+  state.thisSessionWrongs = {};
+  persist();
+  study = null;
+
+  const confetti = Array.from({length: 12}).map(() => '<span class="confetti"></span>').join('');
+
+  let movementHtml = '';
+  const moves = [];
+  if (promotions.aprendidas.length > 0) moves.push(`<div class="done-stat"><div class="done-stat-num done-stat-num-aprendidas">+${promotions.aprendidas.length}</div><div class="done-stat-label">→ Aprendidas</div></div>`);
+  if (promotions.recovered.length > 0) moves.push(`<div class="done-stat"><div class="done-stat-num done-stat-num-aprendiendo">+${promotions.recovered.length}</div><div class="done-stat-label">↑ Aprendiendo</div></div>`);
+  if (promotions.repaso.length > 0) moves.push(`<div class="done-stat"><div class="done-stat-num done-stat-num-repaso">+${promotions.repaso.length}</div><div class="done-stat-label">→ Repaso</div></div>`);
+  if (moves.length > 0) movementHtml = `<div class="done-stats">${moves.join('')}</div>`;
+
+  root.innerHTML = `
+    <main class="done">
+      <div class="done-confetti">${confetti}</div>
+      <div class="done-emoji">🎉</div>
+      <div class="done-eyebrow">Sesión completa</div>
+      <h1 class="done-title">¡Lo lograste!</h1>
+      <p class="done-sub">${learnedToday} carta${learnedToday !== 1 ? 's' : ''} terminada${learnedToday !== 1 ? 's' : ''}. La próxima sesión vuelven — junto con diez palabras frescas y amigas de Aprendiendo.</p>
+      ${movementHtml}
+      <button class="btn-primary" id="continueDone">Volver al inicio <span class="btn-arrow">→</span></button>
+    </main>
+  `;
+  updateHeader();
+  document.getElementById('continueDone').onclick = renderHome;
+}
+
+// ----- BUCKET -----
+function renderBucket(bucket) {
+  const cards = Object.values(state.cards).filter(c => c.bucket === bucket);
+  const titles = {
+    aprendidas: { es: 'Aprendidas', en: 'Learnt', sub: 'Palabras que has dominado.' },
+    aprendiendo: { es: 'Aprendiendo', en: 'Learning', sub: 'Estás en camino.' },
+    repaso: { es: 'Repaso', en: 'Review', sub: 'Necesitan un poco más de cariño.' },
+  };
+  const meta = titles[bucket];
+  const colorClass = `bucket-card-${bucket}`;
+  const revealed = new Set();
+
+  function drawCards() {
+    let cardsHtml;
+    if (cards.length === 0) {
+      const msgMap = {
+        aprendidas: 'Aún no hay nada aquí. ¡Sigue practicando! 🌱',
+        aprendiendo: 'Aún no hay nada aquí. ¡Empieza una sesión! 🌱',
+        repaso: '¡Genial! Nada que repasar todavía. ✨',
+      };
+      cardsHtml = `<div class="bucket-empty">${msgMap[bucket]}</div>`;
+    } else {
+      cardsHtml = `<div class="bucket-grid">${cards.map(c => {
+        const isRevealed = revealed.has(c.es);
+        const word = getWord(c.es);
+        const sEs = word && ((state.gender === 'fem' && word.sentenceEsF) ? word.sentenceEsF : word.sentenceEs);
+        const sentenceHtml = isRevealed && word && sEs ? `
+          <div class="bucket-card-sentence">
+            <em>${escapeHtml(sEs)}</em>
+            <span>${escapeHtml(word.sentenceEn)}</span>
+          </div>` : '';
+        return `<div class="bucket-card ${colorClass} ${isRevealed ? 'revealed' : ''}" data-es="${escapeHtml(c.es)}">
+          <div class="bucket-card-cat">${escapeHtml(c.cat)}</div>
+          <div class="bucket-card-es">${escapeHtml(c.es)}</div>
+          <div class="bucket-card-en">${isRevealed ? escapeHtml(c.en) : 'tap to reveal'}</div>
+          ${sentenceHtml}
+        </div>`;
+      }).join('')}</div>`;
+    }
+
+    root.innerHTML = `
+      <main class="bucket">
+        <button class="btn-link" id="backBtn">← Volver al inicio</button>
+        <div class="bucket-header">
+          <div class="bucket-eyebrow">${cards.length} palabra${cards.length !== 1 ? 's' : ''}</div>
+          <h1 class="bucket-title">${meta.es}</h1>
+          <div class="bucket-title-en">${meta.en}</div>
+          <p class="bucket-sub">${meta.sub} Toca cualquier carta para revelarla.</p>
+        </div>
+        ${cardsHtml}
+      </main>
+    `;
+    document.getElementById('backBtn').onclick = renderHome;
+    document.querySelectorAll('.bucket-card').forEach(el => {
+      el.onclick = () => {
+        const es = el.getAttribute('data-es');
+        if (revealed.has(es)) revealed.delete(es); else revealed.add(es);
+        drawCards();
+      };
+    });
+  }
+  drawCards();
+}
+
+// ----- BOOT -----
+renderHome();
+updateSyncIndicator();
+// Initial sync — adopt cloud if newer
+syncDown();
+
+</script>
+</body>
+</html>
