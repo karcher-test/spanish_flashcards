@@ -981,6 +981,469 @@ main { position: relative; z-index: 1; }
 }
 .hidden { display: none !important; }
 
+/* ============================================================
+   CONFUSIONES
+   ============================================================ */
+
+/* Home section */
+.confusiones-home {
+  margin-bottom: 28px;
+}
+.confusiones-home-header {
+  display: flex; align-items: baseline; gap: 12px;
+  margin-bottom: 16px;
+}
+.confusiones-home-title {
+  font-family: 'Yeseva One', serif;
+  font-size: 26px;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.confusiones-home-sub {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+/* Confusiones home nav card */
+.confusiones-nav-card {
+  background: var(--cream);
+  border: 2.5px solid var(--ink);
+  border-radius: 8px;
+  padding: 22px 20px;
+  box-shadow: 4px 4px 0 0 var(--indigo);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  overflow: hidden;
+  font-family: inherit;
+  text-align: left;
+  width: 100%;
+  background: var(--cream);
+  border: 2.5px solid var(--ink);
+}
+.confusiones-nav-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 5px;
+  background: repeating-linear-gradient(90deg,
+    var(--indigo) 0 12px, var(--terracotta) 12px 24px,
+    var(--jade) 24px 36px, var(--marigold) 36px 48px);
+}
+.confusiones-nav-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--indigo);
+}
+.confusiones-nav-title {
+  font-family: 'Yeseva One', serif;
+  font-size: 24px; color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-top: 6px; margin-bottom: 4px;
+}
+.confusiones-nav-sub {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 14px; color: var(--ink-soft);
+}
+.confusiones-nav-arrow {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 32px; color: var(--indigo); flex-shrink: 0;
+}
+
+/* Confusiones dedicated page */
+.confusiones-page { animation: fadeUp 0.3s ease; }
+.confusiones-page-header {
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 6px 6px 0 0 var(--indigo);
+  margin: 18px 0 24px;
+  position: relative;
+  overflow: hidden;
+}
+.confusiones-page-header::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 10px;
+  background: repeating-linear-gradient(90deg,
+    var(--indigo) 0 14px, var(--terracotta) 14px 28px,
+    var(--jade) 28px 42px, var(--marigold) 42px 56px);
+  border-bottom: 2px solid var(--ink);
+}
+.confusiones-page-eyebrow {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 14px; color: var(--ink-soft);
+  margin-top: 8px; margin-bottom: 8px;
+}
+.confusiones-page-title {
+  font-family: 'Yeseva One', serif;
+  font-size: clamp(40px, 7vw, 58px);
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.confusiones-page-actions {
+  display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+}
+.btn-practice-all {
+  font-family: 'Yeseva One', serif;
+  font-size: 17px;
+  background: var(--indigo); color: white;
+  border: 2.5px solid var(--ink);
+  padding: 14px 24px;
+  border-radius: 50px;
+  box-shadow: 4px 4px 0 0 var(--ink);
+  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 10px;
+  transition: all 0.15s ease;
+}
+.btn-practice-all:hover {
+  transform: translate(-2px,-2px);
+  box-shadow: 6px 6px 0 0 var(--ink);
+  background: #2a3d88;
+}
+.btn-practice-all:disabled {
+  background: var(--muted); border-color: var(--muted);
+  box-shadow: none; cursor: default; transform: none;
+  opacity: 0.6;
+}
+.confusiones-page-meta {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 14px; color: var(--ink-soft); margin-top: 10px;
+}
+
+.confusion-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.confusion-card {
+  background: var(--cream);
+  border: 2.5px solid var(--ink);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 3px 3px 0 0 var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.confusion-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+}
+.confusion-card-inactive::before { background: var(--muted); }
+.confusion-card-active::before { background: var(--indigo); }
+.confusion-card-confident::before { background: var(--jade); }
+
+.confusion-card-title {
+  font-family: 'Yeseva One', serif;
+  font-size: 17px;
+  color: var(--ink);
+  margin-bottom: 4px;
+  margin-top: 4px;
+  letter-spacing: -0.01em;
+}
+.confusion-card-tagline {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.confusion-card-status {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.status-inactive { color: var(--muted); }
+.status-active { color: var(--indigo); }
+.status-confident { color: var(--jade-deep); }
+
+.confusion-accuracy-bar {
+  height: 4px;
+  background: var(--bg-deep);
+  border-radius: 2px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.confusion-accuracy-fill {
+  height: 100%;
+  background: var(--jade);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.confusion-card-actions {
+  display: flex; gap: 8px;
+}
+.btn-confusion-rules {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 13px;
+  background: none;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  padding: 7px 12px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-confusion-rules:hover { background: var(--bg-deep); }
+.btn-confusion-add {
+  font-family: 'Yeseva One', serif;
+  font-size: 13px;
+  background: var(--indigo);
+  color: white;
+  border: 1.5px solid var(--ink);
+  padding: 7px 14px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 0 var(--ink);
+  transition: all 0.15s ease;
+}
+.btn-confusion-add:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 0 var(--ink); }
+.btn-confusion-practice {
+  font-family: 'Yeseva One', serif;
+  font-size: 13px;
+  background: var(--terracotta);
+  color: var(--cream);
+  border: 1.5px solid var(--ink);
+  padding: 7px 14px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 0 var(--ink);
+  transition: all 0.15s ease;
+}
+.btn-confusion-practice:hover { background: var(--hibiscus); transform: translate(-1px, -1px); }
+
+/* Rules page */
+.rules-page { animation: fadeUp 0.3s ease; }
+.rules-header {
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 6px 6px 0 0 var(--ink);
+  margin: 18px 0 28px;
+  position: relative;
+  overflow: hidden;
+}
+.rules-header::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 10px;
+  background: repeating-linear-gradient(90deg,
+    var(--indigo) 0 14px, var(--terracotta) 14px 28px,
+    var(--jade) 28px 42px, var(--marigold) 42px 56px);
+  border-bottom: 2px solid var(--ink);
+}
+.rules-eyebrow {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 14px; color: var(--ink-soft);
+  margin-top: 8px; margin-bottom: 8px;
+}
+.rules-title {
+  font-family: 'Yeseva One', serif;
+  font-size: clamp(36px, 6vw, 52px);
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.rules-tagline {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 17px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.rules-body { display: flex; flex-direction: column; gap: 20px; margin-bottom: 32px; }
+.rule-block {
+  background: var(--cream);
+  border: 2.5px solid var(--ink);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 3px 3px 0 0 var(--ink);
+}
+.rule-block-label {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 12px;
+  color: var(--terracotta);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+.rule-text {
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.6;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.rule-examples { display: flex; flex-direction: column; gap: 8px; }
+.rule-example {
+  background: var(--bg-base);
+  border-left: 3px solid var(--indigo);
+  padding: 10px 14px;
+  border-radius: 0 6px 6px 0;
+}
+.rule-example-es {
+  font-family: 'Yeseva One', serif;
+  font-size: 16px;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.rule-example-en {
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.rules-start-btn-wrap { text-align: center; padding-bottom: 20px; }
+
+/* Confusiones study */
+.confusion-study { animation: fadeUp 0.3s ease; }
+.confusion-study-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
+}
+.confusion-pair-label {
+  font-family: 'Bungee', sans-serif;
+  font-size: 13px;
+  background: var(--indigo);
+  color: white;
+  border: 2px solid var(--ink);
+  padding: 6px 14px;
+  border-radius: 50px;
+  box-shadow: 2px 2px 0 0 var(--ink);
+  letter-spacing: 0.04em;
+}
+.confusion-score {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+.confusion-card-wrap {
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 48px 32px 36px;
+  box-shadow: 8px 8px 0 0 var(--indigo);
+  position: relative;
+  min-height: 420px;
+  display: flex; flex-direction: column;
+}
+.confusion-card-wrap::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 10px;
+  background: repeating-linear-gradient(90deg,
+    var(--indigo) 0 14px, var(--terracotta) 14px 28px,
+    var(--jade) 28px 42px, var(--marigold) 42px 56px);
+  border-bottom: 2px solid var(--ink);
+  border-radius: 9px 9px 0 0;
+}
+.confusion-card-wrap.confusion-correct { background: #dff5e3; box-shadow: 8px 8px 0 0 var(--jade); }
+.confusion-card-wrap.confusion-wrong { background: #fde7e0; box-shadow: 8px 8px 0 0 var(--terracotta); animation: shake 0.4s ease; }
+
+.confusion-prompt-label {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 15px;
+  color: var(--terracotta);
+  margin-bottom: 18px;
+  margin-top: 4px;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.confusion-prompt-label::before, .confusion-prompt-label::after {
+  content: ''; width: 12px; height: 1.5px; background: var(--terracotta);
+}
+.confusion-sentence {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: clamp(22px, 4vw, 32px);
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: 28px;
+  flex: 1;
+}
+.confusion-blank {
+  font-family: 'Yeseva One', serif;
+  font-style: normal;
+  color: var(--indigo);
+  border-bottom: 2.5px solid var(--indigo);
+  padding: 0 6px;
+  min-width: 60px;
+  display: inline-block;
+  text-align: center;
+}
+.confusion-form { display: flex; gap: 10px; }
+.confusion-input {
+  flex: 1;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 14px 20px;
+  background: var(--bg-base);
+  border: 2.5px solid var(--ink);
+  color: var(--ink);
+  outline: none;
+  border-radius: 50px;
+  transition: all 0.15s ease;
+}
+.confusion-input:focus { background: white; box-shadow: 3px 3px 0 0 var(--indigo); }
+.confusion-input::placeholder { color: var(--muted); font-style: italic; }
+.confusion-submit {
+  font-family: 'Yeseva One', serif;
+  font-size: 16px;
+  padding: 14px 28px;
+  background: var(--indigo);
+  color: white;
+  border: 2.5px solid var(--ink);
+  cursor: pointer;
+  border-radius: 50px;
+  box-shadow: 3px 3px 0 0 var(--ink);
+  transition: all 0.15s ease;
+}
+.confusion-submit:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 0 var(--ink); }
+
+.confusion-feedback {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 2px dashed var(--muted);
+  animation: slideUp 0.3s ease;
+}
+.confusion-feedback-mark {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 2.5px solid var(--ink);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  margin-bottom: 10px;
+  box-shadow: 3px 3px 0 0 var(--ink);
+}
+.confusion-correct-mark { background: var(--jade); color: white; }
+.confusion-wrong-mark { background: var(--terracotta); color: white; }
+.confusion-feedback-text {
+  font-family: 'Yeseva One', serif;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.confusion-hint {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.confusion-hint strong {
+  color: var(--indigo);
+  font-weight: 600;
+  font-style: normal;
+}
+
+@media (max-width: 640px) {
+  .confusion-cards-grid { grid-template-columns: 1fr; }
+  .confusion-form { flex-direction: column; }
+  .confusion-submit { width: 100%; }
+}
+
 </style>
 </head>
 <body>
@@ -1150,7 +1613,18 @@ main { position: relative; z-index: 1; }
 <script>
 const SUPABASE_URL = 'https://fpusffsmgsewolxmgtxq.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZwdXNmZnNtZ3Nld29seG1ndHhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MjkyNzUsImV4cCI6MjA5NTMwNTI3NX0.8X0c0VSC3hwWuIoDYtTGAtWZx-3MDNT_gIEvaO_-A2Y';
-const SYNC_ROW_ID = 'me';
+// User identity from URL ?u=... parameter.
+// Falls back to 'me' if nothing's specified.
+// Only allows safe alphanumeric + dash/underscore to keep db keys clean.
+function getUserIdFromUrl() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const u = (params.get('u') || '').trim().toLowerCase();
+    if (u && /^[a-z0-9_-]{1,40}$/.test(u)) return u;
+  } catch {}
+  return 'me';
+}
+const SYNC_ROW_ID = getUserIdFromUrl();
 
 let sb = null;
 let syncStatus = 'offline'; // 'synced' | 'syncing' | 'offline'
@@ -1172,7 +1646,10 @@ function updateSyncIndicator() {
     syncing: '● syncing…',
     offline: '○ offline',
   };
-  el.textContent = labels[syncStatus] || '';
+  const status = labels[syncStatus] || '';
+  // Show username if it's anything other than the default 'me'
+  const userTag = SYNC_ROW_ID !== 'me' ? ` · ${SYNC_ROW_ID}` : '';
+  el.textContent = status + userTag;
   el.className = 'sync-indicator sync-' + syncStatus;
 }
 
@@ -1440,6 +1917,649 @@ const PHRASES = [
   {es:"de nada",en:"you're welcome",components:["no"]}
 ];
 
+
+const CONFUSIONES = [
+
+  // ============================================================
+  // 1. SER vs ESTAR
+  // ============================================================
+  {
+    id: 'ser-estar',
+    title: 'ser vs estar',
+    tagline: 'Both mean "to be" — but they are not interchangeable.',
+    useCases: [
+      {
+        rule: 'Use SER for permanent identity — nationality, profession, personality, relationships, material.',
+        examples: [
+          { es: 'Ella es médica.', en: 'She is a doctor.' },
+          { es: 'Soy español.', en: 'I am Spanish.' },
+          { es: 'La mesa es de madera.', en: 'The table is made of wood.' },
+        ],
+      },
+      {
+        rule: 'Use SER for time, dates, and events.',
+        examples: [
+          { es: 'Son las tres de la tarde.', en: 'It is three in the afternoon.' },
+          { es: 'La fiesta es el viernes.', en: 'The party is on Friday.' },
+        ],
+      },
+      {
+        rule: 'Use ESTAR for temporary states — emotions, health, location, conditions.',
+        examples: [
+          { es: 'Estoy cansada hoy.', en: 'I am tired today.' },
+          { es: 'El café está caliente.', en: 'The coffee is hot.' },
+          { es: 'Estamos en Madrid.', en: 'We are in Madrid.' },
+        ],
+      },
+      {
+        rule: 'Use ESTAR for ongoing actions (with gerund: estar + -ando/-iendo).',
+        examples: [
+          { es: 'Está lloviendo.', en: 'It is raining.' },
+          { es: 'Estoy comiendo.', en: 'I am eating.' },
+        ],
+      },
+      {
+        rule: 'Watch out: some adjectives change meaning with ser vs estar.',
+        examples: [
+          { es: 'Es aburrido. (He is a boring person.)', en: 'Personality → ser' },
+          { es: 'Está aburrido. (He is bored right now.)', en: 'State → estar' },
+          { es: 'Es listo. (He is clever.)', en: 'Personality → ser' },
+          { es: 'Está listo. (He is ready.)', en: 'State → estar' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: 'Ella ___ profesora.', answers: ['es'], hint: 'Profession → ser' },
+      { sentence: 'Yo ___ muy cansado hoy.', answers: ['estoy'], hint: 'Temporary state → estar' },
+      { sentence: 'El restaurante ___ en la calle mayor.', answers: ['está'], hint: 'Location → estar' },
+      { sentence: 'Nosotros ___ de México.', answers: ['somos'], hint: 'Origin/nationality → ser' },
+      { sentence: '¿Tú ___ bien?', answers: ['estás'], hint: 'Health/state → estar' },
+      { sentence: 'Son las ocho — la reunión ___ a las nueve.', answers: ['es'], hint: 'Scheduled event → ser' },
+      { sentence: 'El agua ___ fría.', answers: ['está'], hint: 'Temporary condition → estar' },
+      { sentence: 'Ellos ___ hermanos.', answers: ['son'], hint: 'Relationship → ser' },
+      { sentence: '¿Dónde ___ el baño?', answers: ['está'], hint: 'Location → estar' },
+      { sentence: 'La película ___ muy aburrida.', answers: ['es'], hint: 'Inherent quality → ser' },
+      { sentence: 'Vosotros ___ muy simpáticos.', answers: ['sois'], hint: 'Personality → ser' },
+      { sentence: 'Mi madre ___ enferma esta semana.', answers: ['está'], hint: 'Temporary health state → estar' },
+    ],
+  },
+
+  // ============================================================
+  // 2. POR vs PARA
+  // ============================================================
+  {
+    id: 'por-para',
+    title: 'por vs para',
+    tagline: 'Both can mean "for" — but they express very different ideas.',
+    useCases: [
+      {
+        rule: 'Use PARA for purpose, goal, or destination — "in order to", "for the purpose of", "headed to".',
+        examples: [
+          { es: 'Estudio para aprender.', en: 'I study in order to learn.' },
+          { es: 'Este regalo es para ti.', en: 'This gift is for you.' },
+          { es: 'El tren sale para Madrid.', en: 'The train leaves for Madrid.' },
+        ],
+      },
+      {
+        rule: 'Use PARA for deadlines and employment.',
+        examples: [
+          { es: 'Necesito el informe para el lunes.', en: 'I need the report by Monday.' },
+          { es: 'Trabajo para una empresa grande.', en: 'I work for a big company.' },
+        ],
+      },
+      {
+        rule: 'Use POR for cause, reason, or motive — "because of", "due to", "on behalf of".',
+        examples: [
+          { es: 'Gracias por tu ayuda.', en: 'Thank you for your help.' },
+          { es: 'Lo hago por amor.', en: 'I do it out of love.' },
+          { es: 'Cerrado por vacaciones.', en: 'Closed due to holidays.' },
+        ],
+      },
+      {
+        rule: 'Use POR for exchanges, duration, and movement through a place.',
+        examples: [
+          { es: 'Te lo cambio por este.', en: 'I will swap it for this one.' },
+          { es: 'Caminamos por el parque.', en: 'We walk through the park.' },
+          { es: 'Estudié por dos horas.', en: 'I studied for two hours.' },
+        ],
+      },
+      {
+        rule: 'Use POR in passive constructions ("by" the agent).',
+        examples: [
+          { es: 'El libro fue escrito por García Márquez.', en: 'The book was written by García Márquez.' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: 'Este café es ___ ti.', answers: ['para'], hint: 'Recipient/purpose → para' },
+      { sentence: 'Gracias ___ todo.', answers: ['por'], hint: 'Gratitude/cause → por' },
+      { sentence: 'Necesito terminar ___ el viernes.', answers: ['para'], hint: 'Deadline → para' },
+      { sentence: 'Caminamos ___ la playa.', answers: ['por'], hint: 'Movement through → por' },
+      { sentence: 'Lo hice ___ ayudarte.', answers: ['para'], hint: 'Purpose → para' },
+      { sentence: 'Trabajo ___ una empresa española.', answers: ['para'], hint: 'Employment → para' },
+      { sentence: 'Te llamo ___ la mañana.', answers: ['por'], hint: 'Time period → por' },
+      { sentence: 'Lo vendí ___ veinte euros.', answers: ['por'], hint: 'Exchange → por' },
+      { sentence: 'Este tren va ___ Barcelona.', answers: ['para'], hint: 'Destination → para' },
+      { sentence: 'El cuadro fue pintado ___ Picasso.', answers: ['por'], hint: 'Passive agent → por' },
+    ],
+  },
+
+  // ============================================================
+  // 3. MUCHO vs MUY
+  // ============================================================
+  {
+    id: 'mucho-muy',
+    title: 'mucho vs muy',
+    tagline: '"A lot" vs "very" — easy to confuse, easy to fix.',
+    useCases: [
+      {
+        rule: 'Use MUY before adjectives and adverbs. It means "very". It never changes form.',
+        examples: [
+          { es: 'El café está muy caliente.', en: 'The coffee is very hot.' },
+          { es: 'Hablas muy rápido.', en: 'You speak very fast.' },
+        ],
+      },
+      {
+        rule: 'Use MUCHO before nouns. It agrees in gender and number (mucho/mucha/muchos/muchas).',
+        examples: [
+          { es: 'Tengo mucho trabajo.', en: 'I have a lot of work.' },
+          { es: 'Hay muchas personas aquí.', en: 'There are a lot of people here.' },
+          { es: 'Bebo mucha agua.', en: 'I drink a lot of water.' },
+        ],
+      },
+      {
+        rule: 'Use MUCHO after verbs (as an adverb). It means "a lot" and never changes.',
+        examples: [
+          { es: 'Te quiero mucho.', en: 'I love you a lot.' },
+          { es: 'Trabajas mucho.', en: 'You work a lot.' },
+        ],
+      },
+      {
+        rule: 'Common mistake: never say "muy mucho". Use "muchísimo" for extra emphasis.',
+        examples: [
+          { es: '❌ Es muy mucho.', en: 'Wrong — this does not exist in Spanish.' },
+          { es: '✓ Es muchísimo.', en: 'Correct — it is a huge amount.' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: 'Hay ___ gente en el mercado.', answers: ['mucha'], hint: 'Before feminine noun → mucha' },
+      { sentence: 'Este libro es ___ interesante.', answers: ['muy'], hint: 'Before adjective → muy' },
+      { sentence: 'Tengo ___ amigos en Madrid.', answers: ['muchos'], hint: 'Before masculine plural noun → muchos' },
+      { sentence: 'Hablas ___ bien el español.', answers: ['muy'], hint: 'Before adverb → muy' },
+      { sentence: 'Me gusta ___ la música.', answers: ['mucho'], hint: 'After verb → mucho' },
+      { sentence: 'Hace ___ calor hoy.', answers: ['mucho'], hint: 'Before masculine noun → mucho' },
+      { sentence: 'Estás ___ cansada.', answers: ['muy'], hint: 'Before adjective → muy' },
+      { sentence: 'Ella trabaja ___.', answers: ['mucho'], hint: 'After verb → mucho' },
+      { sentence: 'Tengo ___ sed.', answers: ['mucha'], hint: 'Before feminine noun → mucha' },
+      { sentence: 'El examen fue ___ difícil.', answers: ['muy'], hint: 'Before adjective → muy' },
+    ],
+  },
+
+  // ============================================================
+  // 4. SABER vs CONOCER
+  // ============================================================
+  {
+    id: 'saber-conocer',
+    title: 'saber vs conocer',
+    tagline: 'Both mean "to know" — but knowledge of facts vs familiarity with people/places.',
+    useCases: [
+      {
+        rule: 'Use SABER to know facts, information, or how to do something.',
+        examples: [
+          { es: 'Sé la respuesta.', en: 'I know the answer.' },
+          { es: '¿Sabes nadar?', en: 'Do you know how to swim?' },
+          { es: 'No sé dónde está.', en: "I don't know where it is." },
+        ],
+      },
+      {
+        rule: 'Use CONOCER to know/be familiar with people, places, or things through experience.',
+        examples: [
+          { es: '¿Conoces a María?', en: 'Do you know María?' },
+          { es: 'Conozco bien Madrid.', en: 'I know Madrid well.' },
+          { es: 'No conozco ese restaurante.', en: "I don't know that restaurant." },
+        ],
+      },
+      {
+        rule: 'Key test: can you replace "know" with "know how to" or "know that"? → saber. Can you replace it with "be familiar with" or "have met"? → conocer.',
+        examples: [
+          { es: 'Sé que ella vive aquí. (I know that she lives here.)', en: '→ saber (fact)' },
+          { es: 'Conozco a su familia. (I know her family.)', en: '→ conocer (familiarity)' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: 'Yo no ___ dónde está la llave.', answers: ['sé'], hint: 'Knowing a fact → saber' },
+      { sentence: '¿___ (tú) a mi hermano?', answers: ['conoces'], hint: 'Knowing a person → conocer' },
+      { sentence: 'Ella ___ hablar tres idiomas.', answers: ['sabe'], hint: 'Knowing how to → saber' },
+      { sentence: 'Nosotros ___ bien esta ciudad.', answers: ['conocemos'], hint: 'Familiarity with a place → conocer' },
+      { sentence: '¿___ (vosotros) la respuesta?', answers: ['sabéis'], hint: 'Knowing a fact → saber' },
+      { sentence: 'Ellos no ___ a nadie aquí.', answers: ['conocen'], hint: 'Not knowing any people → conocer' },
+      { sentence: '¿___ (tú) cocinar?', answers: ['sabes'], hint: 'Knowing how to → saber' },
+      { sentence: 'Yo ___ un restaurante muy bueno.', answers: ['conozco'], hint: 'Familiarity with a place → conocer' },
+    ],
+  },
+
+  // ============================================================
+  // 5. PEDIR vs PREGUNTAR
+  // ============================================================
+  {
+    id: 'pedir-preguntar',
+    title: 'pedir vs preguntar',
+    tagline: 'Both can be "to ask" — but asking for something vs asking a question.',
+    useCases: [
+      {
+        rule: 'Use PEDIR to ask for something / to request. Think "to order" or "to request".',
+        examples: [
+          { es: 'Pedí un café.', en: 'I ordered/asked for a coffee.' },
+          { es: 'Me pidió dinero.', en: 'He asked me for money.' },
+        ],
+      },
+      {
+        rule: 'Use PREGUNTAR to ask a question / to inquire.',
+        examples: [
+          { es: 'Pregunta al profesor.', en: 'Ask the teacher (a question).' },
+          { es: 'Me preguntó cómo me llamaba.', en: 'He asked me what my name was.' },
+        ],
+      },
+      {
+        rule: 'Quick test: if you can say "ask for" (a thing) → pedir. If it is "ask about" or a question → preguntar.',
+        examples: [
+          { es: 'Pide la cuenta. (Ask for the bill.)', en: '→ pedir (requesting a thing)' },
+          { es: 'Pregunta la hora. (Ask what time it is.)', en: '→ preguntar (asking a question)' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: 'Voy a ___ un vaso de agua.', answers: ['pedir'], hint: 'Requesting a thing → pedir' },
+      { sentence: 'Ella me ___ dónde vivía.', answers: ['preguntó', 'pregunta'], hint: 'Asking a question → preguntar' },
+      { sentence: 'Los clientes ___ la carta.', answers: ['piden'], hint: 'Requesting the menu → pedir' },
+      { sentence: '¿Puedo ___ algo?', answers: ['preguntar', 'pedir'], hint: 'Depends on context — both possible here' },
+      { sentence: 'Voy a ___ al médico sobre mis síntomas.', answers: ['preguntar'], hint: 'Asking about something → preguntar' },
+      { sentence: 'Nos ___ que llegáramos pronto.', answers: ['pidió', 'pide'], hint: 'Requesting action → pedir' },
+    ],
+  },
+
+  // ============================================================
+  // 6. IR vs VENIR
+  // ============================================================
+  {
+    id: 'ir-venir',
+    title: 'ir vs venir',
+    tagline: '"To go" vs "to come" — direction depends on where the speaker is.',
+    useCases: [
+      {
+        rule: "Use IR (to go) when moving away from the speaker's current location.",
+        examples: [
+          { es: 'Voy al mercado.', en: 'I am going to the market.' },
+          { es: 'Ella va a casa.', en: 'She is going home.' },
+        ],
+      },
+      {
+        rule: "Use VENIR (to come) when moving towards the speaker's location.",
+        examples: [
+          { es: '¿Vienes a la fiesta?', en: 'Are you coming to the party?' },
+          { es: 'Ven aquí, por favor.', en: 'Come here, please.' },
+        ],
+      },
+      {
+        rule: "Key tip: in English we say \"I'll come with you\" but in Spanish you use ir — because you're going away from where you are now.",
+        examples: [
+          { es: "Voy contigo. (I'll come with you.)", en: '→ ir because you are going away from here' },
+          { es: '¿Puedo ir también?', en: 'Can I come too? (said by person who is here)' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: '___ al supermercado ahora.', answers: ['voy'], hint: 'Moving away from here → ir' },
+      { sentence: '¿___ (tú) a mi cumpleaños?', answers: ['vienes'], hint: 'Moving towards the speaker → venir' },
+      { sentence: 'Ellos ___ en coche.', answers: ['van', 'vienen'], hint: 'Depends on direction — both possible' },
+      { sentence: '¿Puedo ___ contigo?', answers: ['ir'], hint: 'Going away together → ir' },
+      { sentence: 'Mi madre ___ a visitarme mañana.', answers: ['viene'], hint: 'Coming towards speaker → venir' },
+      { sentence: 'Nosotros ___ al parque los domingos.', answers: ['vamos'], hint: 'Going away → ir' },
+    ],
+  },
+
+  // ============================================================
+  // 7. BIEN vs BUENO
+  // ============================================================
+  {
+    id: 'bien-bueno',
+    title: 'bien vs bueno',
+    tagline: '"Well" (adverb) vs "good" (adjective). Same mistake as in English.',
+    useCases: [
+      {
+        rule: 'Use BIEN after verbs — it describes how an action is done. It never changes form.',
+        examples: [
+          { es: 'Hablas bien el español.', en: 'You speak Spanish well.' },
+          { es: 'Me siento bien.', en: 'I feel well.' },
+          { es: '¿Estás bien?', en: 'Are you well/okay?' },
+        ],
+      },
+      {
+        rule: 'Use BUENO before or after nouns — it describes a person or thing. Agrees in gender/number: bueno/buena/buenos/buenas. Shortens to buen before masculine singular nouns.',
+        examples: [
+          { es: 'Es un buen libro.', en: 'It is a good book.' },
+          { es: 'La comida está buena.', en: 'The food is good (tastes good).' },
+          { es: 'Tiene buenas ideas.', en: 'She has good ideas.' },
+        ],
+      },
+      {
+        rule: 'Watch out: "estar bueno" means food tastes good (or that someone is attractive). "Estar bien" means to be okay/fine.',
+        examples: [
+          { es: 'El pastel está bueno.', en: 'The cake is good (tastes good).' },
+          { es: 'El pastel está bien.', en: 'The cake is fine/okay (less enthusiastic).' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: 'Ella canta muy ___.', answers: ['bien'], hint: 'After verb → bien' },
+      { sentence: 'Es un ___ hombre.', answers: ['buen', 'bueno'], hint: 'Before/describing noun → bueno/buen' },
+      { sentence: '¿Todo ___?', answers: ['bien'], hint: 'Is everything okay? → bien' },
+      { sentence: 'La sopa está ___.', answers: ['buena', 'bien'], hint: 'Tastes good → buena; feels okay → bien' },
+      { sentence: 'Tienes ___ amigos.', answers: ['buenos'], hint: 'Describing plural masculine noun → buenos' },
+      { sentence: 'Lo haces muy ___.', answers: ['bien'], hint: 'How you do it → bien' },
+      { sentence: 'Es una ___ pregunta.', answers: ['buena'], hint: 'Describing feminine noun → buena' },
+    ],
+  },
+
+  // ============================================================
+  // 8. MAL vs MALO
+  // ============================================================
+  {
+    id: 'mal-malo',
+    title: 'mal vs malo',
+    tagline: 'The "bad" pair — same pattern as bien/bueno.',
+    useCases: [
+      {
+        rule: 'Use MAL after verbs — it describes how an action is done. Never changes.',
+        examples: [
+          { es: 'Duermo mal.', en: 'I sleep badly.' },
+          { es: 'Me siento mal.', en: 'I feel bad/sick.' },
+        ],
+      },
+      {
+        rule: 'Use MALO to describe nouns. Agrees in gender/number. Shortens to "mal" before masculine singular nouns.',
+        examples: [
+          { es: 'Es un mal día.', en: 'It is a bad day.' },
+          { es: 'La película es mala.', en: 'The film is bad.' },
+          { es: 'Tiene malas notas.', en: 'She has bad grades.' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: 'Hoy me siento ___.', answers: ['mal'], hint: 'After verb → mal' },
+      { sentence: 'Es un ___ momento.', answers: ['mal', 'malo'], hint: 'Before masculine noun → mal' },
+      { sentence: 'La noticia es ___.', answers: ['mala'], hint: 'Describing feminine noun → mala' },
+      { sentence: 'Canta muy ___.', answers: ['mal'], hint: 'After verb → mal' },
+      { sentence: 'Tiene ___ hábitos.', answers: ['malos'], hint: 'Plural masculine noun → malos' },
+    ],
+  },
+
+  // ============================================================
+  // 9. ESTE vs ESE vs AQUEL
+  // ============================================================
+  {
+    id: 'este-ese-aquel',
+    title: 'este vs ese vs aquel',
+    tagline: 'This / that / that over there — Spanish has three levels of distance.',
+    useCases: [
+      {
+        rule: 'ESTE/ESTA/ESTOS/ESTAS — "this/these" — close to the speaker.',
+        examples: [
+          { es: 'Este libro es mío.', en: 'This book is mine.' },
+          { es: 'Estas flores son bonitas.', en: 'These flowers are beautiful.' },
+        ],
+      },
+      {
+        rule: 'ESE/ESA/ESOS/ESAS — "that/those" — close to the listener, or a moderate distance.',
+        examples: [
+          { es: 'Ese coche es tuyo.', en: 'That car is yours.' },
+          { es: 'Esa idea no me gusta.', en: "I don't like that idea." },
+        ],
+      },
+      {
+        rule: 'AQUEL/AQUELLA/AQUELLOS/AQUELLAS — "that/those over there" — far from both speaker and listener.',
+        examples: [
+          { es: 'Aquel edificio es muy antiguo.', en: 'That building over there is very old.' },
+          { es: 'Aquellas montañas son los Pirineos.', en: 'Those mountains over there are the Pyrenees.' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: '___ libro que tengo en la mano es nuevo.', answers: ['este'], hint: 'In my hand → este (close to speaker)' },
+      { sentence: '¿Puedes darme ___ bolígrafo que está en tu mesa?', answers: ['ese'], hint: 'Close to listener → ese' },
+      { sentence: '___ edificio de allí es el ayuntamiento.', answers: ['aquel'], hint: 'Far from both → aquel' },
+      { sentence: '___ flores que llevas son preciosas.', answers: ['esas'], hint: 'Flowers you are carrying → esas' },
+      { sentence: 'Mira ___ montañas a lo lejos.', answers: ['aquellas'], hint: 'Far away mountains → aquellas' },
+      { sentence: 'Dame ___ manzana de aquí.', answers: ['esta'], hint: 'Right here → esta' },
+    ],
+  },
+
+  // ============================================================
+  // 10. PERO vs SINO
+  // ============================================================
+  {
+    id: 'pero-sino',
+    title: 'pero vs sino',
+    tagline: 'Both mean "but" — but sino corrects a negative statement.',
+    useCases: [
+      {
+        rule: 'Use PERO to contrast two ideas. It is the default "but".',
+        examples: [
+          { es: 'Es caro pero vale la pena.', en: 'It is expensive but worth it.' },
+          { es: 'Quiero ir pero no puedo.', en: 'I want to go but I cannot.' },
+        ],
+      },
+      {
+        rule: 'Use SINO only after a negative statement, to say "but rather / but instead". The second part corrects the first.',
+        examples: [
+          { es: 'No es rojo sino azul.', en: 'It is not red but blue (rather, blue).' },
+          { es: 'No quiero té sino café.', en: 'I do not want tea but coffee (rather, coffee).' },
+        ],
+      },
+      {
+        rule: 'Use SINO QUE when the correction involves a verb clause.',
+        examples: [
+          { es: 'No lo compré sino que lo encontré.', en: "I didn't buy it but rather found it." },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: 'El hotel es pequeño ___ muy cómodo.', answers: ['pero'], hint: 'Contrast, no negation → pero' },
+      { sentence: 'No habla inglés ___ francés.', answers: ['sino'], hint: 'Correcting a negative → sino' },
+      { sentence: 'Quiero salir ___ estoy muy cansada.', answers: ['pero'], hint: 'Contrast → pero' },
+      { sentence: 'No es mi hermano ___ mi primo.', answers: ['sino'], hint: 'Correcting a negative → sino' },
+      { sentence: 'El examen es difícil ___ no imposible.', answers: ['pero'], hint: 'Contrast → pero' },
+      { sentence: 'No lo escribió ___ que lo dictó.', answers: ['sino'], hint: 'Correcting with a verb clause → sino que' },
+    ],
+  },
+
+  // ============================================================
+  // 11. TAMBIÉN vs TAMPOCO
+  // ============================================================
+  {
+    id: 'tambien-tampoco',
+    title: 'también vs tampoco',
+    tagline: '"Also/too" vs "neither/either" — the positive/negative pair.',
+    useCases: [
+      {
+        rule: 'Use TAMBIÉN in affirmative sentences to say "also" or "too".',
+        examples: [
+          { es: 'Yo también quiero ir.', en: 'I also want to go / I want to go too.' },
+          { es: 'Ella habla francés y también italiano.', en: 'She speaks French and also Italian.' },
+        ],
+      },
+      {
+        rule: 'Use TAMPOCO in negative sentences to say "neither", "either", or "not...either".',
+        examples: [
+          { es: 'Yo tampoco quiero ir.', en: 'I do not want to go either / Neither do I.' },
+          { es: 'No me gusta el frío y tampoco la lluvia.', en: 'I do not like the cold or the rain either.' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: 'A mí ___ me gusta el café.', answers: ['también', 'tampoco'], hint: 'Positive context → también; negative → tampoco' },
+      { sentence: 'Ella no habla alemán y yo ___.', answers: ['tampoco'], hint: 'Negative + agreeing → tampoco' },
+      { sentence: 'Me encanta la playa. A ella le gusta ___.', answers: ['también'], hint: 'Positive agreement → también' },
+      { sentence: 'No tengo hambre. — Yo ___.', answers: ['tampoco'], hint: 'Agreeing with negative → tampoco' },
+      { sentence: 'Hablo español y ___ un poco de portugués.', answers: ['también'], hint: 'Adding positive → también' },
+    ],
+  },
+
+  // ============================================================
+  // 12. QUÉ vs CUÁL
+  // ============================================================
+  {
+    id: 'que-cual',
+    title: '¿qué? vs ¿cuál?',
+    tagline: '"What?" vs "which?" — but Spanish uses them differently to English.',
+    useCases: [
+      {
+        rule: 'Use QUÉ to ask for a definition, explanation, or when asking what something is.',
+        examples: [
+          { es: '¿Qué es esto?', en: 'What is this?' },
+          { es: '¿Qué significa "amor"?', en: 'What does "amor" mean?' },
+          { es: '¿Qué quieres?', en: 'What do you want?' },
+        ],
+      },
+      {
+        rule: 'Use CUÁL/CUÁLES when selecting from options, or asking for specific information (phone number, name, address).',
+        examples: [
+          { es: '¿Cuál es tu nombre?', en: 'What is your name? (which name is yours)' },
+          { es: '¿Cuál prefieres?', en: 'Which do you prefer?' },
+          { es: '¿Cuál es tu número?', en: 'What is your number?' },
+        ],
+      },
+      {
+        rule: 'Watch out: Spanish says ¿Cuál es tu nombre? not ¿Qué es tu nombre? — because you are selecting from possible names, not asking for a definition.',
+        examples: [
+          { es: '❌ ¿Qué es tu dirección?', en: 'Wrong' },
+          { es: '✓ ¿Cuál es tu dirección?', en: 'What is your address? (correct)' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: '¿___ es tu color favorito?', answers: ['cuál'], hint: 'Selecting from options → cuál' },
+      { sentence: '¿___ quieres comer?', answers: ['qué'], hint: 'Asking what → qué' },
+      { sentence: '¿___ es la capital de Francia?', answers: ['cuál'], hint: 'Specific info, not definition → cuál' },
+      { sentence: '¿___ significa esta palabra?', answers: ['qué'], hint: 'Asking for a definition → qué' },
+      { sentence: '¿___ de los dos prefieres?', answers: ['cuál'], hint: 'Choosing between two → cuál' },
+      { sentence: '¿___ es un diccionario?', answers: ['qué'], hint: 'Asking for a definition → qué' },
+      { sentence: '¿___ es tu número de teléfono?', answers: ['cuál'], hint: 'Specific info → cuál' },
+    ],
+  },
+
+  // ============================================================
+  // 13. TRAER vs LLEVAR
+  // ============================================================
+  {
+    id: 'traer-llevar',
+    title: 'traer vs llevar',
+    tagline: '"To bring" vs "to take/carry" — direction relative to the speaker.',
+    useCases: [
+      {
+        rule: 'Use TRAER to bring something towards the speaker or to the current location.',
+        examples: [
+          { es: '¿Me traes un vaso de agua?', en: 'Can you bring me a glass of water?' },
+          { es: 'Trae tu libro a clase.', en: 'Bring your book to class (where we are).' },
+        ],
+      },
+      {
+        rule: 'Use LLEVAR to take or carry something away from the speaker, or to accompany to another place.',
+        examples: [
+          { es: 'Llevo el perro al parque.', en: 'I take the dog to the park.' },
+          { es: '¿Te llevo al aeropuerto?', en: 'Shall I take you to the airport?' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: '¿Me ___ un café, por favor?', answers: ['traes'], hint: 'Bring towards speaker → traer' },
+      { sentence: '___ al niño al colegio cada mañana.', answers: ['llevo', 'llevamos'], hint: 'Take away → llevar' },
+      { sentence: '¿___ tu paraguas hoy?', answers: ['traes', 'llevas'], hint: 'Bring here or take with you — context dependent' },
+      { sentence: 'Siempre ___ flores cuando viene a verme.', answers: ['trae'], hint: 'Bringing to speaker → traer' },
+      { sentence: '¿Te ___ al restaurante?', answers: ['llevo'], hint: 'Taking someone somewhere → llevar' },
+    ],
+  },
+
+  // ============================================================
+  // 14. TOMAR vs LLEVAR vs COGER
+  // ============================================================
+  {
+    id: 'tomar-llevar-coger',
+    title: 'tomar vs llevar vs coger',
+    tagline: 'Three ways to "take" — each with its own flavour.',
+    useCases: [
+      {
+        rule: 'TOMAR — to take (food/drink/transport/time). Very common in Latin America.',
+        examples: [
+          { es: 'Tomo el autobús cada día.', en: 'I take the bus every day.' },
+          { es: '¿Tomas café o té?', en: 'Do you take coffee or tea?' },
+        ],
+      },
+      {
+        rule: 'LLEVAR — to take/carry (to another place or for a duration of time).',
+        examples: [
+          { es: 'Lleva el paraguas.', en: 'Take the umbrella (with you).' },
+          { es: 'Llevo tres horas esperando.', en: 'I have been waiting for three hours.' },
+        ],
+      },
+      {
+        rule: 'COGER — to grab, catch, take. Very common in Spain (but vulgar in parts of Latin America — use tomar instead there).',
+        examples: [
+          { es: 'Coge el tren de las ocho.', en: "Take the eight o'clock train." },
+          { es: 'Cogí un resfriado.', en: 'I caught a cold.' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: '¿___ algo de beber?', answers: ['tomas', 'quieres'], hint: 'Taking a drink → tomar' },
+      { sentence: 'Siempre ___ el metro para ir al trabajo.', answers: ['tomo', 'cojo', 'toma', 'coge'], hint: 'Taking transport → tomar or coger' },
+      { sentence: 'Ella ___ el abrigo y salió.', answers: ['cogió', 'tomó', 'coge', 'toma'], hint: 'Grabbed and left → coger/tomar' },
+      { sentence: '___ el paraguas — va a llover.', answers: ['lleva', 'coge', 'toma'], hint: 'Take it with you → llevar or coger' },
+      { sentence: 'El proyecto ___ mucho tiempo.', answers: ['lleva', 'toma'], hint: 'Takes time (duration) → llevar or tomar' },
+    ],
+  },
+
+  // ============================================================
+  // 15. VOLVER vs REGRESAR vs DEVOLVER
+  // ============================================================
+  {
+    id: 'volver-regresar-devolver',
+    title: 'volver vs regresar vs devolver',
+    tagline: 'Three ways to "return" — each meaning is different.',
+    useCases: [
+      {
+        rule: 'VOLVER — to come back, to return (to a place). The most common word.',
+        examples: [
+          { es: 'Vuelvo a casa a las seis.', en: 'I come back home at six.' },
+          { es: '¿Cuándo vuelves?', en: 'When are you coming back?' },
+        ],
+      },
+      {
+        rule: 'REGRESAR — to return (to a place). Synonymous with volver, more common in Latin America.',
+        examples: [
+          { es: 'Regresé a México el año pasado.', en: 'I returned to Mexico last year.' },
+        ],
+      },
+      {
+        rule: 'DEVOLVER — to return something (to give something back). Completely different meaning.',
+        examples: [
+          { es: 'Tengo que devolver este libro.', en: 'I have to return this book.' },
+          { es: '¿Me devuelves el dinero?', en: 'Will you give me back the money?' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: '¿A qué hora ___ (tú) esta noche?', answers: ['vuelves', 'regresas'], hint: 'Coming back → volver/regresar' },
+      { sentence: 'Tengo que ___ estos zapatos — son de tu hermana.', answers: ['devolver'], hint: 'Giving something back → devolver' },
+      { sentence: 'Ella ___ de Londres mañana.', answers: ['vuelve', 'regresa'], hint: 'Returning from a place → volver/regresar' },
+      { sentence: '¿Me ___ el bolígrafo cuando termines?', answers: ['devuelves'], hint: 'Returning an object → devolver' },
+      { sentence: 'Nosotros ___ al hotel a las diez.', answers: ['volvemos', 'regresamos'], hint: 'Going back to hotel → volver/regresar' },
+    ],
+  },
+
+];
 
 
 // ============================================================================
@@ -1737,7 +2857,7 @@ const STAGES = [
 // ============================================================================
 // PERSISTENCE
 // ============================================================================
-const STORAGE_KEY = 'charla-flashcards-v1';
+const STORAGE_KEY = 'charla-flashcards-v1:' + SYNC_ROW_ID;
 const loadState = () => {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -1788,6 +2908,9 @@ let state = loadState() || {
   aprendiendoCount: 5,     // how many cards from Aprendiendo to add each session
   // timestamp for sync conflict resolution (newest wins)
   updatedAt: 0,
+  // confusiones (tricky pairs) progress
+  // { pairId: { active: bool, history: [bool], total: number } }
+  confusiones: {},
 };
 
 // Make sure newer fields exist on older saves
@@ -1797,6 +2920,7 @@ if (!state.flaggedLog) state.flaggedLog = [];
 if (state.gender === undefined) state.gender = null;
 if (state.aprendiendoCount === undefined) state.aprendiendoCount = 5;
 if (!state.updatedAt) state.updatedAt = 0;
+if (!state.confusiones) state.confusiones = {};
 
 let study = null; // runtime study state, not persisted
 
@@ -1898,6 +3022,8 @@ function renderHome() {
 
       ${phrasesHtml}
 
+      ${renderConfusionesNavCard()}
+
       <footer class="home-footer">
         ${state.flaggedLog.length > 0 ? `<button class="btn-link" id="exportBtn">📤 Exportar ${state.flaggedLog.length} marcadas · Export flags</button><br><br>` : ''}
         <button class="btn-link" id="resetBtn">Borrar todo el progreso</button>
@@ -1909,12 +3035,13 @@ function renderHome() {
   document.getElementById('viewAprendidas').onclick = () => renderBucket('aprendidas');
   document.getElementById('viewAprendiendo').onclick = () => renderBucket('aprendiendo');
   document.getElementById('viewRepaso').onclick = () => renderBucket('repaso');
+  document.getElementById('viewConfusiones').onclick = renderConfusionesPage;
   const exportBtn = document.getElementById('exportBtn');
   if (exportBtn) exportBtn.onclick = exportFlaggedAnswers;
   document.getElementById('resetBtn').onclick = () => {
     if (!confirm('¿Borrar todo el progreso? Esto no se puede deshacer.')) return;
     localStorage.removeItem(STORAGE_KEY);
-    state = { session: 1, cards: {}, todayPack: [], todayCompleted: [], unlockedPhrases: [], thisSessionWrongs: {}, userSynonyms: {}, flaggedLog: [] };
+    state = { session: 1, cards: {}, todayPack: [], todayCompleted: [], unlockedPhrases: [], thisSessionWrongs: {}, userSynonyms: {}, flaggedLog: {}, confusiones: {}, gender: null, aprendiendoCount: 5, updatedAt: 0 };
     renderHome();
   };
 }
@@ -2518,6 +3645,415 @@ function renderBucket(bucket) {
     });
   }
   drawCards();
+}
+
+// ============================================================================
+// CONFUSIONES — Tricky pairs practice
+
+// ----- Home nav card -----
+function renderConfusionesNavCard() {
+  const active = CONFUSIONES.filter(p => getPairStatus(p.id) !== 'inactive');
+  const confident = active.filter(p => getPairStatus(p.id) === 'confident');
+  const sub = active.length === 0
+    ? 'Tricky pairs — add some to get started'
+    : `${active.length} active · ${confident.length} confident`;
+  return `
+    <button class="confusiones-nav-card" id="viewConfusiones">
+      <div>
+        <div class="confusiones-nav-title">Confusiones</div>
+        <div class="confusiones-nav-sub">${sub}</div>
+      </div>
+      <span class="confusiones-nav-arrow">→</span>
+    </button>`;
+}
+
+// ----- Confusiones page -----
+function renderConfusionesPage() {
+  const activePairs = CONFUSIONES.filter(p => getPairStatus(p.id) !== 'inactive');
+  const inactivePairs = CONFUSIONES.filter(p => getPairStatus(p.id) === 'inactive');
+  const canPracticeAll = activePairs.length > 0;
+
+  function pairCard(pair) {
+    const status = getPairStatus(pair.id);
+    const acc = getPairAccuracy(pair.id);
+    const prog = getPairProgress(pair.id);
+    const accPct = acc !== null ? Math.round(acc * 100) : 0;
+    const statusLabel = { inactive: 'Not added', active: 'Practicing', confident: '✓ Confident' }[status];
+    const statusCls = { inactive: 'status-inactive', active: 'status-active', confident: 'status-confident' }[status];
+    const bar = status !== 'inactive' && prog.total > 0
+      ? `<div class="confusion-accuracy-bar"><div class="confusion-accuracy-fill" style="width:${accPct}%"></div></div>` : '';
+    const actionBtn = status === 'inactive'
+      ? `<button class="btn-confusion-add" data-pair="${pair.id}">+ Add</button>`
+      : `<button class="btn-confusion-practice" data-pair="${pair.id}" data-action="practice">Practice →</button>`;
+    return `
+      <div class="confusion-card confusion-card-${status}">
+        <div class="confusion-card-title">${pair.title}</div>
+        <div class="confusion-card-tagline">${pair.tagline.split(' — ')[0]}</div>
+        <div class="confusion-card-status ${statusCls}">${statusLabel}${prog.total > 0 ? ` · ${prog.total} answered` : ''}</div>
+        ${bar}
+        <div class="confusion-card-actions">
+          <button class="btn-confusion-rules" data-pair="${pair.id}" data-action="rules">Rules</button>
+          ${actionBtn}
+        </div>
+      </div>`;
+  }
+
+  root.innerHTML = `
+    <main class="confusiones-page">
+      <button class="btn-link" id="backFromConfusiones">← Volver al inicio</button>
+      <div class="confusiones-page-header">
+        <div class="confusiones-page-eyebrow">Tricky pairs · Practica</div>
+        <h1 class="confusiones-page-title">Confusiones</h1>
+        <div class="confusiones-page-actions">
+          <button class="btn-practice-all" id="practiceAllBtn" ${canPracticeAll ? '' : 'disabled'}>
+            Practicar todo <span class="btn-arrow">→</span>
+          </button>
+        </div>
+        <div class="confusiones-page-meta">
+          ${canPracticeAll
+            ? `${activePairs.length} pair${activePairs.length !== 1 ? 's' : ''} active — all shuffled together`
+            : 'Add at least one pair to start practising'}
+        </div>
+      </div>
+
+      ${activePairs.length > 0 ? `
+        <div class="confusiones-home-header">
+          <span class="confusiones-home-title">Active</span>
+        </div>
+        <div class="confusion-cards-grid" style="margin-bottom:28px">
+          ${activePairs.map(pairCard).join('')}
+        </div>` : ''}
+
+      <div class="confusiones-home-header">
+        <span class="confusiones-home-title">Available</span>
+        <span class="confusiones-home-sub">${inactivePairs.length} not yet added</span>
+      </div>
+      <div class="confusion-cards-grid">
+        ${inactivePairs.map(pairCard).join('')}
+      </div>
+    </main>
+  `;
+
+  document.getElementById('backFromConfusiones').onclick = renderHome;
+  if (canPracticeAll) {
+    document.getElementById('practiceAllBtn').onclick = () => {
+      renderConfusionStudy(null, activePairs); // null = mixed mode
+    };
+  }
+  wireConfusionButtons();
+}
+
+// ============================================================================
+
+function getPairProgress(id) {
+  if (!state.confusiones[id]) {
+    state.confusiones[id] = { active: false, history: [], total: 0 };
+  }
+  return state.confusiones[id];
+}
+
+function getPairAccuracy(id) {
+  const p = getPairProgress(id);
+  if (!p.history || p.history.length === 0) return null;
+  const last10 = p.history.slice(-10);
+  return last10.filter(Boolean).length / last10.length;
+}
+
+function getPairStatus(id) {
+  const p = getPairProgress(id);
+  if (!p.active) return 'inactive';
+  const acc = getPairAccuracy(id);
+  if (acc !== null && acc >= 0.85 && p.history.length >= 10) return 'confident';
+  return 'active';
+}
+
+function recordConfusionAnswer(id, correct) {
+  const p = getPairProgress(id);
+  p.history.push(correct);
+  if (p.history.length > 50) p.history.shift(); // cap at 50
+  p.total = (p.total || 0) + 1;
+  persist();
+}
+
+// Check answer for a confusion question
+function isConfusionCorrect(input, answers) {
+  const a = normalize(input);
+  if (!a) return false;
+  for (const ans of answers) {
+    const t = normalize(ans);
+    if (a === t) return true;
+    if (levenshtein(a, t) <= 1) return true;
+  }
+  return false;
+}
+
+// ----- RENDER: Confusiones section on home -----
+function renderConfusionesSection() {
+  const activePairs = CONFUSIONES.filter(p => getPairStatus(p.id) !== 'inactive');
+  const inactivePairs = CONFUSIONES.filter(p => getPairStatus(p.id) === 'inactive');
+
+  function pairCard(pair) {
+    const status = getPairStatus(pair.id);
+    const acc = getPairAccuracy(pair.id);
+    const prog = getPairProgress(pair.id);
+    const accPct = acc !== null ? Math.round(acc * 100) : 0;
+    const statusLabel = { inactive: 'Not added', active: 'Practicing', confident: '✓ Confident' }[status];
+    const statusCls = { inactive: 'status-inactive', active: 'status-active', confident: 'status-confident' }[status];
+
+    const actionBtn = status === 'inactive'
+      ? `<button class="btn-confusion-add" data-pair="${pair.id}">+ Add</button>`
+      : `<button class="btn-confusion-practice" data-pair="${pair.id}" data-action="practice">Practice →</button>`;
+
+    const bar = status !== 'inactive' && prog.total > 0
+      ? `<div class="confusion-accuracy-bar"><div class="confusion-accuracy-fill" style="width:${accPct}%"></div></div>`
+      : '';
+
+    return `
+      <div class="confusion-card confusion-card-${status}">
+        <div class="confusion-card-title">${pair.title}</div>
+        <div class="confusion-card-tagline">${pair.tagline.split(' — ')[0]}</div>
+        <div class="confusion-card-status ${statusCls}">${statusLabel}${prog.total > 0 ? ` · ${prog.total} answered` : ''}</div>
+        ${bar}
+        <div class="confusion-card-actions">
+          <button class="btn-confusion-rules" data-pair="${pair.id}" data-action="rules">Rules</button>
+          ${actionBtn}
+        </div>
+      </div>`;
+  }
+
+  const html = `
+    <div class="confusiones-home">
+      <div class="confusiones-home-header">
+        <span class="confusiones-home-title">Confusiones</span>
+        <span class="confusiones-home-sub">${activePairs.length} active · ${CONFUSIONES.length} total</span>
+      </div>
+      <div class="confusion-cards-grid">
+        ${activePairs.map(pairCard).join('')}
+        ${inactivePairs.map(pairCard).join('')}
+      </div>
+    </div>`;
+
+  return html;
+}
+
+// Wire up confusion card buttons (called after rendering home)
+function wireConfusionButtons() {
+  document.querySelectorAll('[data-pair]').forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.getAttribute('data-pair');
+      const action = btn.getAttribute('data-action');
+      const pair = CONFUSIONES.find(p => p.id === id);
+      if (!pair) return;
+      if (action === 'rules') { renderRules(pair); return; }
+      if (action === 'practice') { renderConfusionStudy(pair, [pair]); return; }
+      // No action = "add"
+      const p = getPairProgress(id);
+      p.active = true;
+      persist();
+      renderConfusionesPage();
+    };
+  });
+}
+
+// ----- RENDER: Rules page -----
+function renderRules(pair) {
+  const useCasesHtml = pair.useCases.map((uc, i) => `
+    <div class="rule-block">
+      <div class="rule-block-label">Rule ${i + 1}</div>
+      <div class="rule-text">${escapeHtml(uc.rule)}</div>
+      <div class="rule-examples">
+        ${uc.examples.map(ex => `
+          <div class="rule-example">
+            <div class="rule-example-es">${escapeHtml(ex.es)}</div>
+            <div class="rule-example-en">${escapeHtml(ex.en)}</div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+
+  const status = getPairStatus(pair.id);
+
+  root.innerHTML = `
+    <main class="rules-page">
+      <button class="btn-link" id="backFromRules">← Back</button>
+      <div class="rules-header">
+        <div class="rules-eyebrow">Confusiones · Tricky pairs</div>
+        <h1 class="rules-title">${pair.title}</h1>
+        <p class="rules-tagline">${escapeHtml(pair.tagline)}</p>
+      </div>
+      <div class="rules-body">${useCasesHtml}</div>
+      <div class="rules-start-btn-wrap">
+        <button class="btn-primary" id="startFromRules">
+          ${status === 'inactive' ? 'Add & practice' : 'Practice now'}
+          <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </main>
+  `;
+
+  document.getElementById('backFromRules').onclick = renderHome;
+  document.getElementById('startFromRules').onclick = () => {
+    const p = getPairProgress(pair.id);
+    if (!p.active) { p.active = true; persist(); }
+    renderConfusionStudy(pair);
+  };
+}
+
+// ----- RENDER: Confusion study session -----
+let confusionStudyState = null;
+
+// pair = single CONFUSIONES object, OR null for mixed mode
+// pairs = array of pairs (used only when pair is null)
+function renderConfusionStudy(pair, pairs) {
+  const isMixed = pair === null;
+  const activePairs = isMixed ? pairs : [pair];
+  const stateKey = isMixed ? '__mixed__' : pair.id;
+
+  if (!confusionStudyState || confusionStudyState.stateKey !== stateKey) {
+    // Build initial queue — for mixed mode, interleave all questions from all pairs
+    let allQ = [];
+    for (const p of activePairs) {
+      allQ = allQ.concat(p.questions.map(q => ({ ...q, _pairId: p.id, _pairTitle: p.title })));
+    }
+    confusionStudyState = {
+      stateKey,
+      isMixed,
+      activePairs,
+      queue: shuffle(allQ),
+      qIndex: 0,
+      sessionCorrect: 0,
+      sessionTotal: 0,
+      feedback: null,
+      input: '',
+      currentQ: null,
+    };
+  }
+
+  // Reshuffle when queue exhausted
+  if (confusionStudyState.qIndex >= confusionStudyState.queue.length) {
+    let allQ = [];
+    for (const p of confusionStudyState.activePairs) {
+      allQ = allQ.concat(p.questions.map(q => ({ ...q, _pairId: p.id, _pairTitle: p.title })));
+    }
+    confusionStudyState.queue = shuffle(allQ);
+    confusionStudyState.qIndex = 0;
+  }
+
+  const q = confusionStudyState.queue[confusionStudyState.qIndex];
+  confusionStudyState.currentQ = q;
+  const fb = confusionStudyState.feedback;
+
+  // For display: show pair title always (as a hint)
+  const displayTitle = q._pairTitle || (pair ? pair.title : '');
+
+  // Accuracy display
+  let accStr;
+  if (isMixed) {
+    const tot = confusionStudyState.sessionTotal;
+    accStr = tot > 0 ? `${Math.round(confusionStudyState.sessionCorrect / tot * 100)}% this session` : 'just starting';
+  } else {
+    const acc = getPairAccuracy(pair.id);
+    accStr = acc !== null ? `${Math.round(acc * 100)}% accuracy` : 'just starting';
+  }
+
+  const sentenceHtml = escapeHtml(q.sentence).replace('___',
+    `<span class="confusion-blank">${fb ? escapeHtml(fb.answer) : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}</span>`);
+
+  let feedbackHtml = '';
+  if (fb) {
+    if (fb.correct) {
+      feedbackHtml = `
+        <div class="confusion-feedback">
+          <div class="confusion-feedback-mark confusion-correct-mark">✓</div>
+          <div class="confusion-feedback-text">${getCorrectMessage()}</div>
+          <button class="btn-primary btn-small" id="confNextBtn">Siguiente →</button>
+        </div>`;
+    } else {
+      feedbackHtml = `
+        <div class="confusion-feedback">
+          <div class="confusion-feedback-mark confusion-wrong-mark">✕</div>
+          <div class="confusion-feedback-text">${getWrongMessage()}</div>
+          <div class="confusion-hint">Answer: <strong>${escapeHtml(q.answers[0])}</strong> — ${escapeHtml(q.hint)}</div>
+          <button class="btn-primary btn-small" id="confNextBtn">Siguiente →</button>
+        </div>`;
+    }
+  }
+
+  const cardClass = 'confusion-card-wrap' +
+    (fb ? (fb.correct ? ' confusion-correct' : ' confusion-wrong') : '');
+
+  const headerLabel = isMixed
+    ? `<div class="confusion-pair-label" style="background:var(--terracotta)">Práctica mixta</div>
+       <div class="confusion-pair-label">${escapeHtml(displayTitle)}</div>`
+    : `<div class="confusion-pair-label">${escapeHtml(displayTitle)}</div>`;
+
+  root.innerHTML = `
+    <main class="confusion-study">
+      <div class="confusion-study-header">
+        <button class="btn-link" id="exitConfusion">← Salir</button>
+        <div class="study-meta" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          ${headerLabel}
+        </div>
+        <div class="confusion-score">${confusionStudyState.sessionCorrect}/${confusionStudyState.sessionTotal} · ${accStr}</div>
+      </div>
+
+      <div class="${cardClass}">
+        <div class="confusion-prompt-label">Fill in the blank</div>
+        <div class="confusion-sentence">${sentenceHtml}</div>
+        ${!fb ? `
+          <form class="confusion-form" id="confForm">
+            <input id="confInput" class="confusion-input" type="text"
+              autocomplete="off" autocorrect="off" spellcheck="false"
+              placeholder="escribe aquí…" value="${escapeHtml(confusionStudyState.input)}" />
+            <button type="submit" class="confusion-submit">Check</button>
+          </form>` : ''}
+        ${feedbackHtml}
+      </div>
+    </main>
+  `;
+
+  document.getElementById('exitConfusion').onclick = () => {
+    confusionStudyState = null;
+    if (isMixed) renderConfusionesPage();
+    else renderHome();
+  };
+
+  if (!fb) {
+    const inp = document.getElementById('confInput');
+    if (inp) {
+      inp.focus();
+      inp.oninput = e => { confusionStudyState.input = e.target.value; };
+    }
+    const form = document.getElementById('confForm');
+    if (form) form.onsubmit = e => {
+      e.preventDefault();
+      handleConfusionSubmit(q);
+    };
+  }
+
+  const nextBtn = document.getElementById('confNextBtn');
+  if (nextBtn) nextBtn.onclick = () => handleConfusionNext(pair, pairs);
+}
+
+function handleConfusionSubmit(q) {
+  const input = confusionStudyState.input;
+  if (!input.trim()) return;
+  const correct = isConfusionCorrect(input, q.answers);
+  confusionStudyState.feedback = { correct, answer: input };
+  confusionStudyState.sessionTotal++;
+  if (correct) confusionStudyState.sessionCorrect++;
+  // Always record against the specific pair, even in mixed mode
+  if (q._pairId) recordConfusionAnswer(q._pairId, correct);
+  renderConfusionStudy(
+    confusionStudyState.isMixed ? null : confusionStudyState.activePairs[0],
+    confusionStudyState.activePairs
+  );
+}
+
+function handleConfusionNext(pair, pairs) {
+  confusionStudyState.feedback = null;
+  confusionStudyState.input = '';
+  confusionStudyState.qIndex++;
+  renderConfusionStudy(pair, pairs);
 }
 
 // ----- BOOT -----
