@@ -2559,6 +2559,82 @@ const CONFUSIONES = [
     ],
   },
 
+  // ============================================================
+  // ADJECTIVE AGREEMENT
+  // ============================================================
+  {
+    id: 'adjective-agreement',
+    title: 'cansado/cansada · bonito/bonita',
+    tagline: 'Adjectives must match the gender AND number of the noun or person they describe.',
+    useCases: [
+      {
+        rule: 'When describing YOURSELF or another person, the adjective agrees with THAT PERSON\'s gender. -o for masculine, -a for feminine.',
+        examples: [
+          { es: 'Estoy cansado. (said by a man)', en: 'I am tired.' },
+          { es: 'Estoy cansada. (said by a woman)', en: 'I am tired.' },
+          { es: 'Él está contento. / Ella está contenta.', en: 'He is happy. / She is happy.' },
+        ],
+      },
+      {
+        rule: 'When describing an OBJECT or place, the adjective agrees with the gender of THAT NOUN — not the speaker.',
+        examples: [
+          { es: 'El libro es interesante. (libro = masc)', en: 'The book is interesting.' },
+          { es: 'La película es interesante. (película = fem)', en: 'The film is interesting.' },
+          { es: 'El café está frío. / La cerveza está fría.', en: 'The coffee is cold. / The beer is cold.' },
+        ],
+      },
+      {
+        rule: 'For PLURALS, add -s (or -es if the adjective ends in a consonant). Masculine plural is the default for mixed groups.',
+        examples: [
+          { es: 'Los chicos están cansados.', en: 'The boys are tired.' },
+          { es: 'Las chicas están cansadas.', en: 'The girls are tired.' },
+          { es: 'Los chicos y las chicas están cansados.', en: 'The boys and girls are tired. (mixed → masc plural)' },
+        ],
+      },
+      {
+        rule: 'Some adjectives don\'t change for gender — those ending in -e, -ista, or most consonants.',
+        examples: [
+          { es: 'El examen es difícil. / La tarea es difícil.', en: 'The exam is hard. / The homework is hard.' },
+          { es: 'Él es optimista. / Ella es optimista.', en: 'He is optimistic. / She is optimistic.' },
+          { es: 'El chico es joven. / La chica es joven.', en: 'The boy is young. / The girl is young.' },
+        ],
+      },
+      {
+        rule: 'Watch out: BUENO → BUEN (before masc. singular noun), MALO → MAL, GRANDE → GRAN (before any singular noun, with meaning shift to "great").',
+        examples: [
+          { es: 'un buen hombre / una buena mujer', en: 'a good man / a good woman' },
+          { es: 'un gran líder / una gran artista', en: 'a great leader / a great artist (gran before noun = great, not big)' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: 'Estoy muy ___ hoy. (you are female)', answers: ['cansada'], hint: 'Speaker is female → cansada' },
+      { sentence: 'Estoy muy ___ hoy. (you are male)', answers: ['cansado'], hint: 'Speaker is male → cansado' },
+      { sentence: 'El agua está muy ___.', answers: ['fría'], hint: 'agua = feminine (despite el) → fría' },
+      { sentence: 'El café está muy ___.', answers: ['frío'], hint: 'café = masculine → frío' },
+      { sentence: 'La película es muy ___.', answers: ['aburrida'], hint: 'película = feminine → aburrida' },
+      { sentence: 'El libro es muy ___.', answers: ['aburrido'], hint: 'libro = masculine → aburrido' },
+      { sentence: 'Ella está muy ___.', answers: ['contenta'], hint: 'ella = feminine → contenta' },
+      { sentence: 'Él está muy ___.', answers: ['contento'], hint: 'él = masculine → contento' },
+      { sentence: 'Las chicas están muy ___.', answers: ['cansadas'], hint: 'feminine plural → cansadas' },
+      { sentence: 'Los chicos están muy ___.', answers: ['cansados'], hint: 'masculine plural → cansados' },
+      { sentence: 'La tarea es ___.', answers: ['difícil', 'dificil'], hint: 'difícil ends in -l → no gender change, same for masc/fem' },
+      { sentence: 'Es una ___ idea.', answers: ['buena'], hint: 'idea = feminine → buena' },
+      { sentence: 'Es un ___ libro.', answers: ['buen', 'bueno'], hint: 'libro = masculine, before noun → buen' },
+      { sentence: 'La cerveza está ___.', answers: ['fría'], hint: 'cerveza = feminine → fría' },
+      { sentence: 'Mi hermana es muy ___.', answers: ['lista'], hint: 'hermana = feminine → lista (clever/ready)' },
+      { sentence: 'Mi hermano es muy ___.', answers: ['listo'], hint: 'hermano = masculine → listo' },
+      { sentence: 'La casa es muy ___.', answers: ['bonita'], hint: 'casa = feminine → bonita' },
+      { sentence: 'El coche es muy ___.', answers: ['bonito'], hint: 'coche = masculine → bonito' },
+      { sentence: 'Estamos muy ___. (mixed group, m+f)', answers: ['cansados'], hint: 'mixed group defaults to masculine plural → cansados' },
+      { sentence: 'La puerta está ___.', answers: ['abierta'], hint: 'puerta = feminine → abierta (open)' },
+      { sentence: 'El banco está ___.', answers: ['abierto'], hint: 'banco = masculine → abierto' },
+      { sentence: 'Ella es muy ___ en su trabajo.', answers: ['organizada'], hint: 'ella = feminine → organizada' },
+      { sentence: 'El problema es muy ___.', answers: ['complicado'], hint: 'problema = masculine (trap! -ma) → complicado' },
+      { sentence: 'La solución es muy ___.', answers: ['complicada'], hint: 'solución = feminine → complicada' },
+    ],
+  },
+
 ];
 
 
