@@ -1218,6 +1218,19 @@ main { position: relative; z-index: 1; }
   transition: all 0.15s ease;
 }
 .btn-confusion-practice:hover { background: var(--hibiscus); transform: translate(-1px, -1px); }
+.btn-confusion-remove {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: 12px;
+  background: none;
+  border: 1.5px dashed var(--muted);
+  color: var(--muted);
+  padding: 5px 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-left: auto;
+}
+.btn-confusion-remove:hover { border-color: var(--terracotta); color: var(--terracotta); border-style: solid; }
 
 /* Rules page */
 .rules-page { animation: fadeUp 0.3s ease; }
@@ -2608,30 +2621,88 @@ const CONFUSIONES = [
       },
     ],
     questions: [
-      { sentence: 'Estoy muy ___ hoy. (you are female)', answers: ['cansada'], hint: 'Speaker is female → cansada' },
-      { sentence: 'Estoy muy ___ hoy. (you are male)', answers: ['cansado'], hint: 'Speaker is male → cansado' },
-      { sentence: 'El agua está muy ___.', answers: ['fría'], hint: 'agua = feminine (despite el) → fría' },
-      { sentence: 'El café está muy ___.', answers: ['frío'], hint: 'café = masculine → frío' },
-      { sentence: 'La película es muy ___.', answers: ['aburrida'], hint: 'película = feminine → aburrida' },
-      { sentence: 'El libro es muy ___.', answers: ['aburrido'], hint: 'libro = masculine → aburrido' },
-      { sentence: 'Ella está muy ___.', answers: ['contenta'], hint: 'ella = feminine → contenta' },
-      { sentence: 'Él está muy ___.', answers: ['contento'], hint: 'él = masculine → contento' },
-      { sentence: 'Las chicas están muy ___.', answers: ['cansadas'], hint: 'feminine plural → cansadas' },
-      { sentence: 'Los chicos están muy ___.', answers: ['cansados'], hint: 'masculine plural → cansados' },
-      { sentence: 'La tarea es ___.', answers: ['difícil', 'dificil'], hint: 'difícil ends in -l → no gender change, same for masc/fem' },
-      { sentence: 'Es una ___ idea.', answers: ['buena'], hint: 'idea = feminine → buena' },
-      { sentence: 'Es un ___ libro.', answers: ['buen', 'bueno'], hint: 'libro = masculine, before noun → buen' },
-      { sentence: 'La cerveza está ___.', answers: ['fría'], hint: 'cerveza = feminine → fría' },
-      { sentence: 'Mi hermana es muy ___.', answers: ['lista'], hint: 'hermana = feminine → lista (clever/ready)' },
-      { sentence: 'Mi hermano es muy ___.', answers: ['listo'], hint: 'hermano = masculine → listo' },
-      { sentence: 'La casa es muy ___.', answers: ['bonita'], hint: 'casa = feminine → bonita' },
-      { sentence: 'El coche es muy ___.', answers: ['bonito'], hint: 'coche = masculine → bonito' },
-      { sentence: 'Estamos muy ___. (mixed group, m+f)', answers: ['cansados'], hint: 'mixed group defaults to masculine plural → cansados' },
-      { sentence: 'La puerta está ___.', answers: ['abierta'], hint: 'puerta = feminine → abierta (open)' },
-      { sentence: 'El banco está ___.', answers: ['abierto'], hint: 'banco = masculine → abierto' },
-      { sentence: 'Ella es muy ___ en su trabajo.', answers: ['organizada'], hint: 'ella = feminine → organizada' },
-      { sentence: 'El problema es muy ___.', answers: ['complicado'], hint: 'problema = masculine (trap! -ma) → complicado' },
-      { sentence: 'La solución es muy ___.', answers: ['complicada'], hint: 'solución = feminine → complicada' },
+      { sentence: 'Estoy muy ___ hoy. (cansado/cansada — you are female)', answers: ['cansada'], hint: 'Speaker is female → cansada' },
+      { sentence: 'Estoy muy ___ hoy. (cansado/cansada — you are male)', answers: ['cansado'], hint: 'Speaker is male → cansado' },
+      { sentence: 'El agua está muy ___. (frío/fría)', answers: ['fría'], hint: 'agua = feminine (despite el) → fría' },
+      { sentence: 'El café está muy ___. (frío/fría)', answers: ['frío'], hint: 'café = masculine → frío' },
+      { sentence: 'La película es muy ___. (aburrido/aburrida)', answers: ['aburrida'], hint: 'película = feminine → aburrida' },
+      { sentence: 'El libro es muy ___. (aburrido/aburrida)', answers: ['aburrido'], hint: 'libro = masculine → aburrido' },
+      { sentence: 'Ella está muy ___. (contento/contenta)', answers: ['contenta'], hint: 'ella = feminine → contenta' },
+      { sentence: 'Él está muy ___. (contento/contenta)', answers: ['contento'], hint: 'él = masculine → contento' },
+      { sentence: 'Las chicas están muy ___. (cansado/cansada/cansados/cansadas)', answers: ['cansadas'], hint: 'las chicas = feminine plural → cansadas' },
+      { sentence: 'Los chicos están muy ___. (cansado/cansada/cansados/cansadas)', answers: ['cansados'], hint: 'los chicos = masculine plural → cansados' },
+      { sentence: 'La tarea es ___. (difícil/difícila)', answers: ['difícil', 'dificil'], hint: 'difícil ends in -l → no gender change, same form for masc/fem' },
+      { sentence: 'Es una ___ idea. (bueno/buena/buen)', answers: ['buena'], hint: 'idea = feminine → buena' },
+      { sentence: 'Es un ___ libro. (bueno/buena/buen)', answers: ['buen', 'bueno'], hint: 'before a masculine singular noun → buen' },
+      { sentence: 'La cerveza está ___. (frío/fría)', answers: ['fría'], hint: 'cerveza = feminine → fría' },
+      { sentence: 'Mi hermana es muy ___. (listo/lista)', answers: ['lista'], hint: 'hermana = feminine → lista' },
+      { sentence: 'Mi hermano es muy ___. (listo/lista)', answers: ['listo'], hint: 'hermano = masculine → listo' },
+      { sentence: 'La casa es muy ___. (bonito/bonita)', answers: ['bonita'], hint: 'casa = feminine → bonita' },
+      { sentence: 'El coche es muy ___. (bonito/bonita)', answers: ['bonito'], hint: 'coche = masculine → bonito' },
+      { sentence: 'Estamos muy ___. (cansados/cansadas — mixed group m+f)', answers: ['cansados'], hint: 'mixed group defaults to masculine plural → cansados' },
+      { sentence: 'La puerta está ___. (abierto/abierta)', answers: ['abierta'], hint: 'puerta = feminine → abierta' },
+      { sentence: 'El banco está ___. (abierto/abierta)', answers: ['abierto'], hint: 'banco = masculine → abierto' },
+      { sentence: 'El problema es muy ___. (complicado/complicada)', answers: ['complicado'], hint: 'problema = masculine (trap! -ma ending) → complicado' },
+      { sentence: 'La solución es muy ___. (complicado/complicada)', answers: ['complicada'], hint: 'solución = feminine (-ción) → complicada' },
+      { sentence: 'El examen fue muy ___. (difícil/difícila)', answers: ['difícil', 'dificil'], hint: 'difícil = no gender change' },
+      { sentence: 'Ella es muy ___ en su trabajo. (organizado/organizada)', answers: ['organizada'], hint: 'ella = feminine → organizada' },
+      { sentence: 'Es un ___ hombre. (grande/gran/gran)', answers: ['gran'], hint: 'before a noun, grande shortens to gran — meaning "great"' },
+    ],
+  },
+
+  // ============================================================
+  // él/ella/ello → lo/la/le/les
+  // ============================================================
+  {
+    id: 'el-ella-lo-la-le',
+    title: 'él/ella → lo/la/le',
+    tagline: 'Third-person pronouns — who is doing it vs who receives it.',
+    useCases: [
+      {
+        rule: 'ÉL (he) and ELLA (she) are SUBJECT pronouns — they say who does the action.',
+        examples: [
+          { es: 'Él habla español. / Ella habla español.', en: 'He speaks Spanish. / She speaks Spanish.' },
+          { es: 'Él es mi amigo. / Ella es mi amiga.', en: 'He is my friend. / She is my friend.' },
+        ],
+      },
+      {
+        rule: 'LO (him/it-masc) and LA (her/it-fem) are DIRECT object pronouns — they receive the action of the verb.',
+        examples: [
+          { es: 'Lo veo. (I see him / I see it — masc)', en: 'Refers to a masculine person or noun.' },
+          { es: 'La veo. (I see her / I see it — fem)', en: 'Refers to a feminine person or noun.' },
+          { es: '¿El libro? Lo tengo aquí.', en: 'The book? I have it here. (libro = masc → lo)' },
+          { es: '¿La llave? La busco.', en: 'The key? I am looking for it. (llave = fem → la)' },
+        ],
+      },
+      {
+        rule: 'LE (to him / to her / to it) is the INDIRECT object pronoun — it means TO whom or FOR whom. LES for plural.',
+        examples: [
+          { es: 'Le digo la verdad. (I tell him/her the truth)', en: 'Le = to him or to her (indirect object)' },
+          { es: 'Le mando un mensaje a María.', en: 'I send a message to María.' },
+          { es: 'Les explico el problema.', en: 'I explain the problem to them.' },
+        ],
+      },
+      {
+        rule: 'Quick test: can you replace the pronoun with "to him/her"? → le. Can you replace it with just "him/her/it"? → lo/la.',
+        examples: [
+          { es: 'Lo llamo. (I call him.) vs Le llamo para decirle algo.', en: 'lo = him (direct) · le = to him (indirect)' },
+          { es: 'La quiero. (I love her.) vs Le doy un regalo. (I give her a gift.)', en: 'la = her (direct) · le = to her (indirect)' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: '___ es mi hermano, no mi primo. (él/lo/le)', answers: ['él'], hint: 'Subject of the sentence → él' },
+      { sentence: '¿Ves a Juan? — Sí, ___ veo. (él/lo/le)', answers: ['lo'], hint: 'Direct object (seeing him) → lo' },
+      { sentence: '¿Ves a María? — Sí, ___ veo. (ella/lo/la)', answers: ['la'], hint: 'Direct object (seeing her) → la' },
+      { sentence: '___ digo la verdad a mi madre. (lo/la/le)', answers: ['le'], hint: 'To my mother (indirect) → le' },
+      { sentence: '¿El libro? ___ tengo en mi mochila. (lo/la/le)', answers: ['lo'], hint: 'libro = masculine → lo' },
+      { sentence: '¿La llave? No ___ encuentro. (lo/la/le)', answers: ['la'], hint: 'llave = feminine → la' },
+      { sentence: '___ mando un mensaje a mis amigos. (los/las/les)', answers: ['les'], hint: 'To them (indirect, plural) → les' },
+      { sentence: '___ llamo mañana. (referring to a male friend) (lo/la/le)', answers: ['lo', 'le'], hint: 'Call him (direct) → lo; though le is also common in Spain' },
+      { sentence: 'Ella trabaja mucho — ___ admiro. (lo/la/le)', answers: ['la'], hint: 'I admire her (direct, feminine) → la' },
+      { sentence: '___ explico el problema a ella. (lo/la/le)', answers: ['le'], hint: 'Explaining TO her (indirect) → le' },
+      { sentence: '¿Conoces a mi hermana? — No, no ___ conozco. (lo/la/le)', answers: ['la'], hint: 'Direct object, female person → la' },
+      { sentence: '___ doy las gracias. (referring to him) (lo/la/le)', answers: ['le'], hint: 'Give thanks TO him (indirect) → le' },
     ],
   },
 
@@ -3760,7 +3831,7 @@ function renderConfusionesPage() {
       ? `<div class="confusion-accuracy-bar"><div class="confusion-accuracy-fill" style="width:${accPct}%"></div></div>` : '';
     const actionBtn = status === 'inactive'
       ? `<button class="btn-confusion-add" data-pair="${pair.id}">+ Add</button>`
-      : `<button class="btn-confusion-practice" data-pair="${pair.id}" data-action="practice">Practice →</button>`;
+      : `<button class="btn-confusion-practice" data-pair="${pair.id}" data-action="practice">Practice →</button><button class="btn-confusion-remove" data-pair="${pair.id}" data-action="remove" title="Remove from active">✕</button>`;
     return `
       <div class="confusion-card confusion-card-${status}">
         <div class="confusion-card-title">${pair.title}</div>
@@ -3878,7 +3949,7 @@ function renderConfusionesSection() {
 
     const actionBtn = status === 'inactive'
       ? `<button class="btn-confusion-add" data-pair="${pair.id}">+ Add</button>`
-      : `<button class="btn-confusion-practice" data-pair="${pair.id}" data-action="practice">Practice →</button>`;
+      : `<button class="btn-confusion-practice" data-pair="${pair.id}" data-action="practice">Practice →</button><button class="btn-confusion-remove" data-pair="${pair.id}" data-action="remove" title="Remove from active">✕</button>`;
 
     const bar = status !== 'inactive' && prog.total > 0
       ? `<div class="confusion-accuracy-bar"><div class="confusion-accuracy-fill" style="width:${accPct}%"></div></div>`
@@ -3922,6 +3993,13 @@ function wireConfusionButtons() {
       if (!pair) return;
       if (action === 'rules') { renderRules(pair); return; }
       if (action === 'practice') { renderConfusionStudy(pair, [pair]); return; }
+      if (action === 'remove') {
+        const p = getPairProgress(id);
+        p.active = false;
+        persist();
+        renderConfusionesPage();
+        return;
+      }
       // No action = "add"
       const p = getPairProgress(id);
       p.active = true;
