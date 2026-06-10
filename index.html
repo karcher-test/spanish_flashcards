@@ -2932,6 +2932,69 @@ const CONFUSIONES = [
     ],
   },
 
+  // ============================================================
+  // BUSCAR vs MIRAR vs VER vs ENCONTRAR
+  // ============================================================
+  {
+    id: 'buscar-mirar-ver-encontrar',
+    title: 'buscar vs mirar vs ver vs encontrar',
+    tagline: 'Four verbs around "looking" and "finding" — each very different.',
+    useCases: [
+      {
+        rule: 'BUSCAR — to look for / to search for. You haven\'t found it yet. Always implies effort and intention. Never needs a preposition (unlike English "look FOR").',
+        examples: [
+          { es: 'Estoy buscando mis llaves.', en: 'I am looking for my keys.' },
+          { es: '¿Buscas trabajo?', en: 'Are you looking for a job?' },
+          { es: 'Busco un apartamento barato.', en: 'I am looking for a cheap flat.' },
+        ],
+      },
+      {
+        rule: 'MIRAR — to look at / to watch. Intentional, directed attention at something specific. Used for watching TV, looking at a photo, observing.',
+        examples: [
+          { es: 'Mira esa foto.', en: 'Look at that photo.' },
+          { es: 'Miramos la televisión.', en: 'We watch television.' },
+          { es: 'No me mires así.', en: 'Don\'t look at me like that.' },
+        ],
+      },
+      {
+        rule: 'VER — to see / to perceive visually. Can be unintentional. Also used for watching films and shows (more natural than mirar for a whole film).',
+        examples: [
+          { es: 'No veo nada sin mis gafas.', en: 'I can\'t see anything without my glasses.' },
+          { es: '¿Viste la película?', en: 'Did you see/watch the film?' },
+          { es: 'Se ve muy cansado.', en: 'He looks very tired.' },
+        ],
+      },
+      {
+        rule: 'ENCONTRAR — to find (the result of searching). Also used for opinions: encontrar + adjective = to find something (adjective).',
+        examples: [
+          { es: 'Encontré mis llaves.', en: 'I found my keys.' },
+          { es: 'No encuentro el restaurante.', en: 'I can\'t find the restaurant.' },
+          { es: 'Encuentro que es muy interesante.', en: 'I find it very interesting.' },
+        ],
+      },
+      {
+        rule: 'Quick sequence: buscar → mirar → ver → encontrar. Searching → looking at → seeing → finding.',
+        examples: [
+          { es: 'Busco mis gafas → las miro → las veo → las encuentro.', en: 'I search → I look at them → I see them → I find them.' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: 'Estoy ___ mis llaves por todas partes. (buscar/mirar/ver/encontrar)', answers: ['buscando'], hint: 'Actively searching → buscar' },
+      { sentence: '___ esa estrella — es Marte. (buscar/mirar/ver/encontrar)', answers: ['mira'], hint: 'Directed attention at a specific thing → mirar' },
+      { sentence: '¿___ la película anoche? (buscar/mirar/ver/encontrar)', answers: ['viste', 'vio'], hint: 'Watched/saw a film → ver' },
+      { sentence: 'Por fin ___ el restaurante. (buscar/mirar/ver/encontrar)', answers: ['encontré', 'encontramos', 'encontró'], hint: 'The result of searching → encontrar' },
+      { sentence: 'No ___ nada sin mis gafas. (buscar/mirar/ver/encontrar)', answers: ['veo'], hint: 'Passive visual perception → ver' },
+      { sentence: '___ trabajo desde hace tres meses. (buscar/mirar/ver/encontrar)', answers: ['busco', 'busca'], hint: 'Looking for a job → buscar' },
+      { sentence: 'Al final ___ la solución. (buscar/mirar/ver/encontrar)', answers: ['encontraron', 'encontramos', 'encontré', 'encontró'], hint: 'Finally found → encontrar' },
+      { sentence: 'Me ___ a los ojos cuando hablas. (buscar/mirar/ver/encontrar)', answers: ['mira', 'mires'], hint: 'Look me in the eyes → mirar' },
+      { sentence: '¿Dónde ___ ese libro? (buscar/mirar/ver/encontrar)', answers: ['encontraste', 'encontró'], hint: 'Where did you find it → encontrar' },
+      { sentence: '¿Puedo ___ tu teléfono un momento? (buscar/mirar/ver/encontrar)', answers: ['ver', 'mirar'], hint: 'May I see/look at it → ver or mirar' },
+      { sentence: 'Siempre ___ por la ventana cuando está aburrido. (buscar/mirar/ver/encontrar)', answers: ['mira'], hint: 'Looking out of the window → mirar' },
+      { sentence: '___ las noticias todos los días. (buscar/mirar/ver/encontrar)', answers: ['veo', 'miro', 've', 'mira'], hint: 'Watch the news → ver or mirar' },
+    ],
+  },
+
 ];
 
 
