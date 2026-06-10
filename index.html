@@ -2150,6 +2150,10 @@ const CONFUSIONES = [
       { sentence: 'Ellos no ___ a nadie aquí.', answers: ['conocen'], hint: 'Not knowing any people → conocer' },
       { sentence: '¿___ (tú) cocinar?', answers: ['sabes'], hint: 'Knowing how to → saber' },
       { sentence: 'Yo ___ un restaurante muy bueno.', answers: ['conozco'], hint: 'Familiarity with a place → conocer' },
+      { sentence: '¿___ (tú) qué hora es?', answers: ['sabes'], hint: 'Knowing a fact → saber' },
+      { sentence: 'Acabo de ___ a tu jefe en la reunión.', answers: ['conocer'], hint: 'Just met someone → conocer' },
+      { sentence: 'No ___ cómo se llama el director.', answers: ['sé'], hint: 'Knowing a name/fact → saber' },
+      { sentence: '¿___ a alguien en Madrid?', answers: ['conoces'], hint: 'Knowing/being acquainted with people → conocer' },
     ],
   },
 
@@ -2190,6 +2194,10 @@ const CONFUSIONES = [
       { sentence: '¿Puedo ___ algo?', answers: ['preguntar', 'pedir'], hint: 'Depends on context — both possible here' },
       { sentence: 'Voy a ___ al médico sobre mis síntomas.', answers: ['preguntar'], hint: 'Asking about something → preguntar' },
       { sentence: 'Nos ___ que llegáramos pronto.', answers: ['pidió', 'pide'], hint: 'Requesting action → pedir' },
+      { sentence: 'Siempre ___ la misma mesa en ese restaurante.', answers: ['pide', 'pedimos', 'pido'], hint: 'Requesting a specific thing → pedir' },
+      { sentence: 'Le voy a ___ un favor a mi vecino.', answers: ['pedir'], hint: 'Asking for a favour → pedir' },
+      { sentence: 'Me ___ si podía ayudar.', answers: ['preguntó', 'pregunta'], hint: 'Asking a yes/no question → preguntar' },
+      { sentence: '___ al recepcionista por las llaves.', answers: ['pide', 'pedid', 'pregunta'], hint: 'Request keys (pedir) or ask about them (preguntar) — both work with context' },
     ],
   },
 
@@ -2230,6 +2238,10 @@ const CONFUSIONES = [
       { sentence: '¿Puedo ___ contigo?', answers: ['ir'], hint: 'Going away together → ir' },
       { sentence: 'Mi madre ___ a visitarme mañana.', answers: ['viene'], hint: 'Coming towards speaker → venir' },
       { sentence: 'Nosotros ___ al parque los domingos.', answers: ['vamos'], hint: 'Going away → ir' },
+      { sentence: '¿De dónde ___? — De Madrid.', answers: ['vienes'], hint: 'Coming from somewhere → venir' },
+      { sentence: 'Voy a ___ a tu fiesta esta noche.', answers: ['ir'], hint: 'Going to an event away from here → ir' },
+      { sentence: '¿Cuándo ___ a verme?', answers: ['vienes'], hint: 'Coming here to see me → venir' },
+      { sentence: 'Ella siempre ___ tarde al trabajo.', answers: ['llega', 'viene'], hint: 'She arrives/comes late → venir or llegar' },
     ],
   },
 
@@ -2273,6 +2285,10 @@ const CONFUSIONES = [
       { sentence: 'Tienes ___ amigos.', answers: ['buenos'], hint: 'Describing plural masculine noun → buenos' },
       { sentence: 'Lo haces muy ___.', answers: ['bien'], hint: 'How you do it → bien' },
       { sentence: 'Es una ___ pregunta.', answers: ['buena'], hint: 'Describing feminine noun → buena' },
+      { sentence: 'Hablas español muy ___.', answers: ['bien'], hint: 'How you speak → bien (adverb)' },
+      { sentence: 'Es ___ amigo mío.', answers: ['buen', 'un buen'], hint: 'Before masculine noun → buen' },
+      { sentence: 'Las noticias son ___.', answers: ['buenas'], hint: 'Describing plural feminine noun → buenas' },
+      { sentence: '¡Qué ___! Todo salió perfecto.', answers: ['bien'], hint: 'Exclamation about how things went → bien' },
     ],
   },
 
@@ -2306,6 +2322,10 @@ const CONFUSIONES = [
       { sentence: 'La noticia es ___.', answers: ['mala'], hint: 'Describing feminine noun → mala' },
       { sentence: 'Canta muy ___.', answers: ['mal'], hint: 'After verb → mal' },
       { sentence: 'Tiene ___ hábitos.', answers: ['malos'], hint: 'Plural masculine noun → malos' },
+      { sentence: 'Es un ___ ejemplo.', answers: ['mal', 'malo'], hint: 'Before masculine singular noun → mal' },
+      { sentence: 'Las condiciones son ___.', answers: ['malas'], hint: 'Plural feminine noun → malas' },
+      { sentence: 'Lo pasé muy ___ ayer.', answers: ['mal'], hint: 'Had a bad time → mal (adverb)' },
+      { sentence: 'Es una ___ idea salir ahora.', answers: ['mala'], hint: 'Describing feminine noun → mala' },
     ],
   },
 
@@ -2346,6 +2366,10 @@ const CONFUSIONES = [
       { sentence: '___ flores que llevas son preciosas.', answers: ['esas'], hint: 'Flowers you are carrying → esas' },
       { sentence: 'Mira ___ montañas a lo lejos.', answers: ['aquellas'], hint: 'Far away mountains → aquellas' },
       { sentence: 'Dame ___ manzana de aquí.', answers: ['esta'], hint: 'Right here → esta' },
+      { sentence: 'No quiero ___ zapatos — están sucios.', answers: ['estos', 'esos', 'aquellos'], hint: 'Depends on distance — these/those nearby/those far' },
+      { sentence: '___ chico de allá me parece conocido.', answers: ['aquel'], hint: 'Far from both speaker and listener → aquel' },
+      { sentence: 'Prefiero ___ mesa cerca de la ventana.', answers: ['esta', 'esa'], hint: 'Near speaker → esta; near listener → esa' },
+      { sentence: '___ años fueron muy difíciles.', answers: ['aquellos', 'esos'], hint: 'Those years in the past → aquellos (emphatic distance) or esos' },
     ],
   },
 
@@ -2385,6 +2409,10 @@ const CONFUSIONES = [
       { sentence: 'No es mi hermano ___ mi primo.', answers: ['sino'], hint: 'Correcting a negative → sino' },
       { sentence: 'El examen es difícil ___ no imposible.', answers: ['pero'], hint: 'Contrast → pero' },
       { sentence: 'No lo escribió ___ que lo dictó.', answers: ['sino'], hint: 'Correcting with a verb clause → sino que' },
+      { sentence: 'Es caro ___ vale la pena.', answers: ['pero'], hint: 'Contrast, no negation → pero' },
+      { sentence: 'No llegó el lunes ___ el martes.', answers: ['sino'], hint: 'Correcting day (negative + correction) → sino' },
+      { sentence: 'Quiero ir ___ no tengo dinero.', answers: ['pero'], hint: 'Contrast/obstacle → pero' },
+      { sentence: 'No es tímida ___ simplemente callada.', answers: ['sino'], hint: 'Correcting a negative description → sino' },
     ],
   },
 
@@ -2417,6 +2445,10 @@ const CONFUSIONES = [
       { sentence: 'Me encanta la playa. A ella le gusta ___.', answers: ['también'], hint: 'Positive agreement → también' },
       { sentence: 'No tengo hambre. — Yo ___.', answers: ['tampoco'], hint: 'Agreeing with negative → tampoco' },
       { sentence: 'Hablo español y ___ un poco de portugués.', answers: ['también'], hint: 'Adding positive → también' },
+      { sentence: 'No me gusta el frío. A ella ___.', answers: ['tampoco'], hint: 'Agreeing with a negative → tampoco' },
+      { sentence: 'Me gustan los perros. — A mí ___.', answers: ['también'], hint: 'Me too (positive) → también' },
+      { sentence: 'No fumo. — Yo ___.', answers: ['tampoco'], hint: 'I don\'t either → tampoco' },
+      { sentence: 'Ella ___ quiere venir a la cena.', answers: ['también'], hint: 'She also wants to come → también' },
     ],
   },
 
@@ -2492,6 +2524,10 @@ const CONFUSIONES = [
       { sentence: '¿___ tu paraguas hoy?', answers: ['traes', 'llevas'], hint: 'Bring here or take with you — context dependent' },
       { sentence: 'Siempre ___ flores cuando viene a verme.', answers: ['trae'], hint: 'Bringing to speaker → traer' },
       { sentence: '¿Te ___ al restaurante?', answers: ['llevo'], hint: 'Taking someone somewhere → llevar' },
+      { sentence: 'Por favor, ___ más pan a la mesa.', answers: ['trae', 'traed'], hint: 'Bring here (to the table) → traer' },
+      { sentence: '¿Puedes ___ los niños al cole mañana?', answers: ['llevar'], hint: 'Taking them away → llevar' },
+      { sentence: 'Siempre ___ su perro al trabajo.', answers: ['lleva', 'trae'], hint: 'Takes dog to work → llevar; brings dog here → traer' },
+      { sentence: '¿___ algo de comer? Tengo hambre.', answers: ['traes', 'trajiste'], hint: 'Bringing food here → traer' },
     ],
   },
 
@@ -2531,6 +2567,10 @@ const CONFUSIONES = [
       { sentence: 'Ella ___ el abrigo y salió.', answers: ['cogió', 'tomó', 'coge', 'toma'], hint: 'Grabbed and left → coger/tomar' },
       { sentence: '___ el paraguas — va a llover.', answers: ['lleva', 'coge', 'toma'], hint: 'Take it with you → llevar or coger' },
       { sentence: 'El proyecto ___ mucho tiempo.', answers: ['lleva', 'toma'], hint: 'Takes time (duration) → llevar or tomar' },
+      { sentence: '___ el autobús número 5 para llegar al centro.', answers: ['toma', 'coge', 'tomas', 'coges'], hint: 'Take the bus → tomar or coger' },
+      { sentence: '¿___ algo para el dolor de cabeza?', answers: ['tomas', 'toma'], hint: 'Take medicine → tomar' },
+      { sentence: 'No ___ las cosas de otros sin pedir permiso.', answers: ['cojas', 'tomes', 'coja', 'tome'], hint: 'Don\'t take/grab other people\'s things → coger or tomar' },
+      { sentence: 'Vamos a ___ un taxi.', answers: ['tomar', 'coger'], hint: 'Take a taxi → tomar or coger' },
     ],
   },
 
@@ -2569,6 +2609,10 @@ const CONFUSIONES = [
       { sentence: 'Ella ___ de Londres mañana.', answers: ['vuelve', 'regresa'], hint: 'Returning from a place → volver/regresar' },
       { sentence: '¿Me ___ el bolígrafo cuando termines?', answers: ['devuelves'], hint: 'Returning an object → devolver' },
       { sentence: 'Nosotros ___ al hotel a las diez.', answers: ['volvemos', 'regresamos'], hint: 'Going back to hotel → volver/regresar' },
+      { sentence: '¿Cuándo ___ el dinero que te presté?', answers: ['devuelves', 'devuelve'], hint: 'Paying back money → devolver' },
+      { sentence: 'El avión ___ a Madrid a las ocho.', answers: ['vuelve', 'regresa'], hint: 'Flight returns → volver/regresar' },
+      { sentence: 'Necesito ___ estos pantalones — no me quedan bien.', answers: ['devolver'], hint: 'Return item to shop → devolver' },
+      { sentence: '¿A qué hora ___ tu padre del trabajo?', answers: ['vuelve', 'regresa'], hint: 'Coming back home → volver/regresar' },
     ],
   },
 
@@ -2631,7 +2675,7 @@ const CONFUSIONES = [
       { sentence: 'Él está muy ___. (contento/contenta)', answers: ['contento'], hint: 'él = masculine → contento' },
       { sentence: 'Las chicas están muy ___. (cansado/cansada/cansados/cansadas)', answers: ['cansadas'], hint: 'las chicas = feminine plural → cansadas' },
       { sentence: 'Los chicos están muy ___. (cansado/cansada/cansados/cansadas)', answers: ['cansados'], hint: 'los chicos = masculine plural → cansados' },
-      { sentence: 'La tarea es ___. (difícil/difícila)', answers: ['difícil', 'dificil'], hint: 'difícil ends in -l → no gender change, same form for masc/fem' },
+      { sentence: 'La tarea es ___. (difícil — no gender change)', answers: ['difícil', 'dificil'], hint: 'difícil ends in -l → same form for masc/fem, no -a ending' },
       { sentence: 'Es una ___ idea. (bueno/buena/buen)', answers: ['buena'], hint: 'idea = feminine → buena' },
       { sentence: 'Es un ___ libro. (bueno/buena/buen)', answers: ['buen', 'bueno'], hint: 'before a masculine singular noun → buen' },
       { sentence: 'La cerveza está ___. (frío/fría)', answers: ['fría'], hint: 'cerveza = feminine → fría' },
@@ -2644,7 +2688,7 @@ const CONFUSIONES = [
       { sentence: 'El banco está ___. (abierto/abierta)', answers: ['abierto'], hint: 'banco = masculine → abierto' },
       { sentence: 'El problema es muy ___. (complicado/complicada)', answers: ['complicado'], hint: 'problema = masculine (trap! -ma ending) → complicado' },
       { sentence: 'La solución es muy ___. (complicado/complicada)', answers: ['complicada'], hint: 'solución = feminine (-ción) → complicada' },
-      { sentence: 'El examen fue muy ___. (difícil/difícila)', answers: ['difícil', 'dificil'], hint: 'difícil = no gender change' },
+      { sentence: 'El examen fue muy ___. (difícil — no gender change)', answers: ['difícil', 'dificil'], hint: 'difícil = same form regardless of gender' },
       { sentence: 'Ella es muy ___ en su trabajo. (organizado/organizada)', answers: ['organizada'], hint: 'ella = feminine → organizada' },
       { sentence: 'Es un ___ hombre. (grande/gran/gran)', answers: ['gran'], hint: 'before a noun, grande shortens to gran — meaning "great"' },
     ],
@@ -2703,6 +2747,188 @@ const CONFUSIONES = [
       { sentence: '___ explico el problema a ella. (lo/la/le)', answers: ['le'], hint: 'Explaining TO her (indirect) → le' },
       { sentence: '¿Conoces a mi hermana? — No, no ___ conozco. (lo/la/le)', answers: ['la'], hint: 'Direct object, female person → la' },
       { sentence: '___ doy las gracias. (referring to him) (lo/la/le)', answers: ['le'], hint: 'Give thanks TO him (indirect) → le' },
+    ],
+  },
+
+  // ============================================================
+  // PENSAR vs CREER
+  // ============================================================
+  {
+    id: 'pensar-creer',
+    title: 'pensar vs creer',
+    tagline: 'Both mean "to think" — but pensar is the process, creer is the conclusion.',
+    useCases: [
+      {
+        rule: 'CREER QUE — to believe / to think (an opinion or belief). You\'re stating a conclusion you hold to be true. Often interchangeable with pienso que for opinions.',
+        examples: [
+          { es: 'Creo que va a llover.', en: 'I think it\'s going to rain.' },
+          { es: 'No lo creo.', en: 'I don\'t believe it.' },
+          { es: '¿Tú crees que es buena idea?', en: 'Do you think it\'s a good idea?' },
+        ],
+      },
+      {
+        rule: 'PENSAR QUE — to think (a considered opinion). Also often interchangeable with creer que, but feels slightly more reasoned.',
+        examples: [
+          { es: 'Pienso que tienes razón.', en: 'I think you\'re right.' },
+          { es: 'Pensamos que es demasiado caro.', en: 'We think it\'s too expensive.' },
+        ],
+      },
+      {
+        rule: 'PENSAR EN — to think ABOUT something. Creer cannot be used this way.',
+        examples: [
+          { es: '¿En qué piensas?', en: 'What are you thinking about?' },
+          { es: 'Pienso mucho en ti.', en: 'I think about you a lot.' },
+          { es: 'Piensan en el futuro.', en: 'They think about the future.' },
+        ],
+      },
+      {
+        rule: 'PENSAR + infinitive — to plan to / to intend to. Creer cannot be used this way.',
+        examples: [
+          { es: 'Pienso ir mañana.', en: 'I\'m planning to go tomorrow.' },
+          { es: '¿Piensas quedarte mucho tiempo?', en: 'Are you planning to stay long?' },
+          { es: 'Pensamos comprar una casa.', en: 'We\'re planning to buy a house.' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: '___ que va a llover esta tarde. (pensar/creer)', answers: ['creo', 'pienso'], hint: 'Opinion about the weather — both work here' },
+      { sentence: '¿En qué ___? Pareces distraído. (pensar/creer)', answers: ['piensas'], hint: 'Thinking ABOUT something → pensar en' },
+      { sentence: '___ ir al gimnasio mañana. (pensar/creer)', answers: ['pienso', 'pensamos'], hint: 'Planning to do something → pensar + infinitive' },
+      { sentence: 'No ___ que sea verdad. (pensar/creer)', answers: ['creo', 'pienso'], hint: 'Disbelief/opinion — both work, creo is more natural here' },
+      { sentence: '¿Qué ___ del nuevo jefe? (pensar/creer)', answers: ['piensas', 'crees'], hint: 'What do you think of him? — both work' },
+      { sentence: 'Siempre ___ en sus hijos cuando viaja. (pensar/creer)', answers: ['piensa'], hint: 'Thinking about someone → pensar en' },
+      { sentence: '¿___ quedarte a cenar? (pensar/creer)', answers: ['piensas'], hint: 'Planning/intending to → pensar + infinitive' },
+      { sentence: '___ que tiene razón. (pensar/creer)', answers: ['creo', 'pienso'], hint: 'Opinion — both are fine' },
+      { sentence: 'No ___ en el pasado, solo en el futuro. (pensar/creer)', answers: ['pienses', 'piensa', 'pienso'], hint: 'Thinking about → pensar en' },
+      { sentence: '¿___ que vendrá? (pensar/creer)', answers: ['crees', 'piensas'], hint: 'Do you think he\'ll come? — both work' },
+      { sentence: 'Pensamos ___ un viaje a México. (hacer/creer)', answers: ['hacer'], hint: 'pensar + infinitive = planning to → pensar hacer' },
+      { sentence: '¡No lo ___! Es increíble. (pensar/creer)', answers: ['creo', 'puedo creer'], hint: 'I can\'t believe it → creer' },
+    ],
+  },
+
+  // ============================================================
+  // DECIR vs HABLAR vs CONTAR vs EXPLICAR
+  // ============================================================
+  {
+    id: 'decir-hablar-contar-explicar',
+    title: 'decir vs hablar vs contar vs explicar',
+    tagline: 'Four verbs around "speaking and telling" — each with a distinct job.',
+    useCases: [
+      {
+        rule: 'DECIR — to say / to tell. Focuses on the content of what is said. Usually followed by what was said (que + clause, or a direct object).',
+        examples: [
+          { es: 'Me dijo que llegaría tarde.', en: 'He told me he would be late.' },
+          { es: 'Dime la verdad.', en: 'Tell me the truth.' },
+          { es: '¿Qué dices?', en: 'What are you saying?' },
+        ],
+      },
+      {
+        rule: 'HABLAR — to speak / to talk. Focuses on the act of speaking, not the content. Used for languages, and for talking with/to someone.',
+        examples: [
+          { es: 'Habla tres idiomas.', en: 'She speaks three languages.' },
+          { es: 'Necesito hablar contigo.', en: 'I need to talk to you.' },
+          { es: 'Estuvieron hablando toda la noche.', en: 'They were talking all night.' },
+        ],
+      },
+      {
+        rule: 'CONTAR — to tell (a story/joke/news) or to count. When telling, it implies a narrative — a sequence of events, a joke, news. Also used literally for counting.',
+        examples: [
+          { es: 'Cuéntame lo que pasó.', en: 'Tell me what happened. (the story)' },
+          { es: 'Me contó un chiste buenísimo.', en: 'He told me a really good joke.' },
+          { es: 'Cuenta los niños — faltan dos.', en: 'Count the children — two are missing.' },
+        ],
+      },
+      {
+        rule: 'EXPLICAR — to explain. Always implies making something clearer or more understandable.',
+        examples: [
+          { es: '¿Me puedes explicar cómo funciona?', en: 'Can you explain to me how it works?' },
+          { es: 'El profesor explicó la gramática.', en: 'The teacher explained the grammar.' },
+          { es: 'No sé cómo explicarlo.', en: 'I don\'t know how to explain it.' },
+        ],
+      },
+      {
+        rule: 'Quick guide: hablar = the act of speaking · decir = what you say · contar = telling a narrative · explicar = making something understood.',
+        examples: [
+          { es: 'Habló con ella → le dijo algo importante → le contó lo que pasó → le explicó por qué.', en: 'He spoke with her → told her something important → told her what happened → explained why.' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: '¿___ español? (decir/hablar)', answers: ['hablas', 'habla'], hint: 'Speaking a language → hablar' },
+      { sentence: 'Me ___ que no podía venir. (decir/hablar/contar/explicar)', answers: ['dijo'], hint: 'Reporting what someone said → decir' },
+      { sentence: '¡___ lo que pasó! Quiero saber todo. (decir/hablar/contar/explicar)', answers: ['cuéntame', 'cuenta'], hint: 'Tell the story of what happened → contar' },
+      { sentence: '¿Puedes ___ cómo funciona? No lo entiendo. (decir/hablar/contar/explicar)', answers: ['explicar'], hint: 'Making something clear → explicar' },
+      { sentence: 'Necesito ___ contigo sobre algo importante. (decir/hablar/contar/explicar)', answers: ['hablar'], hint: 'Have a talk with someone → hablar con' },
+      { sentence: 'Me ___ un chiste muy malo. (decir/hablar/contar/explicar)', answers: ['contó', 'dijo'], hint: 'Told a joke (narrative) → contar; said a joke → decir' },
+      { sentence: '¿Qué te ___? — Que llegaría tarde. (decir/hablar/contar/explicar)', answers: ['dijo'], hint: 'Reporting speech content → decir' },
+      { sentence: 'El médico le ___ los resultados del análisis. (decir/hablar/contar/explicar)', answers: ['explicó', 'dijo'], hint: 'Making results understood → explicar; simply told → decir' },
+      { sentence: 'Estuvieron ___ horas por teléfono. (decir/hablar/contar/explicar)', answers: ['hablando'], hint: 'The act of talking (duration) → hablar' },
+      { sentence: '___ los votos antes de anunciar el ganador. (decir/hablar/contar/explicar)', answers: ['contaron'], hint: 'Literally counting → contar' },
+      { sentence: 'No me ___ la verdad. (decir/hablar/contar/explicar)', answers: ['dices', 'dijo', 'dijiste'], hint: 'Telling the truth = content of speech → decir' },
+      { sentence: '¿Te ha ___ lo que ocurrió en la reunión? (decir/hablar/contar/explicar)', answers: ['contado', 'dicho'], hint: 'Telling what happened (narrative) → contar; simply told → decir' },
+      { sentence: 'Ella ___ muy bien el inglés. (decir/hablar/contar/explicar)', answers: ['habla'], hint: 'Speaks a language → hablar' },
+      { sentence: 'No sé cómo ___ lo que siento. (decir/hablar/contar/explicar)', answers: ['explicar', 'decir'], hint: 'Put feelings into words → explicar or decir' },
+    ],
+  },
+
+  // ============================================================
+  // MI / TU / SU / SUS — Possessives
+  // ============================================================
+  {
+    id: 'possessives',
+    title: 'mi/tu/su · mis/tus/sus',
+    tagline: 'Possessives agree with the THING owned, not the owner. And body parts use el/la instead.',
+    useCases: [
+      {
+        rule: 'Possessives agree with the noun they describe — singular or plural. NOT with the gender of the owner.',
+        examples: [
+          { es: 'mi libro / mis libros', en: 'my book / my books' },
+          { es: 'tu casa / tus casas', en: 'your house / your houses' },
+          { es: 'su perro / sus perros', en: 'his/her/their dog / dogs' },
+        ],
+      },
+      {
+        rule: 'SU and SUS are ambiguous — they can mean his, her, its, your (formal), or their. Context usually clarifies, or add "de él/ella/ellos".',
+        examples: [
+          { es: 'su coche → el coche de él / el coche de ella', en: 'his car / her car — su alone is ambiguous' },
+          { es: 'sus hijos → los hijos de ellos', en: 'their children — sus clarified with de ellos' },
+        ],
+      },
+      {
+        rule: 'NUESTRO/NUESTRA is the only possessive that changes for gender (as well as number). Mi/tu/su never change for gender.',
+        examples: [
+          { es: 'nuestro coche / nuestra casa', en: 'our car (masc) / our house (fem)' },
+          { es: 'nuestros hijos / nuestras hijas', en: 'our sons / our daughters' },
+          { es: 'mi hermano / mi hermana (no change)', en: 'my brother / my sister — mi stays mi' },
+        ],
+      },
+      {
+        rule: 'For body parts and personal items where the owner is obvious, Spanish uses EL/LA instead of a possessive.',
+        examples: [
+          { es: 'Me duele la cabeza.', en: 'My head hurts. (NOT mi cabeza)' },
+          { es: 'Se lavó las manos.', en: 'He washed his hands. (NOT sus manos)' },
+          { es: 'Ponte el abrigo.', en: 'Put your coat on. (NOT tu abrigo)' },
+          { es: 'Le rompió el brazo.', en: 'He broke his/her arm. (NOT su brazo)' },
+        ],
+      },
+    ],
+    questions: [
+      { sentence: 'Tengo ___ libro aquí. (mi/mis/su/sus)', answers: ['mi'], hint: 'My + singular noun → mi' },
+      { sentence: 'Tengo ___ libros aquí. (mi/mis/su/sus)', answers: ['mis'], hint: 'My + plural noun → mis' },
+      { sentence: 'Ella habla con ___ madre. (su/sus/mi/tu)', answers: ['su'], hint: 'Her + singular noun → su' },
+      { sentence: 'Ellos viven con ___ padres. (su/sus/mi/mis)', answers: ['sus'], hint: 'Their + plural noun → sus' },
+      { sentence: 'Es ___ coche, no el tuyo. (nuestro/nuestra/nuestros)', answers: ['nuestro'], hint: 'coche = masculine singular → nuestro' },
+      { sentence: 'Es ___ casa, no la tuya. (nuestro/nuestra/nuestros)', answers: ['nuestra'], hint: 'casa = feminine singular → nuestra' },
+      { sentence: 'Me duele ___ cabeza. (mi/la/su)', answers: ['la'], hint: 'Body part where owner is obvious → la (not mi)' },
+      { sentence: 'Se lavó ___ manos antes de comer. (sus/las/mis)', answers: ['las'], hint: 'Body part, reflexive verb → las (not sus)' },
+      { sentence: '¿Dónde están ___ llaves? (tu/tus/su)', answers: ['tus'], hint: 'Your + plural noun → tus' },
+      { sentence: 'Ponte ___ abrigo — hace frío. (tu/el/su)', answers: ['el'], hint: 'Personal item where owner is obvious → el (not tu)' },
+      { sentence: '___ hijos estudian en Londres. (nuestro/nuestra/nuestros)', answers: ['nuestros'], hint: 'hijos = masculine plural → nuestros' },
+      { sentence: 'Le duele ___ espalda. (su/la/sus)', answers: ['la'], hint: 'Body part → la (not su)' },
+      { sentence: '¿Es este ___ paraguas? (tu/tus/su)', answers: ['tu', 'su'], hint: 'Your/his/her + singular → tu or su depending on who' },
+      { sentence: 'Perdió ___ trabajo el mes pasado. (su/sus/mi)', answers: ['su'], hint: 'His/her + singular → su' },
+      { sentence: 'Todos trajeron ___ mochilas. (su/sus/sus)', answers: ['sus'], hint: 'Their + plural → sus' },
+      { sentence: 'Me rompí ___ tobillo jugando al fútbol. (mi/el/su)', answers: ['el'], hint: 'Own body part with reflexive → el (not mi)' },
     ],
   },
 
@@ -3929,7 +4155,9 @@ function isConfusionCorrect(input, answers) {
   for (const ans of answers) {
     const t = normalize(ans);
     if (a === t) return true;
-    if (levenshtein(a, t) <= 1) return true;
+    // Only allow 1-edit tolerance for longer words (5+ chars) — short pronoun/article
+    // answers like lo/la/le/el/la are all 1 edit apart and must be exact
+    if (t.length >= 5 && levenshtein(a, t) <= 1) return true;
   }
   return false;
 }
